@@ -36,9 +36,7 @@ body {
     background-color: transparent;
 }
 
-a .active {
-    color: red;
-}
+
 a:hover{
     @apply text-primary;
 }
