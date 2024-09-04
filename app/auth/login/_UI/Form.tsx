@@ -10,6 +10,7 @@ type FieldType = {
     name: string;
     email: string;
     password: string;
+    remember: boolean;
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
@@ -57,7 +58,18 @@ const LoginSignup: React.FC = () => {
             >
                 <Input.Password size='large' onChange={(e) => setPassword(e.target.value)} />
             </Form.Item>
-            
+            <Form.Item<FieldType>
+                name="remember"
+                valuePropName="checked"
+                wrapperCol={{ span: 20, }}
+            >
+               <div className="flex items-center justify-between">
+               <Checkbox>Remember me</Checkbox>
+                <Link href={"/auth/forgot"} className='font-semibold'>
+                    Forgot password?
+                </Link>
+               </div>
+            </Form.Item>
             <Form.Item wrapperCol={{ span: 20 }}>
                 <Button type="primary" htmlType="submit" size='large' className='w-full p-2'>
                     Submit

@@ -79,6 +79,7 @@ const FormSignup: React.FC = () => {
                     <span>one number</span>
                 </div>
             </div>
+            
             <Form.Item wrapperCol={{ span: 20 }}>
                 <Button type="primary" htmlType="submit" size='large' className='w-full'>
                     Submit
