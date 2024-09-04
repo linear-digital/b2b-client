@@ -6,7 +6,7 @@ const Logo = ({ color, size }: { color?: string, size?: number }) => {
             color: color ? color : "black",
             fontSize: size ? size : 40
         }}>
-            Logo
+            B2B
         </div>
     );
 };

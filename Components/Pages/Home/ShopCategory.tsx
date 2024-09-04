@@ -81,6 +81,11 @@ const ShopCategory = () => {
                     </h4>
                 </SwiperSlide>
             </Swiper>
+            <div className="flex justify-center mt-10">
+                <Link href={'/shop'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
+                    View All
+                </Link>
+            </div>
         </div>
     );
 };
