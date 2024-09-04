@@ -4,7 +4,7 @@ import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import GoogleLogin from './GoogleLogin';
+import GoogleLogin from '../../signup/_UI/GoogleLogin';
 import Link from 'next/link';
 type FieldType = {
     name: string;
@@ -20,7 +20,7 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
-const FormSignup: React.FC = () => {
+const LoginSignup: React.FC = () => {
     const [password, setPassword] = React.useState('');
     return (
         <Form
@@ -57,30 +57,9 @@ const FormSignup: React.FC = () => {
             >
                 <Input.Password size='large' onChange={(e) => setPassword(e.target.value)} />
             </Form.Item>
-            <div className='grid grid-cols-2 mb-5  text-gray-500'>
-                <div className="flex items-center gap-2">
-                    <CheckCircleIcon fontSize='small' className={/[a-z]/.test(password) ? 'text-primary' : ''} />
-                    <span>one lowercase character</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <CheckCircleIcon fontSize='small' className={/[!@#$%^&*(),.?":{}|<>]/.test(password) ? 'text-primary' : ''} />
-                    <span>one special character</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <CheckCircleIcon fontSize='small' className={/[A-Z]/.test(password) ? 'text-primary' : ''} />
-                    <span>one uppercase character</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <CheckCircleIcon fontSize='small' className={password.length >= 8 ? 'text-primary' : ''} />
-                    <span>8 characters minimum</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <CheckCircleIcon fontSize='small' className={/\d/.test(password) ? 'text-primary' : ''} />
-                    <span>one number</span>
-                </div>
-            </div>
+            
             <Form.Item wrapperCol={{ span: 20 }}>
-                <Button type="primary" htmlType="submit" size='large' className='w-full'>
+                <Button type="primary" htmlType="submit" size='large' className='w-full p-2'>
                     Submit
                 </Button>
             </Form.Item>
@@ -88,13 +67,12 @@ const FormSignup: React.FC = () => {
                 <GoogleLogin />
             </Form.Item>
             <Form.Item wrapperCol={{ span: 20 }}>
-                <Link href="/auth/login" >
-                    Already have an account? Login
+                <Link href="/auth/signup" >
+                    Don't have an account? Signup
                 </Link>
             </Form.Item>
-
         </Form>
     );
 }
 
-export default FormSignup;
+export default LoginSignup;
