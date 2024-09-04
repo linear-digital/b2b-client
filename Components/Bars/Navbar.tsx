@@ -2,10 +2,11 @@
 import React from 'react';
 import Logo from '../Shared/Logo';
 import SearchBox from './SearchBox';
-import { Avatar } from 'antd';
-import { HeartOutlined } from '@ant-design/icons';
+import { Avatar, List, Popover } from 'antd';
+import { HeartOutlined, UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import UserOptions from './UserOptions';
 
 const Navbar = () => {
     const items = [
@@ -38,7 +39,12 @@ const Navbar = () => {
                 <SearchBox />
                 <div className='flex items-center gap-x-5'>
                     <HeartOutlined className='text-xl' />
-                    <Avatar size={40} src="https://joeschmoe.io/api/v1/random" />
+                    <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}>
+                        <Avatar
+                            size={40}
+                            className='border border-primary'
+                            src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+                    </Popover>
                 </div>
             </div>
             <hr />
