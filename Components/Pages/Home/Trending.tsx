@@ -14,6 +14,7 @@ import ProductCard from './ProductCard';
 
 
 const Trending = () => {
+    const [swiper, setSwiper] = React.useState<any>(null);
     return (
         <div className='container mx-auto'>
             <h2 className='sec-title mt-10'>
@@ -38,10 +39,10 @@ const Trending = () => {
                     </li>
                 </ul>
                 <div className='flex items-center gap-4'>
-                    <button>
+                    <button onClick={() => swiper?.slidePrev()}>
                         <ArrowBackIosIcon />
                     </button>
-                    <button>
+                    <button onClick={() => swiper?.slideNext()}>
                         <ArrowForwardIosIcon />
                     </button>
                 </div>
@@ -50,6 +51,7 @@ const Trending = () => {
                 slidesPerView={4}
                 spaceBetween={30}
                 className="mt-10 h-auto"
+                onSwiper={(swiper) => setSwiper(swiper)}
             >
                 <SwiperSlide className='relative'>
                    <ProductCard />

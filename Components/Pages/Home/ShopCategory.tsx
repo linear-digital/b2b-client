@@ -1,18 +1,21 @@
 'use client'
 import Link from 'next/link';
-import React from 'react';
+import React, { useRef } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { A11y, Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
 
 
+
 const ShopCategory = () => {
+    const swiperRef: any = useRef(null);
+    const [swiper, setSwiper] = React.useState<any>(null);
     return (
         <div className='container mx-auto'>
             <h2 className='sec-title mt-4'>
@@ -36,25 +39,55 @@ const ShopCategory = () => {
                         </button>
                     </li>
                 </ul>
-                <div className='flex items-center gap-4'>
-                    <button>
-                        <ArrowBackIosIcon />
-                    </button>
-                    <button>
-                        <ArrowForwardIosIcon />
-                    </button>
-                </div>
+                <SwiperNavButtons swiper={swiper} />
             </div>
             <Swiper
+                ref={swiperRef}
                 slidesPerView={4}
                 spaceBetween={30}
-                className="mt-10 h-[300px]"
+                className="mt-10 h-[300px] "
+                onSwiper={(swiper) => setSwiper(swiper)}
+                modules={[Navigation, A11y]}
             >
                 <SwiperSlide className='relative'>
                     <Image src={'/photos/image1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
                     <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
                         Product Category
+
                     </h4>
+
+                </SwiperSlide>
+                <SwiperSlide className='relative'>
+                    <Image src={'/products/product-1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
+                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
+                        Product Category
+                    </h4>
+                </SwiperSlide>
+                <SwiperSlide className='relative'>
+                    <Image src={'/photos/image3.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
+                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
+                        Product Category
+                    </h4>
+                </SwiperSlide>
+                <SwiperSlide className='relative'>
+                    <Image src={'/photos/image4.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
+                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
+                        Product Category
+                    </h4>
+                </SwiperSlide>
+                <SwiperSlide className='relative'>
+                    <Image src={'/photos/image5.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
+                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
+                        Product Category
+                    </h4>
+                </SwiperSlide>
+                <SwiperSlide className='relative'>
+                    <Image src={'/photos/image1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
+                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
+                        Product Category
+
+                    </h4>
+
                 </SwiperSlide>
                 <SwiperSlide className='relative'>
                     <Image src={'/products/product-1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
@@ -91,3 +124,19 @@ const ShopCategory = () => {
 };
 
 export default ShopCategory;
+
+
+
+export const SwiperNavButtons = ({ swiper }: any) => {
+    // console.log(swiper);
+    return (
+        <div className='flex gap-x-5 '>
+            <button onClick={() => swiper?.slidePrev()}>
+                <ArrowBackIosIcon />
+            </button>
+            <button onClick={() => swiper?.slideNext()}>
+                <ArrowForwardIosIcon />
+            </button>
+        </div>
+    );
+};

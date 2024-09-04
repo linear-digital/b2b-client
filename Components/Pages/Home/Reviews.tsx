@@ -15,8 +15,7 @@ import Image from 'next/image';
 
 
 const ReviewSlider = () => {
-    const swiperRef: any = useRef(null)
-    const swiper = useSwiper();
+  
     return (
         <section className='container mx-auto mt-20 review' >
             <h1 className='sec-title'>
@@ -25,11 +24,7 @@ const ReviewSlider = () => {
             <Swiper
                 slidesPerView={'auto'}
                 spaceBetween={30}
-                onSwiper={(swiper) => {
-                    if (swiperRef.current) {
-                        swiperRef.current = swiper;
-                    }
-                }}
+               
                 pagination={{ clickable: true }}
                 modules={[Navigation, A11y]}
                 className='w-full mt-10'

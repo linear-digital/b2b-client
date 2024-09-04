@@ -14,6 +14,7 @@ import VoucherCard from './VoucherCard';
 
 
 const Vouchers = () => {
+    const [swiper, setSwiper] = React.useState<any>(null);
     return (
         <div className='container mx-auto'>
             <div className="flex justify-between mt-16">
@@ -21,10 +22,10 @@ const Vouchers = () => {
                     Exclusive Vouchers and Discounts
                 </h2>
                 <div className='flex items-center gap-4'>
-                    <button>
+                    <button onClick={() => swiper?.slidePrev()}>
                         <ArrowBackIosIcon />
                     </button>
-                    <button>
+                    <button onClick={() => swiper?.slideNext()}>
                         <ArrowForwardIosIcon />
                     </button>
                 </div>
@@ -60,6 +61,7 @@ const Vouchers = () => {
                 slidesPerView={2}
                 spaceBetween={30}
                 className="mt-10 h-[350px]"
+                onSwiper={(swiper) => setSwiper(swiper)}
             >
                 <SwiperSlide>
                     <VoucherCard />
