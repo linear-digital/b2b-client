@@ -44,6 +44,9 @@ importers:
       swiper:
         specifier: ^11.1.12
         version: 11.1.12
+      typeit-react:
+        specifier: ^2.7.2
+        version: 2.7.2
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -551,6 +554,9 @@ packages:
 
   '@types/stylis@4.2.5':
     resolution: {integrity: sha512-1Xve+NMN7FWjY14vLoY5tL3BVEQ/n42YLwaqJIPYhotZ9uBHt87VceMwWQpzmdEt2TNXIorIFG+YeCUUW7RInw==}
+
+  '@types/web-animations-js@2.2.16':
+    resolution: {integrity: sha512-ATELeWMFwj8eQiH0KmvsCl1V2lu/qx/CjOBmv4ADSZS5u8r4reMyjCXtxG7khqyiwH3IOMNdrON/Ugn94OUcRA==}
 
   '@typescript-eslint/parser@7.2.0':
     resolution: {integrity: sha512-5FKsVcHTk6TafQKQbuIVkXq58Fnbkd2wDL4LB7AURN7RUOu1utVP+G8+6u3ZhEroW3DF6hyo3ZEXxgKgp4KeCg==}
@@ -2214,6 +2220,12 @@ packages:
     resolution: {integrity: sha512-/OxDN6OtAk5KBpGb28T+HZc2M+ADtvRxXrKKbUwtsLgdoxgX13hyy7ek6bFRl5+aBs2yZzB0c4CnQfAtVypW/g==}
     engines: {node: '>= 0.4'}
 
+  typeit-react@2.7.2:
+    resolution: {integrity: sha512-YD9w3plqKnN2zMEepFKNrbXaxEfgE6wbpdnb0L65UIBNu/PERrg/adsI3Ld3Zhpa4b+b+XeaIm52WwyQVyniHQ==}
+
+  typeit@8.8.4:
+    resolution: {integrity: sha512-bD4/PNthsYj5ObPKqkARnYA7NStbYzZDe8g5odXACmFw2HKEDWSUPv275lblz6E8REr+Ji6oll/AHKmD2ONMYA==}
+
   typescript@5.5.4:
     resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
     engines: {node: '>=14.17'}
@@ -2799,6 +2811,8 @@ snapshots:
       csstype: 3.1.3
 
   '@types/stylis@4.2.5': {}
+
+  '@types/web-animations-js@2.2.16': {}
 
   '@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4)':
     dependencies:
@@ -4860,6 +4874,16 @@ snapshots:
       has-proto: 1.0.3
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
+
+  typeit-react@2.7.2:
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      typeit: 8.8.4
+
+  typeit@8.8.4:
+    dependencies:
+      '@types/web-animations-js': 2.2.16
 
   typescript@5.5.4: {}
 
