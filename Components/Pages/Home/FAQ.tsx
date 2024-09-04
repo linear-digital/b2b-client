@@ -13,7 +13,8 @@ const FAQ = () => {
     ]
     const [active, setActive] = React.useState(0);
     return (
-        <div className='container mx-auto mt-20'>
+        <section className='bg-white py-10 mt-20'>
+            <div className='container mx-auto '>
             <h1 className='sec-title'>
                 Frequently Asked Questions (FAQ)
             </h1>
@@ -31,6 +32,7 @@ const FAQ = () => {
                 ))}
             </div>
         </div>
+        </section>
     );
 };
 
@@ -38,7 +40,7 @@ export default FAQ;
 
 const FAQCard = ({ title, desc, onClick, active }: { title: string, desc?: string, onClick?: () => void, active?: boolean }) => {
     return (
-        <div className={`flex flex-col gap-y-3 mb-2 ${active && "bg-gray-100"} p-2 rounded-lg`}>
+        <div className={`flex flex-col gap-y-3 mb-2 ${active && "bg-gray-50"} p-2 rounded-lg`}>
             <div className="flex justify-between"
                 onClick={onClick}
             >

@@ -37,7 +37,7 @@ body {
 }
 
 
-a:hover{
+a:hover {
     @apply text-primary;
 }
 
@@ -47,11 +47,24 @@ a:hover{
     line-height: 60px;
     font-family: "El Messiri", sans-serif;
 }
-.animation-fade-in{
+
+.animation-fade-in {
     animation: fadeIn 0.5s ease-in-out;
     -webkit-animation: fadeIn 0.5s ease-in-out;
     -moz-animation: fadeIn 0.5s ease-in-out;
     -o-animation: fadeIn 0.5s ease-in-out;
     -ms-animation: fadeIn 0.5s ease-in-out;
     animation-duration: 0.5s;
+}
+
+.review .swiper-slide {
+    max-width: 1000px;
+}
+
+
+
+
+.swiper-nav-btns button:hover {
+    @apply text-primary;
+    cursor: pointer;
 }
