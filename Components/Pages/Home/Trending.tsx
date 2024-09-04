@@ -15,7 +15,7 @@ import ProductCard from './ProductCard';
 
 const Trending = () => {
     return (
-        <div className='container '>
+        <div className='container mx-auto'>
             <h2 className='sec-title mt-10'>
                 Trending products
             </h2>

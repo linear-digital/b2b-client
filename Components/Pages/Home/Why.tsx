@@ -26,7 +26,7 @@ const Why = () => {
     ]
     return (
         <div className='min-h-[450px] bg-[#8E9E84] mt-20 py-10 flex flex-col justify-center'>
-            <div className="container">
+            <div className="container mx-auto">
                 <h1 className='sec-title text-white'>
                     Why Shop with Us?
                 </h1>

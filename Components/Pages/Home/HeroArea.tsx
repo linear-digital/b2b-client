@@ -4,7 +4,7 @@ import React from 'react';
 
 const HeroArea = () => {
     return (
-        <div className='container py-14'>
+        <div className='container mx-auto py-14'>
             <h1 className='text-center messiri text-[48px] text-black font-semibold'>
                 Find the Best Deals on the Latest <br />
                  Tech, Fashion, and More!

@@ -15,7 +15,7 @@ import VoucherCard from './VoucherCard';
 
 const Vouchers = () => {
     return (
-        <div className='container '>
+        <div className='container mx-auto'>
             <div className="flex justify-between mt-16">
                 <h2 className='sec-title mt-4'>
                     Exclusive Vouchers and Discounts

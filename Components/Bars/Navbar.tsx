@@ -34,7 +34,7 @@ const Navbar = () => {
     const path = usePathname();
     return (
         <div>
-            <div className="flex justify-between py-3 items-center container">
+            <div className="flex justify-between py-3 items-center container mx-auto">
                 <Logo />
                 <SearchBox />
                 <div className='flex items-center gap-x-5'>
@@ -48,7 +48,7 @@ const Navbar = () => {
                 </div>
             </div>
             <hr />
-            <div className="container py-3">
+            <div className="container mx-auto py-3">
                 <div className='flex justify-center gap-x-4'>
                     {
                         items.map((item, index) => (

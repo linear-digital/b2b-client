@@ -1,6 +1,7 @@
 import Footer from "@/Components/Bars/Footer/Footer";
 import Navbar from "@/Components/Bars/Navbar";
 import HeroArea from "@/Components/Pages/Home/HeroArea";
+import Newsletter from "@/Components/Pages/Home/Newsletter";
 import ShopCategory from "@/Components/Pages/Home/ShopCategory";
 import Trending from "@/Components/Pages/Home/Trending";
 import Vouchers from "@/Components/Pages/Home/Voucher";
@@ -15,6 +16,7 @@ export default function Home() {
       <Vouchers />
       <Trending />
       <Why />
+      <Newsletter />
       <Footer />
     </main>
   );

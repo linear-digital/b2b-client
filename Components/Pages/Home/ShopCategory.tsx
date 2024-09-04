@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 const ShopCategory = () => {
     return (
-        <div className='container '>
+        <div className='container mx-auto'>
             <h2 className='sec-title mt-4'>
                 Shop by Category
             </h2>
