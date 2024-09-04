@@ -57,7 +57,8 @@ const ReviewCard = () => {
                     <Image src={'/icons/quote.png'} alt="quote" width={90} height={90} />
                 </div>
                 <p className="text-gray-500 text-[18px] mt-4">
-                    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
+                    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
+                     or randomised words which don't look even slightly believable."
                 </p>
             </div>
             <div className="flex items-center justify-between">

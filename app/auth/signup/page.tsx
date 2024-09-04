@@ -5,7 +5,7 @@ import FormSignup from './_UI/Form';
 
 const page = () => {
     return (
-        <div className='container max-h-screen flex py-10 overflow-hidden'>
+        <div className='container mx-auto max-h-screen flex py-10 overflow-hidden'>
             <div className="grid grid-cols-2 h-full">
                 <div className='flex flex-col justify-center p-2'>
                     <Logo />
@@ -18,10 +18,14 @@ const page = () => {
                     <FormSignup />
                 </div>
                 <div className='h-[90%] relative rounded overflow-hidden'>
-                    <Image src='/images/login.png' alt="login" width={700} height={900}
+                    <Image src='/images/image.png' alt="login" width={700} height={900}
                         className='h-full object-cover'
                     />
-                    <Image src={'/images/login-elements.png'} alt="login" width={700} height={200}
+                    <Image
+                        src={'/images/login-elements.png'}
+                        alt="login"
+                        width={700}
+                        height={200}
                         className='absolute bottom-0 left-0 '
                     />
                 </div>

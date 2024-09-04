@@ -5,7 +5,7 @@ import FormSignup from './_UI/Form';
 
 const page = () => {
     return (
-        <div className='container max-h-screen flex py-10 overflow-hidden'>
+        <div className='container mx-auto max-h-screen flex py-10 overflow-hidden'>
             <div className="grid grid-cols-2 h-full">
                 <div className='flex flex-col justify-center p-2'>
                     <Logo />
