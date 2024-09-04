@@ -7,30 +7,30 @@ import { HeartOutlined, UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import UserOptions from './UserOptions';
-
+export const items = [
+    {
+        name: "Home",
+        path: "/",
+    },
+    {
+        name: "Products",
+        path: "/products",
+    },
+    {
+        name: "Vouchers",
+        path: "/voucher",
+    },
+    {
+        name: "About Us",
+        path: "/about",
+    },
+    {
+        name: "Contact",
+        path: "/contact",
+    }
+]
 const Navbar = () => {
-    const items = [
-        {
-            name: "Home",
-            path: "/",
-        },
-        {
-            name: "Products",
-            path: "/products",
-        },
-        {
-            name: "Vouchers",
-            path: "/voucher",
-        },
-        {
-            name: "About Us",
-            path: "/about",
-        },
-        {
-            name: "Contact",
-            path: "/contact",
-        }
-    ]
+    
     const path = usePathname();
     return (
         <div>
