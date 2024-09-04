@@ -80,7 +80,7 @@ const LoginSignup: React.FC = () => {
             </Form.Item>
             <Form.Item wrapperCol={{ span: 20 }}>
                 <Link href="/auth/signup" >
-                    Don't have an account? Signup
+                    Dont have an account? Signup
                 </Link>
             </Form.Item>
         </Form>
