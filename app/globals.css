@@ -41,3 +41,10 @@ body {
 a:hover{
     @apply text-primary;
 }
+
+.sec-title {
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    font-family: "El Messiri", sans-serif;
+}

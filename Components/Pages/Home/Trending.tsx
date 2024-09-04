@@ -16,7 +16,7 @@ import ProductCard from './ProductCard';
 const Trending = () => {
     return (
         <div className='container '>
-            <h2 className='messiri text-3xl mt-10'>
+            <h2 className='sec-title mt-10'>
                 Trending products
             </h2>
             <div className="flex items-center justify-between mt-8">
@@ -73,7 +73,7 @@ const Trending = () => {
             </Swiper>
             <div className="flex justify-center mt-10">
                 <Link href={'/shop'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
-                    View All
+                Explore All Trends
                 </Link>
             </div>
         </div>

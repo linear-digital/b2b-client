@@ -17,7 +17,7 @@ const Vouchers = () => {
     return (
         <div className='container '>
             <div className="flex justify-between mt-16">
-                <h2 className='messiri text-3xl mt-4'>
+                <h2 className='sec-title mt-4'>
                     Exclusive Vouchers and Discounts
                 </h2>
                 <div className='flex items-center gap-4'>

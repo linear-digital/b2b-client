@@ -15,7 +15,7 @@ import Image from 'next/image';
 const ShopCategory = () => {
     return (
         <div className='container '>
-            <h2 className='messiri text-3xl mt-4'>
+            <h2 className='sec-title mt-4'>
                 Shop by Category
             </h2>
             <div className="flex items-center justify-between mt-8">
