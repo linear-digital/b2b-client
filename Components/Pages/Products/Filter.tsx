@@ -1,15 +1,15 @@
 'use client'
 import { HR } from '@/Components/Shared/Global';
-import { CaretDownOutlined, CaretUpOutlined, CheckCircleOutlined, CheckOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { Checkbox, Radio, Rate, Switch } from 'antd';
 import React from 'react';
-
+export const colors = ["black", "red", "blue", "green", "yellow", "orange"];
 const Filter = () => {
     const [showrange, setShowrange] = React.useState(true);
     const [showBrands, setShowBrands] = React.useState(false);
     const [showColor, setShowColor] = React.useState(false);
     const [showAvailable, setShowAvailable] = React.useState(true);
-    const colors = ["black", "red", "blue", "green", "yellow", "orange"];
+
     const [filter, setFilter] = React.useState({
         color: "",
         rate: 0
