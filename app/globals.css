@@ -38,7 +38,7 @@ body {
 
 
 a:hover {
-    @apply text-primary;
+    @apply text-blue-500;
 }
 
 .sec-title {
@@ -67,4 +67,12 @@ a:hover {
 .swiper-nav-btns button:hover {
     @apply text-primary;
     cursor: pointer;
+}
+
+.ant-otp {
+    width: 100%;
+}
+.ant-otp input {
+    height: 50px;
+    outline: none;
 }

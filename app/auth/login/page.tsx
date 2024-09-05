@@ -13,7 +13,7 @@ const page = () => {
                         Login to account
                     </h2>
                     <p className='text-sm mt-3'>
-                    Enter your credentials to access your account
+                        Enter your credentials to access your account
                     </p>
                     <FormSignup />
                 </div>
