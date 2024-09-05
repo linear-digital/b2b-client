@@ -15,7 +15,7 @@ const Filter = () => {
         rate: 0
     })
     return (
-        <div className='w-[295px] min-h-[819px] bg-white rounded-lg p-5'>
+        <div className='min-w-[295px] max-w-[300px]  bg-white rounded-lg p-5'>
             <h1 className='messiri text-[28px]'>
                 Filter
             </h1>
