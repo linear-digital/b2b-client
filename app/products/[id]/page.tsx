@@ -13,6 +13,8 @@ import { useState } from 'react';
 import ProductDetails from './_UI/ProductDetails';
 import ProductComparison from './_UI/ProductComparison';
 import CustomerReview from './_UI/CustomerReview';
+import AllReviews from './_UI/AllReviews';
+import FeaturedProduct from './_UI/FeaturedProduct';
 
 
 const Page = () => {
@@ -66,6 +68,8 @@ const Page = () => {
             </div>
             <ProductComparison />
             <CustomerReview />
+            <AllReviews />
+            <FeaturedProduct />
             <Footer />
         </div>
     );

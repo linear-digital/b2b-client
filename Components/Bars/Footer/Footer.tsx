@@ -9,7 +9,7 @@ import { items } from '../Navbar';
 import { Button } from 'antd';
 const Footer = () => {
     return (
-        <footer className='bg-black w-full  mt-52'>
+        <footer className='bg-black w-full  mt-16'>
             <div className="container mx-auto grid grid-cols-12 py-10 gap-x-10">
                 <div className='col-span-3'>
                     <Logo color='white' />

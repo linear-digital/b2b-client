@@ -3,6 +3,7 @@ import PageTop from '@/Components/Pages/PageTop';
 import Filter from '@/Components/Pages/Products/Filter';
 import React from 'react';
 import ProductContainer from './_UI/ProductContainer';
+import Footer from '@/Components/Bars/Footer/Footer';
 
 const page = () => {
     return (
@@ -16,6 +17,7 @@ const page = () => {
                 <Filter />
                 <ProductContainer />
             </div>
+            <Footer />
         </div>
     );
 };
