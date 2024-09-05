@@ -10,7 +10,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Navbar from '@/Components/Bars/Navbar';
 import { useState } from 'react';
-import ProductDetails from '../_UI/ProductDetails';
+import ProductDetails from './_UI/ProductDetails';
+import ProductComparison from './_UI/ProductComparison';
+import CustomerReview from './_UI/CustomerReview';
 
 
 const Page = () => {
@@ -61,8 +63,9 @@ const Page = () => {
                     </div>
                     <ProductDetails />
                 </section>
-
             </div>
+            <ProductComparison />
+            <CustomerReview />
             <Footer />
         </div>
     );
