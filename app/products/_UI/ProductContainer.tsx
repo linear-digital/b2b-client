@@ -28,7 +28,13 @@ const ProductContainer = () => {
                     </select>
                 </div>
             </div>
-            <div className="grid grid-cols-3 mt-7 gap-5 mb-8">
+            <div className="grid grid-cols-3 mt-7 gap-5 mb-8 max-h-screen overflow-y-auto">
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
