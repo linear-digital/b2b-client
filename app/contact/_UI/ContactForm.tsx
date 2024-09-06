@@ -57,12 +57,14 @@ const ContactForm = () => {
                 <Form.Item<FieldType>
                     label="Subject"
                     name="subject"
+                    rules={[{ required: true, message: 'Please input your subject!' }]}
                 >
                     <Input size='large' />
                 </Form.Item>
                 <Form.Item<FieldType>
                     label="Message"
                     name="message"
+                    rules={[{ required: true, message: 'Please input your message!' }]}
                 >
                     <Input.TextArea size='large' rows={4} />
                 </Form.Item>
@@ -73,6 +75,8 @@ const ContactForm = () => {
                 </Form.Item>
 
             </Form>
+
+            
         </div>
     );
 };
