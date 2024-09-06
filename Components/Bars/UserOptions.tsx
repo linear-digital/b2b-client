@@ -9,11 +9,7 @@ const UserOptions = () => {
                 <UserOutlined />
                 <span>Profile</span>
             </Link>
-            <Link href={"/profile/edit"} className='flex items-center gap-x-3 mt-2'>
-                <EditFilled />
-                <span>Edit Profile</span>
-            </Link>
-            <Link href={"/profile"} className='flex items-center gap-x-3 mt-2'>
+            <Link href={"/settings"} className='flex items-center gap-x-3 mt-2'>
                 <SettingOutlined />
                 <span>Account Settings</span>
             </Link>
