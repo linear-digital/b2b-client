@@ -5,9 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-    --ant-primary-color: #120787;
+    --primary: #8E9E84;
 }
 
 .messiri {
@@ -110,12 +109,22 @@ a:hover {
 }
 
 .btn-primary-active {
-    @apply  border bg-primary text-white px-5 py-2 rounded-lg;
+    @apply border bg-primary text-white px-5 py-2 rounded-lg;
 }
 
 .btn-primary:hover {
     @apply bg-primary text-white;
 }
+
 .btn-primary-active:hover {
-    @apply  border-primary border text-primary bg-transparent;
+    @apply border-primary border text-primary bg-transparent;
+}
+
+.default-bg {
+    background-color: #F7F7F7;
+}
+
+.ant-btn-primary {
+    background-color: var(--primary) !important;
+    box-shadow: none;
 }
