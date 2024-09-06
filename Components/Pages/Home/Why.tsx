@@ -43,7 +43,7 @@ export default Why;
 const ItemCard = ({ data }: { data: { image: string, title: string, description: string } }) => {
     return <div>
         <Image src={data.image} alt="login" width={80} height={80} />
-        <h2 className='text-[20px] font-semibold text-white mt-3'>{data.title}</h2>
-        <p className='text-white text-[16px] mt-1'>{data.description}</p>
+        <h2 className='text-[20px] font-semibold text-white mt-5'>{data.title}</h2>
+        <p className='text-white text-[16px] mt-1 '>{data.description}</p>
     </div>
 }
