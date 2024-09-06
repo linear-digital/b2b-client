@@ -97,3 +97,10 @@ a:hover {
     color: #898989;
     max-width: 653px;
 }
+
+
+.contact .ant-form-item label {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
