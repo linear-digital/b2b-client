@@ -24,7 +24,7 @@ export default function RootLayout({
             theme={{
               token: {
                 // Seed Token
-                colorPrimary: '#120787',
+                colorPrimary: '#8E9E84',
                 // Alias Token
               },
             }}

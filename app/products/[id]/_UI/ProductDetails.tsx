@@ -53,7 +53,7 @@ const ProductDetails = () => {
                 Experience top-tier performance with the Apple MacBook Pro 16-inch, featuring a stunning Retina display, powerful Intel Core i9 processor, and advanced graphics—perfect for professionals seeking speed and reliability.
             </p>
             <div className="flex mt-6 gap-5">
-                <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary hover:text-white text-sm'>
+                <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>
                     Add to wishlist
                 </button>
                 <button className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm'>

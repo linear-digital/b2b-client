@@ -30,7 +30,7 @@ export const items = [
     }
 ]
 const Navbar = () => {
-    
+
     const path = usePathname();
     return (
         <div>
@@ -38,7 +38,9 @@ const Navbar = () => {
                 <Logo />
                 <SearchBox />
                 <div className='flex items-center gap-x-5'>
-                    <HeartOutlined className='text-xl' />
+                    <Link href={"/wishlist"}>
+                        <HeartOutlined className='text-xl' />
+                    </Link>
                     <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}>
                         <Avatar
                             size={40}
