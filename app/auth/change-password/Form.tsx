@@ -49,7 +49,7 @@ const ChangePassword: React.FC = () => {
             >
                 <Input.Password size='large' onChange={(e) => setPassword(e.target.value)} />
             </Form.Item>
-            <div className='grid grid-cols-2 mb-5  text-gray-500'>
+            <div className='grid grid-cols-2 mb-5   text-gray-500 gap-2'>
                 <div className="flex items-center gap-2">
                     <CheckCircleIcon fontSize='small' className={/[a-z]/.test(password) ? 'text-primary' : ''} />
                     <span>one lowercase character</span>
@@ -66,7 +66,7 @@ const ChangePassword: React.FC = () => {
                     <CheckCircleIcon fontSize='small' className={password.length >= 8 ? 'text-primary' : ''} />
                     <span>8 characters minimum</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 ">
                     <CheckCircleIcon fontSize='small' className={/\d/.test(password) ? 'text-primary' : ''} />
                     <span>one number</span>
                 </div>

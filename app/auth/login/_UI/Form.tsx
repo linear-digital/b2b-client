@@ -27,7 +27,7 @@ const LoginSignup: React.FC = () => {
         <Form
             name="basic"
             labelCol={{ span: 8 }}
-            wrapperCol={{ span: 20 }}
+            wrapperCol={{ span: 22 }}
             style={{ maxWidth: 600 }}
             onFinish={onFinish}
 
@@ -36,13 +36,6 @@ const LoginSignup: React.FC = () => {
             layout='vertical'
             className='mt-8'
         >
-            <Form.Item<FieldType>
-                label="Name"
-                name="name"
-                rules={[{ required: true, message: 'Please input your name!' }]}
-            >
-                <Input size='large' />
-            </Form.Item>
             <Form.Item<FieldType>
                 label="Email"
                 name="email"

@@ -8,7 +8,7 @@ import ChangePassword from './Form';
 const page = () => {
     return (
         <div className='container mx-auto flex items-center justify-center h-screen'>
-            <Card className='w-[500px] min-h-[400px] border-none p-5'>
+            <Card className='lg:w-[500px] w-full min-h-[400px] border-none lg:p-5'>
                 <Image src={'/icons/forgot.png'} alt="forgot" width={50} height={50} />
                 <h1 className='text-[32px] messiri mt-4'>
                     Change password!
