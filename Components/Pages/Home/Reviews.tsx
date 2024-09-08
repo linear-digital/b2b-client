@@ -55,7 +55,7 @@ const ReviewCard = () => {
         <div className="p-8 w-[720px]  bg-white rounded-lg shadow-lg z-10 ">
             <div className="">
                 <div className="">
-                    <Image src={'/icons/quote.png'} alt="quote" width={90} height={90} />
+                    <Image src={'/icons/Quote.png'} alt="quote" width={90} height={90} />
                 </div>
                 <p className="text-gray-500 lg:text-[18px] text-[14px] mt-4">
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
