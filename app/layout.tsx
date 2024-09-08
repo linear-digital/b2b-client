@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./tailwind.css";
+
 import { ConfigProvider } from "antd";
 import { Suspense } from "react";
 import 'animate.css';
