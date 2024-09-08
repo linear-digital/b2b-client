@@ -4,7 +4,7 @@ import React from 'react';
 const Category = () => {
     const [selected, setSelected] = React.useState(0);
     return (
-        <div className='w-[295px]  p-5 min-w-[295px] h-auto bg-white rounded-xl '>
+        <div className='w-[295px] lg:block hidden  p-5 min-w-[295px] h-auto bg-white rounded-xl '>
             <h1 className='text-[28px] messiri font-medium'>Category</h1>
             <div className="flex flex-col gap-y-2 mt-6">
                 {

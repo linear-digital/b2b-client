@@ -32,7 +32,7 @@ export default AllReviews;
 
 const ReviewCard = () => {
     return <Card className='border-0'>
-        <div className="flex justify-between">
+        <div className="lg:flex justify-between">
             <div>
                 <div className="flex items-center gap-x-4">
                     <Avatar size={60} />
@@ -45,18 +45,19 @@ const ReviewCard = () => {
                         </h5>
                     </div>
                 </div>
-                <p className='mt-4 text-[#898989] text-[16px] max-w-[632px]'>
+                <p className='mt-4 text-[#898989] text-[14px] lg:text-[16px] max-w-[632px]'>
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum
                 </p>
                 <Rate className='mt-3' defaultValue={5} />
             </div>
-            <div className='flex gap-4'>
-                <Image src={'/products/watch.png'} alt="quote" width={216} height={216}
-                    className='border rounded-lg overflow-hidden'
+            <div className='flex gap-4 lg:mt-0 mt-4'>
+                <Image src={'/products/watch.png'} alt="quote" 
+                    className='border h-full rounded-lg overflow-hidden max-h-[100px] lg:max-h-[216px] '
                 />
-                <Image src={'/products/watch.png'} alt="quote" width={216} height={216}
-                    className='border rounded-lg overflow-hidden'
+                <Image src={'/products/watch.png'} alt="quote" 
+                    className='border h-full rounded-lg overflow-hidden max-h-[100px] lg:max-h-[216px] '
                 />
+
             </div>
         </div>
     </Card>

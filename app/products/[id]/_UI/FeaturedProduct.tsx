@@ -18,13 +18,13 @@ const FeaturedProduct = () => {
     const swiperRef: any = useRef(null);
     const [swiper, setSwiper] = React.useState<any>(null);
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto px-4 lg:px-0'>
             <div className="flex items-end justify-between">
                 <div>
                     <h2 className='sec-title mt-4'>
                         Featured Products
                     </h2>
-                    <p className='text-[#898989] text-[18px] max-w-[749px]'>
+                    <p className='text-[#898989] text-[14px] lg:text-[18px] max-w-[749px] '>
                         Discover our handpicked selection of top-rated products, showcasing the best in quality and value. Explore trending items across all categories.
                     </p>
                 </div>
@@ -32,7 +32,20 @@ const FeaturedProduct = () => {
             </div>
             <Swiper
                 ref={swiperRef}
-                slidesPerView={4}
+                breakpoints={{
+                    400: {
+                        slidesPerView: 1,
+                    },
+                    700: {
+                        slidesPerView: 2,
+                    },
+                    1000: {
+                        slidesPerView: 3,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                    },
+                }}
                 spaceBetween={30}
                 className="mt-10 h-auto"
                 onSwiper={(swiper) => setSwiper(swiper)}

@@ -81,7 +81,7 @@ const Page = () => {
             <ProductComparison />
             <CustomerReview />
             <AllReviews />
-            {/*   <FeaturedProduct /> */}
+              <FeaturedProduct />
             <Footer />
         </div>
     );
