@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ConfigProvider } from "antd";
 import { Suspense } from "react";
-
+import 'animate.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

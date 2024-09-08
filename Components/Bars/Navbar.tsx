@@ -3,10 +3,12 @@ import React from 'react';
 import Logo from '../Shared/Logo';
 import SearchBox from './SearchBox';
 import { Avatar, List, Popover } from 'antd';
-import { HeartOutlined, UserOutlined } from '@ant-design/icons';
+import { HeartOutlined, MenuOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
+import CloseIcon from '@mui/icons-material/Close';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import UserOptions from './UserOptions';
+import { HR } from '../Shared/Global';
 export const items = [
     {
         name: "Home",
@@ -30,45 +32,85 @@ export const items = [
     }
 ]
 const Navbar = () => {
-
-    const path = usePathname();
+    const [show, setShow] = React.useState(false);
     return (
-        <div>
-            <div className="flex justify-between py-3 items-center container mx-auto">
+        <div className='relative'>
+            <div className="flex justify-between py-3 items-center container mx-auto lg:px-0 px-4 ">
                 <Logo />
                 <SearchBox />
-                <div className='flex items-center gap-x-5'>
+                <div className='flex items-center gap-x-5 '>
+                    <button>
+                        <SearchOutlined className='text-xl' />
+                    </button>
                     <Link href={"/wishlist"}>
                         <HeartOutlined className='text-xl' />
                     </Link>
-                    <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}>
+                    <button onClick={() => setShow(!show)}>
+                        <MenuOutlined className='text-xl' />
+                    </button>
+                    <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}
+                        className='hidden lg:block'
+                    >
                         <Avatar
                             size={40}
-                            className='border border-primary'
+                            className='border border-primary cursor-pointer'
                             src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
                     </Popover>
                 </div>
+                {
+                    show && <div className="absolute top-0 left-0 right-0 bg-white w-full h-screen z-50 lg:hidden flex flex-col gap-y-4 p-5 animate__animated  animate__zoomIn">
+                        <div className="flex items-center justify-between">
+                            <Logo />
+                            <button onClick={() => setShow(!show)}>
+                                <CloseIcon fontSize="medium" />
+                            </button>
+                        </div>
+                        <MenuItems onClick={() => setShow(!show)}/>
+                        <HR />
+                        <Popover title={"User Options"} trigger={"click"} content={<UserOptions onClick={() => setShow(!show)}/>}
+                            placement='bottom'
+                        >
+                            <Avatar
+                                size={40}
+                                className='border border-primary cursor-pointer'
+                                src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+                        </Popover>
+                    </div>
+                }
             </div>
-            <hr />
-            <div className="container mx-auto py-3">
-                <div className='flex justify-center gap-x-4'>
-                    {
-                        items.map((item, index) => (
-                            <div key={index} className='flex items-center gap-x-3'>
-                                <Link href={item.path} className={path === item.path ? 'text-primary' : ''}>
-                                    {item.name}
-                                </Link>
-                                {
-                                    index !== items.length - 1 && <h4 className='text-gray-400'>/</h4>
-                                }
-                            </div>
-                        ))
-                    }
+            <div className="hidden lg:block">
+                <hr />
+                <div className="container mx-auto py-3">
+                    <div className='flex justify-center gap-x-4'>
+                        <MenuItems />
+                    </div>
                 </div>
+                <hr />
             </div>
-            <hr />
         </div>
     );
 };
 
 export default Navbar;
+
+const MenuItems = ({ onClick }: { onClick?: () => void }) => {
+    const path = usePathname();
+    return <>
+        {
+            items.map((item, index) => (
+                <div key={index} className='flex items-center gap-x-3'
+
+                >
+                    <Link href={item.path} className={path === item.path ? 'text-primary' : ''}
+                        onClick={onClick}
+                    >
+                        {item.name}
+                    </Link>
+                    {
+                        index !== items.length - 1 && <h4 className='text-gray-400 lg:block hidden'>/</h4>
+                    }
+                </div>
+            ))
+        }
+    </>
+}

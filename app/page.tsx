@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main className="bg-[#F7F7F7]">
       <Navbar />
-      <HeroArea />
+      {/* <HeroArea />
       <ShopCategory />
       <Vouchers />
       <Trending />
@@ -23,7 +23,7 @@ export default function Home() {
       <FeaturedBrands />
       <FAQ />
       <ReviewSlider />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 }
