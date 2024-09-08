@@ -3,16 +3,16 @@ import React from 'react';
 
 const ProductComparison = () => {
     return (
-        <div className='bg-black min-h-[400px] w-full mt-16 text-white py-10' >
+        <div className='bg-black min-h-[400px] w-full mt-16 text-white py-10 lg:px-0 px-4' >
             <div className="container mx-auto">
                 <h1 className='sec-title'>
                     Product Comparison
                 </h1>
-                <p className='text-[18px] text-[#898989] w-[749px] mt-4'>
+                <p className='lg:text-[18px] text-[14px] text-[#898989] max-w-[749px] mt-4'>
                     Easily compare features, prices, and reviews of your favorite products. Multiple items to see how they stack up against each other and make an informed decision before purchasing.
                 </p>
                 <div className='mt-16'>
-                    <table className="table-auto border-collapse w-full text-left">
+                    <table className="table-auto border-collapse w-full text-left hidden">
                         <thead>
                             <tr>
                                 <th className="px-4 py-2" >

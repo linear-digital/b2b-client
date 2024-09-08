@@ -4,7 +4,7 @@ import { colors } from '@/Components/Pages/Products/Filter';
 const ProductDetails = () => {
     return (
         <div>
-            <h2 className='messiri text-[36px]'>
+            <h2 className='messiri lg:text-[36px] text-[25px]'>
                 Apple MacBook Pro 16-inch
             </h2>
             <h3 className='text-[28px] font-semibold mt-4'>
