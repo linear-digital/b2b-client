@@ -5,12 +5,13 @@ const AllReviews = () => {
     return (
         <section className='mt-10 container mx-auto lg:p-0 p-4'>
             <div className="flex items-center justify-between">
-                <h2 className='messiri text-[28px]'>
+                <h2 className='messiri lg:text-[28px] text-[25px]'>
                     All reviews
                 </h2>
                 <button className='bg-primary text-white px-5 lg:px-8 py-4 text-sm rounded-xl'>
                     Write a review
                 </button>
+
             </div>
             <div className="mt-10 flex flex-col gap-y-4">
                 <ReviewCard />
