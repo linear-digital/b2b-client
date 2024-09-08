@@ -14,10 +14,10 @@ export default function Home() {
   return (
     <main className="bg-[#F7F7F7]">
       <Navbar />
-       <HeroArea />
-     {/* <ShopCategory />
+      <HeroArea />
+      <ShopCategory />
       <Vouchers />
-      <Trending />
+      {/*  <Trending />
       <Why />
       <Newsletter />
       <FeaturedBrands />

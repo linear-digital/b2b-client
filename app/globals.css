@@ -49,13 +49,7 @@ a:hover {
     @apply text-primary;
 }
 
-.sec-title {
-    font-family: El Messiri;
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 48px;
-    text-align: left;
-}
+
 
 .animation-fade-in {
     animation: fadeIn 0.5s ease-in-out;
@@ -127,4 +121,19 @@ a:hover {
 .ant-btn-primary {
     background-color: var(--primary) !important;
     box-shadow: none;
+}
+
+.sec-title {
+    font-family: El Messiri;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 48px;
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .sec-title {
+        font-size: 28px;
+    }
+
 }

@@ -18,12 +18,12 @@ const ShopCategory = () => {
     const [swiper, setSwiper] = React.useState<any>(null);
     
     return (
-        <div className='container mx-auto'>
-            <h2 className='sec-title mt-4'>
+        <div className='container mx-auto px-4 lg:px-0'>
+            <h2 className='sec-title  mt-4'>
                 Shop by Category
             </h2>
             <div className="flex items-center justify-between mt-8">
-                <ul className='flex items-center gap-x-4 text-[#898989]'>
+                <ul className='flex items-center gap-x-4 text-[#898989] lg:text-base text-sm'>
                     <li>
                         <button className='text-primary'>
                             All
@@ -44,7 +44,18 @@ const ShopCategory = () => {
             </div>
             <Swiper
                 ref={swiperRef}
-                slidesPerView={4}
+                // slidesPerView={4}
+                breakpoints={{
+                   700: {
+                        slidesPerView: 1,
+                    },
+                    1024: {
+                        slidesPerView: 2,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                    },
+                }}
                 spaceBetween={30}
                 className="mt-10 h-[300px] "
                 onSwiper={(swiper) => setSwiper(swiper)}
@@ -115,7 +126,7 @@ const ShopCategory = () => {
                     </h4>
                 </SwiperSlide>
             </Swiper>
-            <div className="flex justify-center mt-10">
+            <div className="flex justify-center lg:mt-10 mt-7">
                 <Link href={'/products'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
                     View All
                 </Link>
