@@ -3,12 +3,12 @@ import React from 'react';
 
 const AllReviews = () => {
     return (
-        <section className='mt-10 container mx-auto'>
+        <section className='mt-10 container mx-auto lg:p-0 p-4'>
             <div className="flex items-center justify-between">
                 <h2 className='messiri text-[28px]'>
                     All reviews
                 </h2>
-                <button className='bg-primary text-white px-8 py-4 text-sm rounded-xl'>
+                <button className='bg-primary text-white px-5 lg:px-8 py-4 text-sm rounded-xl'>
                     Write a review
                 </button>
             </div>

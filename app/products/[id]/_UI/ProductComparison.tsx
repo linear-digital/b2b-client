@@ -11,10 +11,10 @@ const ProductComparison = () => {
                 <p className='lg:text-[18px] text-[14px] text-[#898989] max-w-[749px] mt-4'>
                     Easily compare features, prices, and reviews of your favorite products. Multiple items to see how they stack up against each other and make an informed decision before purchasing.
                 </p>
-                <div className='mt-16'>
-                    <table className="table-auto border-collapse w-full text-left hidden">
-                        <thead>
-                            <tr>
+                <div className='mt-16 overflow-x-auto '>
+                    <table className="table-auto border-collapse w-full text-left ">
+                        <thead >
+                            <tr className='lg:table-row flex flex-col'>
                                 <th className="px-4 py-2" >
                                     <h2 className='text-[#FFFFFF] text-[36px]'>
                                         Features
@@ -89,7 +89,7 @@ const ProductComparison = () => {
                                 <td></td>
                                 <td>
                                     <div className="flex justify-center mt-2">
-                                        <button className='border text-white px-4 py-2 rounded-lg'>Add to wishlist</button>
+                                        <button className='border text-white px-4 py-2 rounded-lg lg:text-base text-sm '>Add to wishlist</button>
                                     </div>
                                 </td>
                             </tr>

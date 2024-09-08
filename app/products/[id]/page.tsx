@@ -79,9 +79,9 @@ const Page = () => {
                 </div>
             </div>
             <ProductComparison />
-            {/*   <CustomerReview />
+            <CustomerReview />
             <AllReviews />
-            <FeaturedProduct /> */}
+            {/*   <FeaturedProduct /> */}
             <Footer />
         </div>
     );
