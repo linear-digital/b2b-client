@@ -17,19 +17,32 @@ const OurTeam = () => {
     const swiperRef: any = useRef(null);
     const [swiper, setSwiper] = React.useState<any>(null);
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto px-4 lg:px-0'>
             <h2 className='sec-title mt-4'>
                 Our Team
             </h2>
-            <div className="flex items-end justify-between mt-8">
-                <p className='max-w-[749px] text-[#898989] text-[18px]'>
+            <div className="lg:flex items-end justify-between mt-8">
+                <p className='max-w-[749px] text-[#898989] lg:text-[18px] text-[14] mb-3 lg:mb-0'>
                     Our team is a diverse group of experts passionate about enhancing your shopping experience. Together, we bring innovation, dedication, and a commitment to excellence in everything we do
                 </p>
                 <SwiperNavButtons swiper={swiper} />
             </div>
             <Swiper
                 ref={swiperRef}
-                slidesPerView={3}
+                breakpoints={{
+                    400: {
+                         slidesPerView: 1,
+                     },
+                     700: {
+                         slidesPerView: 2,
+                     },
+                     1000: {
+                         slidesPerView: 2,
+                     },
+                     1200: {
+                         slidesPerView: 3,
+                     },
+                 }}
                 spaceBetween={30}
                 className="mt-10 h-auto"
                 onSwiper={(swiper) => setSwiper(swiper)}

@@ -20,12 +20,12 @@ const WhyChooseUs = () => {
         }
     ]
     return (
-        <div className='min-h-[450px] bg-[#8E9E84] py-10 flex flex-col justify-center'>
+        <div className='min-h-[450px] bg-[#8E9E84] py-10 flex flex-col justify-center px-4 lg:px-0'>
             <div className="container mx-auto">
                 <h1 className='sec-title text-white'>
                     Why Choose Us?
                 </h1>
-                <div className="grid grid-cols-3 gap-5 mt-14">
+                <div className="grid lg:grid-cols-3 gap-5 mt-14">
                 {items.map((item, index) => <ItemCard data={item} key={index} />)}
             </div>
             </div>
