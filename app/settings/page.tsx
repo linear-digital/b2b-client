@@ -13,14 +13,14 @@ const page = () => {
         console.log(data)
     }
     return (
-        <div className='w-full'>
+        <div className='w-full lg:p-0 p-4'>
             <div className="flex items-center gap-10">
                 <Avatar size={150} src={'/images/Avatar/man-1.png'} />
                 <button className='btn-primary'>
                     Change
                 </button>
             </div>
-            <Form className='grid grid-cols-2 gap-x-5 mt-10'
+            <Form className='grid lg:grid-cols-2 gap-x-5 mt-10'
                 layout='vertical'
                 name="basic"
                 onFinish={onSubmit}
@@ -68,7 +68,7 @@ const page = () => {
                 >
                     <Input size='large' />
                 </Form.Item>
-                <Form.Item></Form.Item>
+                <Form.Item className='lg:block hidden'></Form.Item>
                 <Form.Item<FieldType>
                 >
                     <Button htmlType='submit' type='primary' size='large'>

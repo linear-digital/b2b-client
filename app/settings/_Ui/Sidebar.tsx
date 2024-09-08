@@ -21,7 +21,7 @@ const Sidebar = () => {
     ]
     const path = usePathname();
     return (
-        <Card className='border-0 bg-[#ECEDEA]  min-w-[295px] w-[295px]'>
+        <Card className='border-0 hidden lg:block bg-[#ECEDEA]  min-w-[295px] w-[295px]'>
             <div className="flex flex-col justify-between  h-[586px]">
                 <div className="flex flex-col gap-4">
                     {
