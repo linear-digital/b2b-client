@@ -13,7 +13,7 @@ const FAQ = () => {
     ]
     const [active, setActive] = React.useState(0);
     return (
-        <section className='bg-white py-10 mt-20'>
+        <section className='bg-white py-10 mt-20 px-5 lg:px-0'>
             <div className='container mx-auto '>
             <h1 className='sec-title'>
                 Frequently Asked Questions (FAQ)
@@ -44,7 +44,7 @@ const FAQCard = ({ title, desc, onClick, active }: { title: string, desc?: strin
             <div className="flex justify-between"
                 onClick={onClick}
             >
-                <h1 className='text-[18px] font-semibold'>
+                <h1 className='lg:text-[18px] text-[14px] font-semibold'>
                     {title}
                 </h1>
                 <button>
@@ -55,8 +55,8 @@ const FAQCard = ({ title, desc, onClick, active }: { title: string, desc?: strin
             </div>
             <hr />
             {
-                active && <p className='text-[#898989] pr-10 pb-2 animation-fade-in'>
-                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur laudantium voluptates earum amet repellendus fuga quisquam odio? Recusandae, illum commodi. Nemo velit aliquam veritatis accusamus perferendis expedita commodi perspiciatis sunt.
+                active && <p className='text-[#898989] pr-10 pb-2 animation-fade-in lg:text-base text-sm'>
+                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur laudantium voluptates earum amet repellendus fuga quisquam odio? Recusandae, 
                 </p>
             }
         </div>

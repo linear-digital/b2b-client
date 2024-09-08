@@ -3,8 +3,8 @@ import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 const ProductCard = () => {
     return (
-        <div>
-            <Image src={'/products/apple.png'} alt="login" width={290} height={300} className={'object-cover max-h-[300px] rounded-lg'} />
+        <div  className='w-full'>
+            <Image src={'/products/apple.png'} alt="login" width={290} height={300} className={'object-cover lg:max-h-[300px] rounded-lg w-full lg:w-auto'} />
             <div className='mt-3 px-2'>
                 <h3 className='text-[18px] font-semibold'>
                     Apple iPhone 14 Pro

@@ -10,24 +10,25 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 // import 'swiper/swiper-bundle.min.css';
 import { A11y, Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
+import { Avatar } from 'antd';
 
 // Import required modules
 
 
 const ReviewSlider = () => {
-  
+
     return (
-        <section className='container mx-auto mt-20 review' >
+        <section className='container mx-auto mt-20 review px-4 lg:px-0' >
             <h1 className='sec-title'>
                 What Our Clients Say
             </h1>
             <Swiper
                 slidesPerView={'auto'}
                 spaceBetween={30}
-               
+
                 pagination={{ clickable: true }}
                 modules={[Navigation, A11y]}
-                className='w-full mt-10'
+                className='w-full lg:mt-10 '
             >
                 <SwiperSlide className='w-[1000px]'>
                     <ReviewCard />
@@ -56,21 +57,24 @@ const ReviewCard = () => {
                 <div className="">
                     <Image src={'/icons/quote.png'} alt="quote" width={90} height={90} />
                 </div>
-                <p className="text-gray-500 text-[18px] mt-4">
+                <p className="text-gray-500 lg:text-[18px] text-[14px] mt-4">
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
-                     or randomised words which don't look even slightly believable."
+                    or randomised words which don't look even slightly believable."
                 </p>
             </div>
             <div className="flex items-center justify-between">
-                <div className="mt-4">
-                    <h3 className="text-lg font-bold">Joe Weeks</h3>
-                    <p className="text-sm text-gray-400">Customer</p>
+                <div className="flex items-center mt-4 gap-x-3">
+                    <Avatar size={45} />
+                    <div className="lg:mt-4">
+                        <h3 className="lg:text-lg text-[16px] font-bold">Joe Weeks</h3>
+                        <p className="text-sm text-gray-400">Customer</p>
+                    </div>
                 </div>
                 <SwiperNavButtons />
             </div>
         </div>
         <Image src={'/images/Avatar/avater.png'} alt="avater" width={400} height={400}
-            className='absolute bottom-0 right-0 z-[-1]'
+            className='absolute bottom-0 right-0 z-[-1] lg:block hidden'
         />
     </div>
 }

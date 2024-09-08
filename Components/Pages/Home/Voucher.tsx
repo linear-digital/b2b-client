@@ -49,7 +49,7 @@ const Vouchers = () => {
                         </button>
                     </li>
                 </ul>
-                <div className="flex items-center justify-between w-full mt-7">
+                <div className="flex items-center justify-between w-full lg:w-auto mt-7">
                     <select className='bg-transparent outline-none border-none'>
                         <option value="">Sort By</option>
                         <option value="featured">Featured</option>
@@ -57,7 +57,7 @@ const Vouchers = () => {
                         <option value="latest">Latest</option>
                         <option value="upcomming">Upcomming</option>
                     </select>
-                    <div className='items-center gap-4 flex'>
+                    <div className='items-center gap-4 flex lg:hidden'>
                         <button onClick={() => swiper?.slidePrev()}>
                             <ArrowBackIosIcon />
                         </button>

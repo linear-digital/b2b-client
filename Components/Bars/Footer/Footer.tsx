@@ -9,8 +9,8 @@ import { items } from '../Navbar';
 import { Button } from 'antd';
 const Footer = () => {
     return (
-        <footer className='bg-black w-full  mt-16'>
-            <div className="container mx-auto grid grid-cols-12 py-10 gap-x-10">
+        <footer className='bg-black w-full  lg:mt-16 mt-10'>
+            <div className="container mx-auto grid lg:grid-cols-12 py-10 gap-x-10 grid-cols-1 p-4 gap-y-6">
                 <div className='col-span-3'>
                     <Logo color='white' />
                     <p className='text-sm leading-normal text-white mt-2'>
@@ -89,7 +89,7 @@ const Footer = () => {
                 </div>
             </div>
             <hr />
-            <div className='py-5 text-white container mx-auto flex justify-between text-sm'>
+            <div className='py-5 text-white container mx-auto flex justify-between lg:flex-row flex-col-reverse items-center gap-y-2 text-sm'>
                 <p className='text-sm'>©2024 Your Company</p>
                 <div className='flex gap-x-3'>
                     <Link href={'/'}>

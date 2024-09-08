@@ -10,18 +10,19 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import Image from 'next/image';
-import ProductCard from './ProductCard';
+import ProductCard from '@/app/products/_UI/ProductCard';
+// import ProductCard from './ProductCard';
 
 
 const Trending = () => {
     const [swiper, setSwiper] = React.useState<any>(null);
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto px-4 lg:px-0'>
             <h2 className='sec-title mt-10'>
                 Trending products
             </h2>
             <div className="flex items-center justify-between mt-8">
-                <ul className='flex items-center gap-x-4 text-[#898989]'>
+                <ul className='flex items-center gap-x-4 text-[#898989] lg:text-base text-sm'>
                     <li>
                         <button className='text-primary'>
                             All
@@ -48,9 +49,23 @@ const Trending = () => {
                 </div>
             </div>
             <Swiper
-                slidesPerView={4}
+                // slidesPerView={4}
+                breakpoints={{
+                    400: {
+                         slidesPerView: 1,
+                     },
+                     700: {
+                         slidesPerView: 2,
+                     },
+                     1000: {
+                         slidesPerView: 3,
+                     },
+                     1200: {
+                         slidesPerView: 4,
+                     },
+                 }}
                 spaceBetween={30}
-                className="mt-10 h-auto"
+                className="mt-10 h-auto w-full"
                 onSwiper={(swiper) => setSwiper(swiper)}
             >
                 <SwiperSlide className='relative'>
