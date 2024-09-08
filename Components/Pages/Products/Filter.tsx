@@ -1,10 +1,11 @@
 'use client'
 import { HR } from '@/Components/Shared/Global';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { Close } from '@mui/icons-material';
 import { Checkbox, Radio, Rate, Switch } from 'antd';
 import React from 'react';
 export const colors = ["black", "red", "blue", "green", "yellow", "orange"];
-const Filter = () => {
+const Filter = ({ setVisible }: { setVisible?: any }) => {
     const [showrange, setShowrange] = React.useState(true);
     const [showBrands, setShowBrands] = React.useState(false);
     const [showColor, setShowColor] = React.useState(false);
@@ -15,10 +16,17 @@ const Filter = () => {
         rate: 0
     })
     return (
-        <div className='min-w-[295px] max-w-[300px]  bg-white rounded-lg p-5'>
-            <h1 className='messiri text-[28px]'>
-                Filter
-            </h1>
+        <div className='min-w-[295px] lg:max-w-[300px] w-full  bg-white rounded-lg p-5'>
+            <div className="flex justify-between items-center">
+                <h1 className='messiri text-[28px]'>
+                    Filter
+                </h1>
+                <button onClick={() => setVisible(false)}
+                    className='lg:hidden'
+                >
+                    <Close />
+                </button>
+            </div>
             <select
                 className='w-full mt-8 outline-none border-none bg-transparent font-semibold text-[16px] text-black'
             >

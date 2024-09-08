@@ -58,7 +58,7 @@ const Navbar = () => {
                     </Popover>
                 </div>
                 {
-                    show && <div className="absolute top-0 left-0 right-0 bg-white w-full h-screen z-50 lg:hidden flex flex-col gap-y-4 p-5 animate__animated  animate__zoomIn">
+                    show && <div className="absolute top-0 left-0 right-0 bg-white w-full h-screen z-50 lg:hidden flex flex-col gap-y-4 p-5 animate__animated  animate__zoomIn animate__faster">
                         <div className="flex items-center justify-between">
                             <Logo />
                             <button onClick={() => setShow(!show)}>
