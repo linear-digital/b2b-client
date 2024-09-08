@@ -4,7 +4,7 @@ import React from 'react';
 
 const PageTop = ({ title, description }: { title: string, description: string }) => {
     return (
-        <div className='lg:h-[313px] h-[240px] bg-[#EEEEEE] w-full flex flex-col justify-center items-center overflow-hidden'>
+        <div className='lg:h-[313px] h-[240px] bg-[#EEEEEE] w-full flex flex-col justify-center items-center overflow-hidden px-4 lg:px-0'>
             <div className="container flex flex-col items-center justify-center relative h-full">
                 <h1 className='sec-title text-center'>
                     {title}

@@ -6,17 +6,17 @@ import ContactForm from './ContactForm';
 
 const Contact = () => {
     return (
-        <Container className='py-16'>
-            <div className="grid grid-cols-2 gap-x-10">
+        <Container className='py-16 lg:px-0 px-4'>
+            <div className="grid lg:grid-cols-2 gap-x-10">
                 {/* Information  */}
                 <div>
                     <h1 className='sec-title'>
                         Contact Information
                     </h1>
-                    <p className='max-w-[609px] text-[#898989] text-[18px] mt-3'>
+                    <p className='max-w-[609px] text-[#898989] lg:text-[18px] text-sm  mt-3'>
                         We’re here to assist you with any inquiries, support needs, or feedback. Reach out to us via email, phone, or the contact form below. Connect with us on social media to stay informed about the latest updates. Your satisfaction is our priority
                     </p>
-                    <div className="grid grid-cols-2 gap-5 mt-10">
+                    <div className="grid lg:grid-cols-2 gap-5 mt-10">
                         <Card className='border-0'>
                             <Image
                                 src={'/images/contact/image-1.png'}

@@ -13,7 +13,7 @@ const page = () => {
             <Container className='mt-10'>
                 <ProfileTop />
                 <HR className='my-5' />
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid lg:grid-cols-2 gap-5">
                     <Reviews />
                     <WishLists />
                 </div>

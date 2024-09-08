@@ -19,8 +19,8 @@ const ContactForm = () => {
         console.log('Success:', values);
     };
     return (
-        <div className='bg-[#2F3B2A] rounded-xl p-7 contact'>
-            <h2 className='messiri text-[30px] text-white'>
+        <div className='bg-[#2F3B2A] rounded-xl lg:p-7 p-3 contact lg:mt-0 mt-5'>
+            <h2 className='messiri lg:text-[30px] text-[25px] text-white'>
                 We’d Love to Hear From You
             </h2>
             <Form
