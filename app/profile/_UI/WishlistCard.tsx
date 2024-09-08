@@ -46,7 +46,7 @@ import { Card } from 'antd';
 import Image from 'next/image';
 import React from 'react';
 
-const WishListCard = ({ image }: { image: any }) => {
+const WishListCard = () => {
     return (
         <Card className='border-0  relative'>
             <div className="flex lg:flex-row flex-col lg:items-start gap-x-5">
