@@ -15,7 +15,7 @@ const page = () => {
                 title='My Wishlist'
                 description="Keep track of the products you love and find them easily whenever you return. Your wishlist is a convenient way to save items you're interested in, so you can compare and make informed decisions later."
             />
-            <Container className='py-16'>
+            <Container className='lg:py-16 py-10 lg:px-0 px-4'>
                 <h2 className='text-[28px] font-medium'>
                     Saved Items
                 </h2>
