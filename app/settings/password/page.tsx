@@ -4,13 +4,13 @@ import React from 'react';
 
 const page = () => {
     return (
-        <div>
+        <div className='lg:px-0 px-4 w-full'>
             <h2 className='text-[28px] font-medium font-elMessiri'>
                 Change Password
             </h2>
             <Form
                 layout='vertical'
-                className='mt-10 w-[400px]'
+                className='mt-10 lg:w-[400px] w-full'
 
             >
                 <Form.Item
