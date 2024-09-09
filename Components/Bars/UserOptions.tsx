@@ -1,7 +1,8 @@
 import { EditFilled, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import React from 'react';
-
+import KeyIcon from '@mui/icons-material/Key';
+import { Delete } from '@mui/icons-material';
 const UserOptions = ({ onClick }: { onClick?: () => void }) => {
 
     return (
@@ -18,6 +19,17 @@ const UserOptions = ({ onClick }: { onClick?: () => void }) => {
                 <SettingOutlined />
                 <span>Account Settings</span>
             </Link>
+            <Link href={"/settings/password"} className='flex items-center gap-x-3 mt-2 lg:hidden'
+                onClick={onClick}
+            >
+                <KeyIcon fontSize='small' />
+                <span>Change Password</span>
+            </Link>
+            <button className='flex text-red-500 items-center gap-x-3 mt-2'
+            >
+                <Delete fontSize='small' />
+                <span>Delete Account</span>
+            </button>
             <button className='flex text-red-500 items-center gap-x-3 mt-2'
             >
                 <LogoutOutlined />
