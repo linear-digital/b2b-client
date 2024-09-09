@@ -25,7 +25,7 @@ const UserOptions = ({ onClick }: { onClick?: () => void }) => {
                 <KeyIcon fontSize='small' />
                 <span>Change Password</span>
             </Link>
-            <button className='flex text-red-500 items-center gap-x-3 mt-2'
+            <button className='flex text-red-500 items-center gap-x-3 mt-2 lg:hidden'
             >
                 <Delete fontSize='small' />
                 <span>Delete Account</span>
