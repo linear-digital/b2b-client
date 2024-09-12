@@ -2,6 +2,7 @@
 import fetcher from '@/Components/util/axios';
 import { errorDisplay } from '@/Components/util/readError';
 import { RootState } from '@/Redux/store';
+import { CameraOutlined } from '@ant-design/icons';
 import { Avatar, Button, Form, Input, Select } from 'antd';
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -15,6 +16,8 @@ type FieldType = {
 };
 const Settings = () => {
     const { currentUser } = useSelector((state: RootState) => state.user)
+    const [image, setImage] = React.useState(null)
+    const [publicUrl, setPublicUrl] = React.useState(currentUser?.profile)
     const onSubmit = async (data: FieldType) => {
         try {
             const res = await fetcher({
@@ -33,14 +36,55 @@ const Settings = () => {
             toast.error(errorDisplay(error))
         }
     }
+    const changeImage = async () => {
+        try {
+            const formdata = new FormData();
+            formdata.append('profile', image as any);
+            const resImage = await fetch('http://localhost:4000/upload', {
+                method: 'POST',
+                body: formdata
+            })
+            const data = await resImage.json()
+
+            const res = await fetcher({
+                method: 'PUT',
+                url: `/users/${currentUser?._id}`,
+                body: {
+                    profile: data?.url
+                }
+            })
+            toast.success("Profile updated successfully")
+        } catch (error) {
+            toast.error(errorDisplay(error))
+        }
+    }
     if (!currentUser) {
         return
     }
     return (
         <div className='w-full lg:p-0 p-4'>
             <div className="flex items-center gap-10">
-                <Avatar size={150} src={currentUser?.profile} />
-                <button className='btn-primary'>
+                <label htmlFor="file" className='cursor-pointer relative w-[150px] h-[150px] overflow-hidden image-upload'>
+                    <Avatar size={150} src={publicUrl || currentUser?.profile} className='border border-primary' />
+                    <div className='absolute bottom-0 right-0 w-full h-full bg-white/90 rounded-full  items-center justify-center overlay'>
+                        <CameraOutlined className='text-black  text-2xl' />
+                    </div>
+                </label>
+                <input
+                    id='file'
+                    type='file'
+                    className='hidden'
+                    onChange={(e: any) => {
+                        const file = e.target.files[0]
+                        file && setImage(file)
+                        setPublicUrl(URL.createObjectURL(file))
+                    }}
+                    accept="image/*"
+                />
+                <button className='btn-primary'
+                    disabled={!image}
+                    onClick={changeImage}
+                >
                     Change
                 </button>
             </div>

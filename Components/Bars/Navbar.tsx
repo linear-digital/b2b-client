@@ -61,7 +61,7 @@ const Navbar = () => {
                                 <Avatar
                                     size={40}
                                     className='border border-primary cursor-pointer'
-                                    src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+                                    src={currentUser?.profile} />
                             </Popover>
                             :
                             <div className="lg:flex hidden items-center gap-x-3">
@@ -94,7 +94,7 @@ const Navbar = () => {
                                     <Avatar
                                         size={40}
                                         className='border border-primary cursor-pointer'
-                                        src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+                                        src={currentUser?.profile} />
                                 </Popover>
                                 :
                                 <div className="flex flex-col gap-y-3">

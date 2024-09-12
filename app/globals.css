@@ -139,3 +139,10 @@ a:hover {
         font-size: 14px;
     }
 }
+
+.image-upload .overlay {
+    display: none;
+}
+.image-upload:hover .overlay {
+    display: flex;
+}
