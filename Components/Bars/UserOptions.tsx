@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import KeyIcon from '@mui/icons-material/Key';
 import { Delete } from '@mui/icons-material';
+import Cookies from 'js-cookie';
 const UserOptions = ({ onClick }: { onClick?: () => void }) => {
 
     return (
@@ -31,6 +32,10 @@ const UserOptions = ({ onClick }: { onClick?: () => void }) => {
                 <span>Delete Account</span>
             </button>
             <button className='flex text-red-500 items-center gap-x-3 mt-2'
+            onClick={()=> {
+                Cookies.remove('auth-token');
+                window.location.reload();
+            }}
             >
                 <LogoutOutlined />
                 <span>Logout</span>

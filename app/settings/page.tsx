@@ -1,6 +1,11 @@
 'use client'
+import fetcher from '@/Components/util/axios';
+import { errorDisplay } from '@/Components/util/readError';
+import { RootState } from '@/Redux/store';
 import { Avatar, Button, Form, Input, Select } from 'antd';
 import React from 'react';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 type FieldType = {
     name: string;
     email: string;
@@ -8,14 +13,33 @@ type FieldType = {
     gender: string
     address: string
 };
-const page = () => {
-    const onSubmit = (data: FieldType) => {
-        console.log(data)
+const Settings = () => {
+    const { currentUser } = useSelector((state: RootState) => state.user)
+    const onSubmit = async (data: FieldType) => {
+        try {
+            const res = await fetcher({
+                method: 'PUT',
+                url: `/users/${currentUser?._id}`,
+                body: {
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    address: data.address,
+                    gender: data.gender
+                }
+            })
+            toast.success("Profile updated successfully")
+        } catch (error) {
+            toast.error(errorDisplay(error))
+        }
+    }
+    if (!currentUser) {
+        return
     }
     return (
         <div className='w-full lg:p-0 p-4'>
             <div className="flex items-center gap-10">
-                <Avatar size={150} src={'/images/Avatar/man-1.png'} />
+                <Avatar size={150} src={currentUser?.profile} />
                 <button className='btn-primary'>
                     Change
                 </button>
@@ -24,7 +48,7 @@ const page = () => {
                 layout='vertical'
                 name="basic"
                 onFinish={onSubmit}
-                initialValues={{ gender: "" }}
+                initialValues={{ name: currentUser?.name, email: currentUser?.email, phone: currentUser?.phone, gender: currentUser?.gender, address: currentUser?.address }}
             >
 
                 <Form.Item<FieldType>
@@ -80,4 +104,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Settings;

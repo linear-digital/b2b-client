@@ -1,20 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import GoogleLogin from './GoogleLogin';
 import Link from 'next/link';
+import fetcher from '@/Components/util/axios';
+import toast from 'react-hot-toast';
+import { errorDisplay } from '@/Components/util/readError';
+import { useRouter } from 'next/navigation';
 type FieldType = {
     name: string;
     email: string;
     password: string;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values);
-};
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -22,6 +23,34 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 
 const FormSignup: React.FC = () => {
     const [password, setPassword] = React.useState('');
+
+    const [messageText, setMessage] = React.useState('');
+   
+    const router = useRouter();
+    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+        try {
+            if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+                return setMessage('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character')
+            }
+            else {
+                setMessage('')
+            }
+            const res = await fetcher({
+                method: 'POST',
+                url: '/users',
+                body: {
+                    name: values.name,
+                    email: values.email,
+                    password: values.password
+                }
+            })
+            toast.success('Account created successfully');
+            router.push('/auth/login');
+        } catch (error: any) {
+            setMessage(errorDisplay(error));
+            toast.error(errorDisplay(error));
+        }
+    };
     return (
         <Form
             name="basic"
@@ -29,7 +58,6 @@ const FormSignup: React.FC = () => {
             wrapperCol={{ span: 20 }}
             style={{ maxWidth: 600 }}
             onFinish={onFinish}
-
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             layout='vertical'
@@ -79,7 +107,8 @@ const FormSignup: React.FC = () => {
                     <span>one number</span>
                 </div>
             </div>
-            
+
+            <p className='text-red-500 mb-2 max-w-[500px] text-xs'>{messageText}</p>
             <Form.Item wrapperCol={{ span: 20 }}>
                 <Button type="primary" htmlType="submit" size='large' className='w-full'>
                     Submit

@@ -4,8 +4,9 @@ import "./globals.css";
 import "./tailwind.css";
 
 import { ConfigProvider } from "antd";
-import { Suspense } from "react";
 import 'animate.css';
+import { Toaster } from "react-hot-toast";
+import MainLayout from "@/Components/RootLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,17 +22,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-          <ConfigProvider
-            theme={{
-              token: {
-                // Seed Token
-                colorPrimary: '#8E9E84',
-                // Alias Token
-              },
-            }}
-          >
+        <ConfigProvider
+          theme={{
+            token: {
+              // Seed Token
+              colorPrimary: '#8E9E84',
+              // Alias Token
+            },
+          }}
+        >
+          <MainLayout>
             {children}
-          </ConfigProvider>
+          </MainLayout>
+          <Toaster />
+        </ConfigProvider>
       </body>
     </html>
   );
