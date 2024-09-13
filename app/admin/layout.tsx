@@ -186,7 +186,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             src={currentUser?.profile} />
                     </Popover>
                 </Header>
-                <Content style={{ margin: '24px 16px 0', overflow: 'initial', height: '100vh' }}
+                <Content style={{ margin: '24px 16px 0', overflow: 'initial', minHeight: '80vh' }}
                     className='bg-white p-5 rounded-lg'
                 >
                     {children}
