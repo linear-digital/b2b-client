@@ -34,7 +34,7 @@ const UserOptions = ({ onClick }: { onClick?: () => void }) => {
             <button className='flex text-red-500 items-center gap-x-3 mt-2'
             onClick={()=> {
                 Cookies.remove('auth-token');
-                window.location.reload();
+                window.location.href = '/'
             }}
             >
                 <LogoutOutlined />

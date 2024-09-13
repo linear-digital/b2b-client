@@ -74,7 +74,7 @@ const LoginSignup: React.FC = () => {
             <Form.Item<FieldType>
                 name="remember"
                 valuePropName="checked"
-                wrapperCol={{ span: 20, }}
+                wrapperCol={{ span: 22, }}
             >
                 <div className="flex items-center justify-between">
                     <Checkbox>Remember me</Checkbox>
@@ -83,15 +83,15 @@ const LoginSignup: React.FC = () => {
                     </Link>
                 </div>
             </Form.Item>
-            <Form.Item wrapperCol={{ span: 20 }}>
+            <Form.Item wrapperCol={{ span: 22 }}>
                 <Button type="primary" htmlType="submit" size='large' className='w-full p-2'>
                     Submit
                 </Button>
             </Form.Item>
-            <Form.Item wrapperCol={{ span: 20 }}>
+            <Form.Item wrapperCol={{ span: 22 }}>
                 <GoogleLogin />
             </Form.Item>
-            <Form.Item wrapperCol={{ span: 20 }}>
+            <Form.Item wrapperCol={{ span: 22 }}>
                 <Link href="/auth/signup" >
                     Dont have an account? Signup
                 </Link>
