@@ -146,3 +146,7 @@ a:hover {
 .image-upload:hover .overlay {
     display: flex;
 }
+
+.ant-spin-fullscreen {
+    background-color: black !important;
+}

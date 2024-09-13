@@ -1,15 +1,34 @@
 'use client'
+import fetcher from '@/Components/util/axios';
+import { errorDisplay } from '@/Components/util/readError';
+import { RootState } from '@/Redux/store';
 import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const Password = () => {
     const [notMatch, setNotMatch] = useState(false)
+    const { currentUser } = useSelector((state: RootState) => state.user)
     const onSubmit = async (data: any) => {
         if (data.newPassword !== data.confirmPassword) {
             return setNotMatch(true)
         }
         else {
             setNotMatch(false)
+        }
+        try {
+            const res = await fetcher({
+                url: `/users/password/${currentUser?._id}`,
+                method: 'PUT',
+                body: {
+                    oldPassword: data.password,
+                    password: data.newPassword
+                }
+            })
+            toast.success('Password changed successfully')
+        } catch (error) {
+            toast.error(errorDisplay(error))
         }
     }
     return (
