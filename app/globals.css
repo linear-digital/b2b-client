@@ -150,3 +150,12 @@ a:hover {
 .ant-spin-fullscreen {
     background-color: black !important;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
