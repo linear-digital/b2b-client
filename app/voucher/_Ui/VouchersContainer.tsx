@@ -18,6 +18,7 @@ const VouchersContainer = () => {
             })
         }
     })
+    const [active, setActive] = React.useState(1);
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -26,7 +27,7 @@ const VouchersContainer = () => {
             {
                 data?.data?.map((voucher: VoucherType, index: number) => <VoucherCard key={index} voucher={voucher} />)
             }
-            <Pagination className='mt-5' pages={data?.totalPages}/>
+            <Pagination className='mt-5' pages={data?.totalPage} active={active} setActive={setActive}/>
         </div>
     );
 };
