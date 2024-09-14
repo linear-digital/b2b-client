@@ -19,9 +19,16 @@ const VoucherCard = ({ voucher }: { voucher: VoucherType }) => {
                 <h4 className='text-white mt-5 text-sm lg:hidden'>
                     Expires: {dateDisplay(voucher.endDate)}
                 </h4>
-                <Button className='bg-transparent text-primary border-primary mt-5' size='large'>
-                    Get Code
-                </Button>
+                <h5 className=' mt-3 text-base font-medium text-white'>
+                    Code:  <span className='text-primary'>
+                        {voucher.code}
+                    </span>
+                </h5>
+                <a href={voucher.link} target='_blank'>
+                    <Button className='bg-transparent text-primary border-primary mt-5' size='large'>
+                        Get Code
+                    </Button>
+                </a>
             </div>
             <Image src={voucher.image} alt="voucher" width={365} height={295}
                 className='absolute top-0 right-0 z-1 lg:w-[365px] w-[200px] max-w-[365px] max-h-[295px]'

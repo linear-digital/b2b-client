@@ -24,9 +24,9 @@ const VouchersContainer = () => {
     return (
         <div className='w-full flex flex-col gap-y-4'>
             {
-                data?.map((voucher: VoucherType, index: number) => <VoucherCard key={index} voucher={voucher} />)
+                data?.data?.map((voucher: VoucherType, index: number) => <VoucherCard key={index} voucher={voucher} />)
             }
-            <Pagination className='mt-5' />
+            <Pagination className='mt-5' pages={data?.totalPages}/>
         </div>
     );
 };
