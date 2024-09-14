@@ -3,9 +3,25 @@ import { Button, Card, Form, Input } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-const page = () => {
+import fetcher from '@/Components/util/axios';
+import toast from 'react-hot-toast';
+import { errorDisplay } from '@/Components/util/readError';
+import { useRouter } from 'next/navigation';
+const Page = () => {
+    const router = useRouter()
+    const handleForgot = async (data: { email: string }) => {
+        try {
+            const res = await fetcher({
+                url: `/users/forget/${data.email}`,
+                method: 'PATCH',
+            })
+            toast.success(res.message)
+            router.push(`/auth/forgot/${res?.token}`)
+        } catch (error) {
+            toast.error(errorDisplay(error))
+        }
+    }
     return (
         <div className='container mx-auto flex items-center justify-center h-screen'>
             <Card className='lg:w-[500px] w-full min-h-[400px] border-none'>
@@ -24,16 +40,17 @@ const page = () => {
                     labelCol={{ span: 10 }}
                     wrapperCol={{ span: 24 }}
                     style={{ maxWidth: 600 }}
-                    autoComplete="off"
+                    autoComplete="on"
                     layout='vertical'
                     className='mt-5'
+                    onFinish={handleForgot}
                 >
                     <Form.Item
                         label="Email"
                         name="email"
                         rules={[{ required: true, message: 'Please input your email!' }]}
                     >
-                        <Input size='large' />
+                        <Input size='large' type='email'/>
                     </Form.Item>
                     <Form.Item wrapperCol={{ span: 24 }}>
                         <Button type="primary" htmlType="submit" className="w-full" size='large'>
@@ -42,7 +59,7 @@ const page = () => {
                     </Form.Item>
                 </Form>
                 <Link href={'/auth/login'}
-                className='text-sm'
+                    className='text-sm'
                 >
                     <ArrowLeftOutlined className='mr-1' />  Back to login
                 </Link>
@@ -51,4 +68,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

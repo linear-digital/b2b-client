@@ -11,10 +11,26 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import Image from 'next/image';
 import VoucherCard from './VoucherCard';
+import { useQuery } from '@tanstack/react-query';
+import fetcher from '@/Components/util/axios';
+import { Spin } from 'antd';
+import { VoucherType } from '@/Components/util/type';
 
 
 const Vouchers = () => {
+    const { data, isLoading } = useQuery({
+        queryKey: ['vouchers'],
+        queryFn: async () => {
+            return await fetcher({
+                url: '/vouchers/all',
+                method: 'GET'
+            })
+        }
+    })
     const [swiper, setSwiper] = React.useState<any>(null);
+    if (isLoading) {
+        return <Spin size='large' />
+    }
     return (
         <div className='container mx-auto lg:px-0 px-4'>
             <div className="flex justify-between mt-16">
@@ -82,21 +98,13 @@ const Vouchers = () => {
                 className="mt-10 h-auto"
                 onSwiper={(swiper) => setSwiper(swiper)}
             >
-                <SwiperSlide>
-                    <VoucherCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VoucherCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VoucherCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VoucherCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <VoucherCard />
-                </SwiperSlide>
+                {
+                    data?.data?.map((voucher: VoucherType) => (
+                        <SwiperSlide key={voucher._id}>
+                            <VoucherCard voucher={voucher}/>
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
             <div className="flex justify-center mt-5 lg:mt-10">
                 <Link href={'/shop'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>

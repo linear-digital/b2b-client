@@ -125,10 +125,7 @@ const VoucherAddForm = () => {
                     name={'category'}
                     rules={[{ required: true, message: 'Please select category' }]}
                 >
-                    <Select
-                        placeholder='Select Category'
-                        size='large'
-                        options={[{ value: '', label: 'Select Category' }, ...categories.map((category) => ({ label: category.name, value: category.name }))]} />
+                    <Input placeholder='Voucher Category' size='large' />
                 </Form.Item>
                 <Form.Item<VoucherType>
                     label='Voucher Code'

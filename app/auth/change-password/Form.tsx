@@ -1,19 +1,20 @@
-'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import Link from 'next/link';
+import { decodeToken, isExpired } from 'react-jwt';
+import fetcher from '@/Components/util/axios';
+import toast from 'react-hot-toast';
+import { errorDisplay } from '@/Components/util/readError';
+
 type FieldType = {
     rewirte: string;
     password: string;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values);
-};
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -21,6 +22,68 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 
 const ChangePassword: React.FC = () => {
     const [password, setPassword] = React.useState('');
+    const search = useSearchParams()
+    const token = search.get('token') as string
+    const decode: any = decodeToken(token)
+    const router = useRouter()
+    const [isValid, setIsValid] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    if (decode.email) {
+                        const res = await fetcher({
+                            url: `/users/verify-token`,
+                            method: 'POST',
+                            body: {
+                                email: decode.email,
+                                token
+                            }
+                        })
+                    }
+                    setIsValid(true)
+                } catch (error) {
+                    setIsValid(false)
+                }
+            }
+        )()
+    }, [token, decode.email])
+
+
+    const [message, setMessage] = useState('')
+    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+        if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+            return setMessage('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character')
+        }
+        const email = decode.email
+        if (values.password !== values.rewirte) {
+            return toast.error('Password does not match')
+        }
+        try {
+            setIsLoading(true)
+            const res = await fetcher({
+                url: `/users/update-password`,
+                method: 'PATCH',
+                body: {
+                    email,
+                    password
+                }
+            })
+            toast.success(res?.message)
+            setMessage('')
+            router.push('/auth/login')
+        } catch (error) {
+            toast.error(errorDisplay(error))
+            setIsLoading(false)
+        }
+    };
+    if (!isValid) {
+        return <h1 className='text-center text-red-500'>Invalid Token</h1>
+    }
+    if (isExpired(token)) {
+        return <h1>Token Expired</h1>
+    }
     return (
         <Form
             name="basic"
@@ -71,11 +134,13 @@ const ChangePassword: React.FC = () => {
                     <span>one number</span>
                 </div>
             </div>
-
+            <Form.Item>
+                <p className='text-red-500'>{message}</p>
+            </Form.Item>
             <Form.Item wrapperCol={{ span: 24 }}>
-                <button className='w-full  bg-primary py-3 rounded-xl text-white' type='submit'>
+                <Button type='primary' className='w-full' htmlType='submit' loading={isLoading} size='large'>
                     Reset Password
-                </button>
+                </Button>
             </Form.Item>
 
         </Form>
