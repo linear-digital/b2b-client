@@ -1,19 +1,40 @@
 'use client'
+import fetcher from '@/Components/util/axios';
+import { useQuery } from '@tanstack/react-query';
+import { Spin } from 'antd';
 import React from 'react';
+
+type CategoryType = {
+    _id: string,
+    count: number,
+}
 
 const Category = () => {
     const [selected, setSelected] = React.useState(0);
+    const {data, isLoading} = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            return await fetcher({
+                url: '/vouchers/statistics',
+                method: 'GET'
+            })
+        }
+    })
+    const categorys = data as CategoryType[]
+    if (isLoading) {
+        return <Spin size='large'/>
+    }
     return (
         <div className='w-[295px] lg:block hidden  p-5 min-w-[295px] h-auto bg-white rounded-xl '>
             <h1 className='text-[28px] messiri font-medium'>Category</h1>
             <div className="flex flex-col gap-y-2 mt-6">
                 {
-                    categories.map((category, index) => (
+                    categorys.map((category, index) => (
                         <div className={`w-full flex items-center justify-between ${selected === index ? 'text-black' : 'text-[#898989]'} cursor-pointer`} key={index}
                             onClick={() => setSelected(index)}
                         >
-                            <h5>{category.name}</h5>
-                            <h5>{category.value}</h5>
+                            <h5>{category._id}</h5>
+                            <h5>{category.count}</h5>
                         </div>
                     ))
                 }

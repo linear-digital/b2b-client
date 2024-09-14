@@ -38,21 +38,19 @@ const VoucherAddForm = () => {
 
         try {
             const res = await uploadImage()
-            if (!res) {
-                return toast.error('Image not found')
-            }
+            
             const newVoucher = {
                 ...values,
                 startDate,
                 endDate,
-                image: res
+                image: res || data?.image
             }
             await fetcher({
-                url: '/vouchers/new',
-                method: "POST",
+                url: `/vouchers/single/${id}`,
+                method: "PUT",
                 body: newVoucher
             })
-            toast.success("Voucher added successfully")
+            toast.success("Voucher Updated successfully")
         } catch (error) {
             toast.error(errorDisplay(error))
         }
@@ -72,7 +70,7 @@ const VoucherAddForm = () => {
             const data = await resImage.json()
             return data?.url
         } catch (error) {
-            throw error
+            return null
         }
     }
     if (isLoading) {
@@ -152,14 +150,14 @@ const VoucherAddForm = () => {
                     <Input placeholder='Website Link' size='large' />
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType='submit' type='primary'>
-                        Add Voucher
+                    <Button htmlType='submit' size='large' type='primary'>
+                        Update
                     </Button>
                 </Form.Item>
             </Form>
             <div>
                 <h2 className='text-lg font-medium mb-4'>Add an image</h2>
-                <UploadBanner image={image} setImage={setImage} />
+                <UploadBanner image={image} setImage={setImage} publicImg={data?.image}/>
             </div>
         </div>
     );
