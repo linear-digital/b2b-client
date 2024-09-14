@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Table, message } from 'antd';
 import type { TableColumnsType } from 'antd';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 interface DataType {
     key: React.Key;
@@ -45,7 +46,7 @@ const initialData: DataType[] = [
 
 const VoucherTable: React.FC = () => {
     const [data, setData] = useState<DataType[]>(initialData);
-
+    const router = useRouter();
     // Handler for deleting a row
     const handleDelete = (key: React.Key) => {
         const newData = data.filter((item) => item.key !== key);
@@ -55,8 +56,7 @@ const VoucherTable: React.FC = () => {
 
     // Handler for editing a row (you can replace this with your own logic)
     const handleEdit = (key: React.Key) => {
-        message.info(`Editing voucher with key: ${key}`);
-        // Logic for updating or editing the record
+        router.push(`/admin/vouchers/add?id=${key}`)
     };
 
     const columns: TableColumnsType<DataType> = [
@@ -83,8 +83,17 @@ const VoucherTable: React.FC = () => {
         <Table
             columns={columns}
             expandable={{
-                expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.description}</p>,
-                rowExpandable: (record) => record.name !== 'Not Expandable',
+                expandedRowRender: (record) => <div>
+                    <h5>
+                        <strong>Title</strong>: {record.name}
+                    </h5>
+                    <h5>
+                        <strong>Address</strong>: {record.address}
+                    </h5>
+                    <p>
+                        <strong>Description</strong>: {record.description}
+                    </p>
+                </div>,
             }}
             dataSource={data}
         />

@@ -31,56 +31,6 @@ const siderStyle: React.CSSProperties = {
     scrollbarColor: 'unset',
 };
 
-const items: MenuProps['items'] = [
-    {
-        icon: <TeamOutlined />,
-        label: 'All Users',
-        key: '1',
-        onClick: (e: any) => {
-            console.log(e);
-        }
-    },
-    {
-        icon: <ShopOutlined />,
-        label: 'Products',
-        key: '2',
-        children: [
-            {
-                label: 'All Products',
-                key: '3',
-            },
-            {
-                label: 'Add New Product',
-                key: '4',
-            },
-        ]
-    },
-    {
-        icon: <DiscountIcon />,
-        label: 'Vouchers',
-        key: '5',
-        children: [
-            {
-                label: 'All Vouchers',
-                key: '6',
-            },
-            {
-                label: 'Add New Voucher',
-                key: '7',
-            },
-        ]
-    }
-    // VideoCameraOutlined,
-    // UploadOutlined,
-    // BarChartOutlined,
-    // CloudOutlined,
-    // AppstoreOutlined,
-    // TeamOutlined,
-    // ShopOutlined,
-].map((item, index) => ({
-    ...item,
-    key: String(index),
-}));
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const {
@@ -166,7 +116,9 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <Layout hasSider>
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}>
                 <div className="demo-logo-vertical" />
-                <Menu theme="dark" selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
+                <Menu theme="dark"
+                className='text-base'
+                selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
                     ...item,
                     key: String(index),
                     onClick: navigateHandler
@@ -187,7 +139,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     </Popover>
                 </Header>
                 <Content style={{ margin: '24px 16px 0', overflow: 'initial', minHeight: '80vh' }}
-                    className='bg-white p-5 rounded-lg'
+                    className='bg-white p-10 rounded-lg'
                 >
                     {children}
                 </Content>

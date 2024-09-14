@@ -2,9 +2,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Image } from 'antd';
 import React, { useEffect } from 'react';
 
-const Uploadbanner = () => {
+const Uploadbanner = ({ image, setImage }: { image: any, setImage: any }) => {
     const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
-    const [image, setImage] = React.useState<any>(null);
 
     useEffect(() => {
         if (image) {

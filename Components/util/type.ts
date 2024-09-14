@@ -8,3 +8,16 @@ export type UserType = {
     wishlist: any;
     _id: string;
 }
+
+export type VoucherType = {
+    title: string;
+    description: string;
+    startDate: Date;
+    endDate: Date;
+    discount: number;
+    _id: string;
+    code: string;
+    link: string;
+    image: string;
+    category: string;
+}
