@@ -8,6 +8,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Filter from '@/Components/Pages/Products/Filter';
 const ProductContainer = () => {
     const [visible, setVisible] = React.useState(false);
+    const [page, setPage] = React.useState(1);
     return (
         <section className='w-full lg:pb-20 pb-10'>
             {
@@ -52,7 +53,7 @@ const ProductContainer = () => {
                 <ProductCard />
                 <ProductCard />
             </div>
-            <Pagination />
+            <Pagination pages={3} active={page} setActive={setPage}/>
         </section>
     );
 };

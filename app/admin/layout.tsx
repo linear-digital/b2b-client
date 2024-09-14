@@ -8,7 +8,7 @@ import DiscountIcon from '@mui/icons-material/Discount';
 
 
 import React, { Children, useEffect, useMemo, useState } from 'react';
-
+import LayersIcon from '@mui/icons-material/Layers';
 import type { MenuProps } from 'antd';
 import { Avatar, Layout, Menu, Popover, theme } from 'antd';
 import { useSelector } from 'react-redux';
@@ -99,6 +99,24 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     label: 'Add New Voucher',
                     path: '/admin/vouchers/add',
                     key: '7',
+                },
+            ]
+        },
+        {
+            icon: <LayersIcon />,
+            label: 'Pages',
+            path: '/admin/pages',
+            key: '8',
+            children: [
+                {
+                    label: 'Home Page',
+                    path: '/admin/pages/home',
+                    key: '9',
+                },
+                {
+                    label: 'About Page',
+                    path: '/admin/pages/about',
+                    key: '10',
                 },
             ]
         }

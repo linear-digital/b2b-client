@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const HeroArea = () => {
@@ -11,9 +12,11 @@ const HeroArea = () => {
             </h1>
             <p className='text-center lg:text-lg text-[14px]  mt-4 text-[#898989]'>Compare products from top merchants and save big.</p>
             <div className="flex justify-center lg:mt-8 mt-5">
-                <button className='bg-primary text-white px-8 py-4 rounded-xl' >
+               <Link href={'/products'}>
+               <button className='bg-primary text-white px-8 py-4 rounded-xl' >
                     Shop Now 
                 </button>
+                </Link>
             </div>
             <div className="grid grid-cols-12 max-h-[480px] grid-rows-2 gap-5 mt-10">
                 <div className="col-span-4 row-span-2">
