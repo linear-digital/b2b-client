@@ -1,37 +1,44 @@
 'use client'
+import fetcher from '@/Components/util/axios';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import TypeIt from "typeit-react";
 const FAQ = () => {
-    const list = [
-        "What is a comparison-shopping site?",
-        "Do I buy products directly from your website?",
-        "Are the prices on your site accurate?",
-        "Can I trust the reviews on your site?",
-        "How do I use filters to find products?",
-        "Can I save products to view later?"
-    ]
+    const { data } = useQuery({
+        queryKey: ['faq'],
+        queryFn: () => {
+            const res: any = fetcher({
+                url: `/pages/search`,
+                method: 'POST',
+                body: {
+                    name: "faq"
+                }
+            })
+            return res
+        },
+    })
     const [active, setActive] = React.useState(0);
     return (
         <section className='bg-white py-10 mt-20 px-5 lg:px-0'>
             <div className='container mx-auto '>
-            <h1 className='sec-title'>
-                Frequently Asked Questions (FAQ)
-            </h1>
-            <p className='max-w-[700px] text-[#898989] mt-3'>
-                Find quick answers to your questions about how our site works, using features, and more. Get the information you need to shop with confidence.
-            </p>
-            <div className="mt-10">
-                {list.map((item, index) => (
-                    <FAQCard
-                        title={item}
-                        key={index}
-                        onClick={() => setActive(index === active ? -1 : index)}
-                        active={active === index}
-                    />
-                ))}
+                <h1 className='sec-title'>
+                    {data?.title}
+                </h1>
+                <p className='max-w-[700px] text-[#898989] mt-3'>
+                    {data?.desc}
+                </p>
+                <div className="mt-10">
+                    {data?.others?.questions.map((item: any, index: number) => (
+                        <FAQCard
+                            title={item.q}
+                            desc={item.a}
+                            key={index}
+                            onClick={() => setActive(index === active ? -1 : index)}
+                            active={active === index}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
         </section>
     );
 };
@@ -49,14 +56,14 @@ const FAQCard = ({ title, desc, onClick, active }: { title: string, desc?: strin
                 </h1>
                 <button>
                     {
-                        active ? <MinusOutlined className='text-red-500 text-xl' /> : <PlusOutlined className='text-xl'/>
+                        active ? <MinusOutlined className='text-red-500 text-xl' /> : <PlusOutlined className='text-xl' />
                     }
                 </button>
             </div>
             <hr />
             {
                 active && <p className='text-[#898989] pr-10 pb-2 animation-fade-in lg:text-base text-sm'>
-                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur laudantium voluptates earum amet repellendus fuga quisquam odio? Recusandae, 
+                   {desc}
                 </p>
             }
         </div>

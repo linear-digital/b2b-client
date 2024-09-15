@@ -144,6 +144,18 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             label: 'Why Shop With Us',
                             path: '/admin/pages/home#Why-Shop',
                             key: '114',
+                        },{
+                            label: 'Featured Brands',
+                            path: '/admin/pages/home#Featured-Brands',
+                            key: '115',
+                        },{
+                            label: 'Newsletter',
+                            path: '/admin/pages/home#Newsletter',
+                            key: '116',
+                        },{
+                            label: 'FAQ',
+                            path: '/admin/pages/home/faq',
+                            key: '117',
                         },
                     ]
                 },

@@ -6,6 +6,7 @@ import ShopByCategory from './shop-category/page';
 import TrendingProducts from './_UI/TrendingProducts';
 import WhyShopWithUs from './_UI/WhyShopWithUs';
 import FeaturedBrands from './_UI/FeaturedBrands';
+import Newsletter from './_UI/Newsletter';
 
 const page = () => {
     return (
@@ -19,6 +20,8 @@ const page = () => {
             <WhyShopWithUs />
             <div className="mt-20"></div>
             <FeaturedBrands />
+            <div className="mt-20"></div>
+            <Newsletter />
         </div>
     );
 };

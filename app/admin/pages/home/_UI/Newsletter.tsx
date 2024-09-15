@@ -7,15 +7,15 @@ import toast from 'react-hot-toast';
 import UploadImage from './UploadImage';
 import UpdateImage from './UpdateImage';
 
-const FeaturedBrands = () => {
+const Newsletter = () => {
     const { data, isFetching, refetch } = useQuery({
-        queryKey: ['FeaturedBrands'],
+        queryKey: ['Newsletter'],
         queryFn: () => {
             const res: any = fetcher({
                 url: `/pages/search`,
                 method: 'POST',
                 body: {
-                    name: "Featured Brands"
+                    name: "newsletter"
                 }
             })
             return res
@@ -39,8 +39,8 @@ const FeaturedBrands = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='Featured-Brands'>
-            <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
+        <div id='Newsletter'>
+            <h1 className='text-3xl font-medium font-elMessiri'>{data?.title}</h1>
             <Form
                 layout='vertical'
                 initialValues={data}
@@ -65,30 +65,8 @@ const FeaturedBrands = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            <h1 className='text-2xl font-medium'>
-                Images
-            </h1>
-            {/* <UploadImage url={data?.images}/> */}
-            <div className="flex flex-wrap gap-4 mt-4">
-                {
-                    data?.images?.map((image: any, index: number) => (
-                        <div key={index} className='flex flex-col items-start gap-y-3'>
-                            <Image src={image} alt="login" width={200} className={'h-full w-full p-4'} />
-                            <Popover trigger={"click"} content={<UpdateImage
-                                data={data}
-                                url={image}
-                                refetch={refetch}
-                            />}>
-                                <Button type='primary'>
-                                    Update
-                                </Button>
-                            </Popover>
-                        </div>
-                    ))
-                }
-            </div>
         </div>
     );
 };
 
-export default FeaturedBrands;
+export default Newsletter;
