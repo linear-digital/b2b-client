@@ -18,15 +18,25 @@ import { VoucherType } from '@/Components/util/type';
 
 
 const Vouchers = () => {
-    const { data, isLoading } = useQuery({
+    const { data: alldata, isLoading } = useQuery({
         queryKey: ['vouchers'],
         queryFn: async () => {
-            return await fetcher({
+            const vouchers = await fetcher({
                 url: '/vouchers/all',
                 method: 'GET'
             })
+            const section = await fetcher({
+                url: '/pages/search',
+                method: 'POST',
+                body: {
+                    name: 'Vouchers and Discounts'
+                }
+            })
+            return { vouchers, section }
         }
     })
+    const data = alldata?.vouchers
+    const section = alldata?.section
     const [swiper, setSwiper] = React.useState<any>(null);
     if (isLoading) {
         return <Spin size='large' />
@@ -35,7 +45,7 @@ const Vouchers = () => {
         <div className='container mx-auto lg:px-0 px-4'>
             <div className="flex justify-between mt-16">
                 <h2 className='sec-title mt-4'>
-                    Exclusive Vouchers and Discounts
+                    {section?.title}
                 </h2>
                 <div className='items-center gap-4 lg:flex hidden'>
                     <button onClick={() => swiper?.slidePrev()}>
@@ -49,21 +59,15 @@ const Vouchers = () => {
 
             <div className="flex items-center justify-between lg:mt-8 mt-5 lg:flex-row flex-col ">
                 <ul className='flex items-center gap-x-4 text-[#898989] lg:text-base text-sm'>
-                    <li>
-                        <button className='text-primary'>
-                            All Vouchers
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            Fashion
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            Home Appliances
-                        </button>
-                    </li>
+                    {
+                        section?.others?.category?.map((item: any, index: number) => (
+                            <li key={index}>
+                                <button>
+                                    {item}
+                                </button>
+                            </li>
+                        ))
+                    }
                 </ul>
                 <div className="flex items-center justify-between w-full lg:w-auto mt-7">
                     <select className='bg-transparent outline-none border-none'>
@@ -101,7 +105,7 @@ const Vouchers = () => {
                 {
                     data?.data?.map((voucher: VoucherType) => (
                         <SwiperSlide key={voucher._id}>
-                            <VoucherCard voucher={voucher}/>
+                            <VoucherCard voucher={voucher} />
                         </SwiperSlide>
                     ))
                 }

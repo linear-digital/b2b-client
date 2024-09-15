@@ -1,32 +1,46 @@
+
+'use client';
 import fetcher from '@/Components/util/axios';
 import { errorDisplay } from '@/Components/util/readError';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Form, Image, Input, Popover, Spin } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import UploadImage from './UploadImage';
-import UpdateImage from './UpdateImage';
+import Category from './UI/Categorys';
 
-const HeroArea = () => {
+const ShopByCategory = () => {
+
     const { data, isFetching, refetch } = useQuery({
-        queryKey: ['hero'],
+        queryKey: ['ShopByCategory'],
         queryFn: () => {
-            return fetcher({
+            const res: any = fetcher({
                 url: `/pages/search`,
                 method: 'POST',
                 body: {
-                    name: "Hero Area"
+                    name: "Shop by Category"
                 }
             })
+            return res
         },
         refetchOnWindowFocus: false
     })
+    const [tags, setTags] = React.useState<string[]>([]);
+    useEffect(() => {
+        if (data?.others?.category) {
+            setTags(data?.others?.category)
+        }
+    }, [data])
     const onFinish = async (values: any) => {
         try {
             const res = await fetcher({
                 method: 'PUT',
                 url: `/pages/${data?._id}`,
-                body: values
+                body: {
+                    ...values,
+                    others: {
+                        category: tags
+                    }
+                }
             })
             toast.success("Data updated successfully")
             refetch()
@@ -38,7 +52,7 @@ const HeroArea = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='hero'>
+        <div id='shop-by-category'>
             <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
             <Form
                 layout='vertical'
@@ -53,10 +67,9 @@ const HeroArea = () => {
                     <Input size='large' />
                 </Form.Item>
                 <Form.Item
-                    label="Description"
-                    name={"desc"}
+                    label="Categorys"
                 >
-                    <Input.TextArea rows={4} size='large' />
+                    <Category tags={tags} setTags={setTags} />
                 </Form.Item>
                 <Form.Item>
                     <Button type='primary' htmlType='submit'>
@@ -64,30 +77,9 @@ const HeroArea = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            <h1 className='text-2xl font-medium'>
-                Images
-            </h1>
-            {/* <UploadImage url={data?.images}/> */}
-            <div className="flex flex-wrap gap-4 mt-4">
-                {
-                    data?.images?.map((image: any, index: number) => (
-                        <div key={index} className='flex flex-col items-start gap-y-3'>
-                            <Image src={image} alt="login" height={150} className={'h-full w-full'} />
-                            <Popover trigger={"click"} content={<UpdateImage  
-                            data={data}
-                             url={image}
-                             refetch={refetch}
-                             />}>
-                                <Button type='primary'>
-                                    Update
-                                </Button>
-                            </Popover>
-                        </div>
-                    ))
-                }
-            </div>
+
         </div>
     );
 };
 
-export default HeroArea;
+export default ShopByCategory;

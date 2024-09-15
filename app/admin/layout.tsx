@@ -43,19 +43,29 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selected, setSelected] = useState(0)
 
     const navigateHandler = (e: any) => {
+        console.log(e);
         menuItems.forEach((item, index) => {
             if (item.key === e.key) {
                 setSelected(index)
-                router.push(item.path)
+                return router.push(item.path)
             }
             else if (item.children) {
                 item.children.forEach((child, index) => {
                     if (child.key === e.key) {
                         setSelected(index)
-                        router.push(child.path)
+                        return router.push(child.path)
+                    }
+                    else if (child.children) {
+                        child.children.forEach((child, index) => {
+                            if (child.key === e.key) {
+                                setSelected(index)
+                                return router.push(child.path)
+                            }
+                        })
                     }
                 })
             }
+           
         })
     }
     const menuItems = useMemo(() => [
@@ -114,18 +124,23 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     children: [
                         {
                             label: 'Hero Area',
-                            path: '/admin/pages/home',
+                            path: '/admin/pages/home#hero',
                             key: '10',
                         },
                         {
-                            label: 'Featured Brands Area',
-                            path: '/admin/pages/home/featured-brands',
+                            label: 'Shop by Category',
+                            path: '/admin/pages/home/#shop-by-category',
                             key: '11',
                         },
                         {
-                            label: 'Trending Area',
-                            path: '/admin/pages/home/trending',
-                            key: '12',
+                            label: 'Voucher & Discount',
+                            path: '/admin/pages/home#voucher-discount',
+                            key: '112',
+                        },
+                        {
+                            label: 'Trending Products',
+                            path: '/admin/pages/home#Trending-Products',
+                            key: '113',
                         },
                     ]
                 },
@@ -156,9 +171,12 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     className='text-base'
                     selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
                         ...item,
+
                         key: String(index),
                         onClick: navigateHandler
-                    }))} />
+                    }))}
+
+                />
             </Sider>
             <Layout style={{ marginInlineStart: 250 }}>
                 <Header style={{ background: colorBgContainer }}

@@ -10,35 +10,43 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { A11y, Navigation } from 'swiper/modules';
 import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
+import fetcher from '@/Components/util/axios';
 
 
 
 const ShopCategory = () => {
     const swiperRef: any = useRef(null);
     const [swiper, setSwiper] = React.useState<any>(null);
-    
+    const { data } = useQuery({
+        queryKey: ['Shop by Category'],
+        queryFn: () => {
+            const res: any = fetcher({
+                url: `/pages/search`,
+                method: 'POST',
+                body: {
+                    name: "Shop by Category"
+                }
+            })
+            return res
+        },
+    })
     return (
         <div className='container mx-auto px-4 lg:px-0'>
             <h2 className='sec-title  mt-4'>
-                Shop by Category
+                {data?.title}
             </h2>
             <div className="flex items-center justify-between mt-8">
                 <ul className='flex items-center gap-x-4 text-[#898989] lg:text-base text-sm'>
-                    <li>
-                        <button className='text-primary'>
-                            All
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            Fashion
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            Home Appliances
-                        </button>
-                    </li>
+                    {
+                        data?.others?.category?.map((item: any, index: number) => (
+                            <li key={index}>
+                                <button>
+                                    {item}
+                                </button>
+                            </li>
+                        ))
+                    }
                 </ul>
                 <SwiperNavButtons swiper={swiper} />
             </div>

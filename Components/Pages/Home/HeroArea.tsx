@@ -16,7 +16,7 @@ const HeroArea = () => {
                     name: "Hero Area"
                 }
             })
-        }
+        },
     })
     return (
         <div className='container mx-auto py-14 lg:px-0 px-4'>
