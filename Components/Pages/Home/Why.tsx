@@ -1,38 +1,32 @@
+import fetcher from '@/Components/util/axios';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+
 import React from 'react';
 
 const Why = () => {
-    const items = [
-        {
-            image: "/icons/checklist.png",
-            title: "Product Variety",
-            description: "Compare thousands of products across multiple categories."
+    const { data } = useQuery({
+        queryKey: ['Why Shop With Us'],
+        queryFn: () => {
+            const res: any = fetcher({
+                url: `/pages/search`,
+                method: 'POST',
+                body: {
+                    name: "Why Shop With Us"
+                }
+            })
+            return res
         },
-        {
-            image: "/icons/ab-testing.png",
-            title: "Precise Comparisons",
-            description: "Accurate comparisons with real-time data from top merchants."
-        },
-        {
-            image: "/icons/filter.png",
-            title: "Smart Filtering",
-            description: "User-friendly interface with advanced filtering options."
-        },
-        {
-            image: "/icons/design.png",
-            title: "Seamless Everywhere",
-            description: "Seamless experience across all devices."
-        }
-    ]
+    })
     return (
         <div className='min-h-[450px] bg-[#8E9E84] mt-20 py-10 flex flex-col justify-center px-4 lg:px-0'>
             <div className="container mx-auto">
                 <h1 className='sec-title text-white'>
-                    Why Shop with Us?
+                    {data?.title}
                 </h1>
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 mt-14">
-                {items.map((item, index) => <ItemCard data={item} key={index} />)}
-            </div>
+                    {data?.others?.options?.map((item: any, index: number) => <ItemCard data={item} key={index} />)}
+                </div>
             </div>
         </div>
     );

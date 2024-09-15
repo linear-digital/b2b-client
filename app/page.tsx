@@ -13,7 +13,7 @@ import Why from "@/Components/Pages/Home/Why";
 
 export default function Home() {
   return (
-    <main className="bg-[#F7F7F7] lg:px-5 ">
+    <main className="bg-[#F7F7F7]">
       <Navbar />
       <HeroArea />
       <ShopCategory />

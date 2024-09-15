@@ -43,7 +43,6 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selected, setSelected] = useState(0)
 
     const navigateHandler = (e: any) => {
-        console.log(e);
         menuItems.forEach((item, index) => {
             if (item.key === e.key) {
                 setSelected(index)
@@ -141,6 +140,10 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             label: 'Trending Products',
                             path: '/admin/pages/home#Trending-Products',
                             key: '113',
+                        },{
+                            label: 'Why Shop With Us',
+                            path: '/admin/pages/home#Why-Shop',
+                            key: '114',
                         },
                     ]
                 },
@@ -171,7 +174,6 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     className='text-base'
                     selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
                         ...item,
-
                         key: String(index),
                         onClick: navigateHandler
                     }))}

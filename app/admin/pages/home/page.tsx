@@ -4,6 +4,8 @@ import HeroArea from './_UI/HeroArea';
 import Voucher_Discount from './_UI/Voucher&Discount';
 import ShopByCategory from './shop-category/page';
 import TrendingProducts from './_UI/TrendingProducts';
+import WhyShopWithUs from './_UI/WhyShopWithUs';
+import FeaturedBrands from './_UI/FeaturedBrands';
 
 const page = () => {
     return (
@@ -14,6 +16,9 @@ const page = () => {
             
             <Voucher_Discount />
             <TrendingProducts />
+            <WhyShopWithUs />
+            <div className="mt-20"></div>
+            <FeaturedBrands />
         </div>
     );
 };
