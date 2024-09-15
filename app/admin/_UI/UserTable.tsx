@@ -1,7 +1,10 @@
 'use client'
 import React from 'react';
-import { Button, Space, Table, Tag } from 'antd';
+import { Button, Space, Spin, Table, Tag } from 'antd';
 import type { TableProps } from 'antd';
+import { useQuery } from '@tanstack/react-query';
+import fetcher from '@/Components/util/axios';
+import { UserType } from '@/Components/util/type';
 
 interface DataType {
     key: string;
@@ -11,7 +14,7 @@ interface DataType {
     phone: string;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<UserType>['columns'] = [
     {
         title: 'Name',
         dataIndex: 'name',
@@ -44,31 +47,21 @@ const columns: TableProps<DataType>['columns'] = [
     },
 ];
 
-const data: DataType[] = [
-    {
-        key: '1',
-        name: 'John Brown',
-        email: "a@a.com",
-        phone: '9876543210',
-        address: 'New York No. 1 Lake Park',
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        email: "a@a.com",
-        phone: '9876543210',
-        address: 'London No. 1 Lake Park',
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        email: "a@a.com",
-        phone: '9876543210',
-        address: 'Sidney No. 1 Lake Park',
-    },
-    
-];
 
-const UserTable: React.FC = () => <Table columns={columns} dataSource={data} />;
+const UserTable: React.FC = () => {
+    const {data, isLoading} = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            return await fetcher({
+                url: '/users',
+                method: 'GET'
+            })
+        }
+    })
+    if (isLoading) {
+        return <Spin size='large'/>
+    }
+    return <Table columns={columns} dataSource={data as UserType[]} rowKey={(row) => row._id}/>
+};
 
 export default UserTable;

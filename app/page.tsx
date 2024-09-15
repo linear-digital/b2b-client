@@ -1,3 +1,4 @@
+'use client'
 import Footer from "@/Components/Bars/Footer/Footer";
 import Navbar from "@/Components/Bars/Navbar";
 import FAQ from "@/Components/Pages/Home/FAQ";

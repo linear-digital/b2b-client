@@ -43,21 +43,20 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selected, setSelected] = useState(0)
 
     const navigateHandler = (e: any) => {
-        if (e.key === '0') {
-            router.push('/admin')
-        }
-        else if (e.key === '3') {
-            router.push('/admin/products')
-        }
-        else if (e.key === '4') {
-            router.push('/admin/products/add')
-        }
-        else if (e.key === '6') {
-            router.push('/admin/vouchers')
-        }
-        else if (e.key === '7') {
-            router.push('/admin/vouchers/add')
-        }
+        menuItems.forEach((item, index) => {
+            if (item.key === e.key) {
+                setSelected(index)
+                router.push(item.path)
+            }
+            else if (item.children) {
+                item.children.forEach((child, index) => {
+                    if (child.key === e.key) {
+                        setSelected(index)
+                        router.push(child.path)
+                    }
+                })
+            }
+        })
     }
     const menuItems = useMemo(() => [
         {
@@ -112,11 +111,28 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     label: 'Home Page',
                     path: '/admin/pages/home',
                     key: '9',
+                    children: [
+                        {
+                            label: 'Hero Area',
+                            path: '/admin/pages/home',
+                            key: '10',
+                        },
+                        {
+                            label: 'Featured Brands Area',
+                            path: '/admin/pages/home/featured-brands',
+                            key: '11',
+                        },
+                        {
+                            label: 'Trending Area',
+                            path: '/admin/pages/home/trending',
+                            key: '12',
+                        },
+                    ]
                 },
                 {
                     label: 'About Page',
                     path: '/admin/pages/about',
-                    key: '10',
+                    key: '13',
                 },
             ]
         }
@@ -132,17 +148,19 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     return (
         <Layout hasSider>
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}>
+            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}
+                width={250}
+            >
                 <div className="demo-logo-vertical" />
                 <Menu theme="dark"
-                className='text-base'
-                selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
-                    ...item,
-                    key: String(index),
-                    onClick: navigateHandler
-                }))} />
+                    className='text-base'
+                    selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
+                        ...item,
+                        key: String(index),
+                        onClick: navigateHandler
+                    }))} />
             </Sider>
-            <Layout style={{ marginInlineStart: 200 }}>
+            <Layout style={{ marginInlineStart: 250 }}>
                 <Header style={{ background: colorBgContainer }}
                     className='flex justify-between items-center px-10'
                 >

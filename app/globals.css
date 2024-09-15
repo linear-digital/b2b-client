@@ -159,11 +159,11 @@ a:hover {
 ::-webkit-scrollbar-thumb {
     background-color: transparent;
 }
-.ant-upload,
+/* .ant-upload,
 .ant-upload-list-item-container {
     width: 100% !important;
     height: 300px !important;
-}
+} */
 
 .ant-upload-list-item-image {
     object-fit: cover !important;
