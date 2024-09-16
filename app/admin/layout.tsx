@@ -64,7 +64,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     }
                 })
             }
-           
+
         })
     }
     const menuItems = useMemo(() => [
@@ -140,19 +140,19 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             label: 'Trending Products',
                             path: '/admin/pages/home#Trending-Products',
                             key: '113',
-                        },{
+                        }, {
                             label: 'Why Shop With Us',
                             path: '/admin/pages/home#Why-Shop',
                             key: '114',
-                        },{
+                        }, {
                             label: 'Featured Brands',
                             path: '/admin/pages/home#Featured-Brands',
                             key: '115',
-                        },{
+                        }, {
                             label: 'Newsletter',
                             path: '/admin/pages/home#Newsletter',
                             key: '116',
-                        },{
+                        }, {
                             label: 'FAQ',
                             path: '/admin/pages/home/faq',
                             key: '117',
@@ -163,7 +163,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     label: 'Product Page',
                     path: '/admin/pages/product',
                     key: '213',
-                },{
+                }, {
                     label: 'Voucher Page',
                     path: '/admin/pages/voucher',
                     key: '214',
@@ -172,6 +172,11 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     label: 'About Page',
                     path: '/admin/pages/about',
                     key: '13',
+                },
+                {
+                    label: 'Team',
+                    path: '/admin/pages/team',
+                    key: '1323',
                 },
             ]
         }
