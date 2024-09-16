@@ -20,7 +20,7 @@ const Partnerships = () => {
     })
     return (
         <Container className='lg:py-16 py-10 px-4 lg:px-0'>
-            <div className="lg:flex items-center gap-x-6">
+            <div className="lg:flex items-center justify-between gap-x-6">
                 <div>
                     <h2 className='sec-title'>
                         {data?.title}
