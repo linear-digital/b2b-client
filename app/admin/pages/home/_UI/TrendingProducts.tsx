@@ -52,7 +52,7 @@ const TrendingProducts = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='Trending-Products' className='mt-20'>
+        <div id='Trending-Products' className='mt-20 border p-4 rounded-lg'>
             <h1 className='text-3xl font-medium font-elMessiri'>{"Trending Products"}</h1>
             <Form
                 layout='vertical'

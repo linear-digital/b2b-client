@@ -52,7 +52,7 @@ const ShopByCategory = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='shop-by-category'>
+        <div id='shop-by-category' className='border p-4 rounded-lg'>
             <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
             <Form
                 layout='vertical'

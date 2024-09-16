@@ -6,6 +6,7 @@ export type UserType = {
     gender: string;
     profile: string;
     wishlist: any;
+    role: string;
     _id: string;
 }
 

@@ -38,7 +38,7 @@ const HeroArea = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='hero'>
+        <div id='hero' className='border p-4 rounded-lg'>
             <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
             <Form
                 layout='vertical'

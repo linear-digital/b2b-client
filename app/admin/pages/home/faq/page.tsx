@@ -59,7 +59,7 @@ const Faq = () => {
             <Form
                 layout='vertical'
                 initialValues={data}
-                className='mt-4'
+                className='mt-4 border p-4 rounded-lg'
                 onFinish={onFinish}
 
             >

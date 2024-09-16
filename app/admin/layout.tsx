@@ -78,17 +78,17 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             icon: <ShopOutlined />,
             label: 'Products',
             path: '/admin/products',
-            key: '2',
+            key: '32',
             children: [
                 {
                     label: 'All Products',
                     path: '/admin/products',
-                    key: '3',
+                    key: '33',
                 },
                 {
                     label: 'Add New Product',
                     path: '/admin/products/add',
-                    key: '4',
+                    key: '34',
                 },
             ]
         },
@@ -160,6 +160,15 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     ]
                 },
                 {
+                    label: 'Product Page',
+                    path: '/admin/pages/product',
+                    key: '213',
+                },{
+                    label: 'Voucher Page',
+                    path: '/admin/pages/voucher',
+                    key: '214',
+                },
+                {
                     label: 'About Page',
                     path: '/admin/pages/about',
                     key: '13',
@@ -181,9 +190,9 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}
                 width={250}
             >
-                <div className="demo-logo-vertical" />
+                {/* <Logo path='/admin' color='white'/> */}
                 <Menu theme="dark"
-                    className='text-base'
+                    className='text-base h-full overflow-y-auto'
                     selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
                         ...item,
                         key: String(index),

@@ -39,7 +39,7 @@ const FeaturedBrands = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='Featured-Brands'>
+        <div id='Featured-Brands' className='border p-4 rounded-lg'>
             <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
             <Form
                 layout='vertical'

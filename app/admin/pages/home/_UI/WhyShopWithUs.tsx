@@ -45,8 +45,8 @@ const WhyShopWithUs = () => {
     if (isFetching) {
         return <Spin size='large' />
     }
-    return (
-        <div id='Why-Shop' className='mt-20'>
+    return ( 
+        <div id='Why-Shop' className='mt-20 border p-4 rounded-lg'>
             <h1 className='text-3xl font-medium font-elMessiri'>{"Why Shop With Us"}</h1>
             <Form
                 layout='vertical'

@@ -1,3 +1,4 @@
+'use client';
 import Footer from '@/Components/Bars/Footer/Footer';
 import Navbar from '@/Components/Bars/Navbar';
 import PageTop from '@/Components/Pages/PageTop';
@@ -10,14 +11,29 @@ import WhyChooseUs from './_UI/WhyChooseUs';
 import Partnerships from './_UI/Partnerships';
 import Affiliate from './_UI/Affiliate';
 import OurTeam from './_UI/OurTeam';
+import { useQuery } from '@tanstack/react-query';
+import fetcher from '@/Components/util/axios';
 
-const page = () => {
+const Page = () => {
+    const { data } = useQuery({
+        queryKey: ['About Us'],
+        queryFn: () => {
+            const res: any = fetcher({
+                url: `/pages/search`,
+                method: 'POST',
+                body: {
+                    name: "About Us"
+                }
+            })
+            return res
+        },
+    })
     return (
         <div>
             <Navbar />
             <PageTop
-                title='About us'
-                description='Welcome to [Your Site Name], your trusted partner in finding the best products at the best prices. We are more than just a comparison-shopping site; we are a platform designed to empower consumers by simplifying their shopping experience.'
+                title={data?.title}
+                description={data?.desc}
             />
             <OurMission />
             <Container>
@@ -26,6 +42,7 @@ const page = () => {
                     alt="about"
                     width={1240}
                     height={500}
+                    className='w-full'
                 />
             </Container>
             <WhatWeDo />
@@ -38,4 +55,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

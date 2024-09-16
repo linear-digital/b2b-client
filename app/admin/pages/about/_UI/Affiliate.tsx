@@ -6,41 +6,29 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, Form, Image, Input, Popover, Spin } from 'antd';
 import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import Category from '../shop-category/UI/Categorys';
 
-const Voucher_Discount = () => {
+const Affiliate = () => {
 
     const { data, isFetching, refetch } = useQuery({
-        queryKey: ['Vouchers and Discounts'],
+        queryKey: ['Affiliate'],
         queryFn: () => {
             const res: any = fetcher({
                 url: `/pages/search`,
                 method: 'POST',
                 body: {
-                    name: "Vouchers and Discounts"
+                    name: "Affiliate"
                 }
             })
             return res
         },
         refetchOnWindowFocus: false
     })
-    const [tags, setTags] = React.useState<string[]>([]);
-    useEffect(() => {
-        if (data?.others?.category) {
-            setTags(data?.others?.category)
-        }
-    }, [data])
     const onFinish = async (values: any) => {
         try {
             const res = await fetcher({
                 method: 'PUT',
                 url: `/pages/${data?._id}`,
-                body: {
-                    ...values,
-                    others: {
-                        category: tags
-                    }
-                }
+                body: values
             })
             toast.success("Data updated successfully")
             refetch()
@@ -52,8 +40,8 @@ const Voucher_Discount = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='voucher-discount' className='mt-20 border p-4 rounded-lg' >
-            <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
+        <div id='voucher-discount' className='border p-4 rounded-lg' >
+            <h1 className='text-3xl font-medium font-elMessiri'>{data?.title}</h1>
             <Form
                 layout='vertical'
                 initialValues={data}
@@ -67,9 +55,13 @@ const Voucher_Discount = () => {
                     <Input size='large' />
                 </Form.Item>
                 <Form.Item
-                    label="Categorys"
+                    label="Description"
+                    name={"desc"}
                 >
-                    <Category tags={tags} setTags={setTags} />
+                    <Input.TextArea
+                        rows={3}
+                        size='large'
+                    />
                 </Form.Item>
                 <Form.Item>
                     <Button type='primary' htmlType='submit'>
@@ -82,4 +74,4 @@ const Voucher_Discount = () => {
     );
 };
 
-export default Voucher_Discount;
+export default Affiliate;
