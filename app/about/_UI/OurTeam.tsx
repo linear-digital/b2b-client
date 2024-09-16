@@ -3,12 +3,12 @@ import Link from 'next/link';
 import React, { useRef } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { A11y, Navigation, Pagination } from 'swiper/modules';
+import { A11y, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import fetcher from '@/Components/util/axios';
