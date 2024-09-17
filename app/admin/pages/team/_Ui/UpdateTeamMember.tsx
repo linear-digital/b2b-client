@@ -1,0 +1,113 @@
+import fetcher from "@/Components/util/axios";
+import { errorDisplay } from "@/Components/util/readError";
+import { Button, Form, Image, Input } from "antd";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Upload } from 'antd';
+import type { UploadProps } from 'antd';
+
+
+
+const UpdateMember = ({ rootData, refetch, selectedMember }: { rootData: any, refetch: any, selectedMember: any }) => {
+    const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState<string>('');
+
+    const handleChange: UploadProps['onChange'] = (info) => {
+
+        if (info.file.status === 'uploading') {
+            setLoading(true);
+            return;
+        }
+        if (info.fileList) {
+            setLoading(false);
+            setImageUrl(info.fileList[0]?.response?.url);
+        }
+    };
+    const uploadButton = (
+        <button style={{ border: 0, background: 'none', fontSize: 12 }} type="button">
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>Upload Images</div>
+        </button>
+    );
+
+    const [form] = Form.useForm();
+    const onFinish = async (values: any) => {
+        try {
+            if (!imageUrl) {
+                return toast.error("Please upload image")
+            }
+            const questions = rootData?.others?.members
+            const newMembers = questions?.map((item: any, index: number) => {
+                if (index === selectedMember) {
+                    return {
+                        ...item,
+                        ...values,
+                        image: imageUrl
+                    }
+                }
+                return item
+            })
+            const res = await fetcher({
+                method: 'PUT',
+                url: `/pages/${rootData?._id}`,
+                body: {
+                    others: {
+                        members: newMembers
+                    }
+                }
+            })
+            refetch()
+            toast.success("Data updated successfully")
+            form.resetFields()
+        } catch (error) {
+            toast.error(errorDisplay(error))
+        }
+    }
+    return (
+        <Form
+            layout='vertical'
+            className='mt-4 border p-4 rounded-lg'
+            onFinish={onFinish}
+            form={form}
+            initialValues={rootData?.others?.members?.[selectedMember]}
+        >
+            <Form.Item>
+                <Upload
+                    name="profile"
+                    listType="picture-card"
+                    className="avatar-uploader"
+                    action="http://localhost:4000/upload"
+                    accept="image/*"
+                    // maxCount={1}
+                    onChange={handleChange}
+                    onRemove={() => setImageUrl('')}
+                >
+                    {imageUrl ? null : uploadButton}
+                </Upload>
+            </Form.Item>
+            <Image width={200} src={rootData?.others?.members?.[selectedMember]?.image} alt=""/>
+            <Form.Item
+                label="Name"
+                name={"name"}
+                rules={[{ required: true, message: 'Please enter name' }]}
+            >
+                <Input size='middle' />
+            </Form.Item>
+            <Form.Item
+                label="Position"
+                name={"position"}
+                rules={[{ required: true, message: 'Please enter position' }]}
+            >
+                <Input size='middle' />
+            </Form.Item>
+            <Form.Item>
+                <Button type='primary' htmlType='submit'>
+                    Update
+                </Button>
+            </Form.Item>
+        </Form>
+    )
+}
+
+export default UpdateMember

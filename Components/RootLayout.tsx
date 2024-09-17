@@ -19,7 +19,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     if (isLoading) {
-        return <Spin size='large' fullscreen={true} />;
+        return <Spin size='large'  fullscreen={true} />;
     }
     return (
         <Provider store={store}>

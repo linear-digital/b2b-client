@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { A11y, Navigation } from 'swiper/modules';
+import { A11y, Autoplay, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import fetcher from '@/Components/util/axios';
@@ -58,23 +58,23 @@ const OurTeam = () => {
                     },
                 }}
                 spaceBetween={30}
+                loop={true}
+                autoplay={{ delay: 2500 }}
                 className="mt-10 h-auto"
                 onSwiper={(swiper) => setSwiper(swiper)}
-                modules={[Navigation, A11y]}
+                modules={[Navigation, A11y, Autoplay]}
             >
                 {
                     data?.others?.members?.map((item: any, index: number) => <SwiperSlide key={index}>
-                        <SwiperSlide >
-                            <div>
-                                <Image src={item?.image} alt="login" width={400} height={400} className={'h-full w-full object-cover'} />
-                                <h2 className='text-[18px] font-medium mt-3'>
-                                    {item?.name}
-                                </h2>
-                                <h5 className='text-[14px] text-[#898989]'>{item?.position}</h5>
-                            </div>
-                        </SwiperSlide>
-
-                    </SwiperSlide>)
+                        <div>
+                            <Image src={item?.image} alt="login" width={400} height={400} className={'h-full w-full object-cover'} />
+                            <h2 className='text-[18px] font-medium mt-3'>
+                                {item?.name}
+                            </h2>
+                            <h5 className='text-[14px] text-[#898989]'>{item?.position}</h5>
+                        </div>
+                    </SwiperSlide>
+                    )
                 }
             </Swiper>
         </div>

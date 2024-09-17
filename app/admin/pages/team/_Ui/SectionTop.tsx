@@ -5,20 +5,8 @@ import { Button, Form, Image, Input, Popover, Spin } from 'antd';
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const SectionTop = () => {
-    const { data, isFetching, refetch } = useQuery({
-        queryKey: ['Our Team'],
-        queryFn: () => {
-            return fetcher({
-                url: `/pages/search`,
-                method: 'POST',
-                body: {
-                    name: "Our Team"
-                }
-            })
-        },
-        refetchOnWindowFocus: false
-    })
+const SectionTop = ({ refetch, data }: { refetch: any, data: any }) => {
+
     const onFinish = async (values: any) => {
         try {
             const res = await fetcher({
@@ -32,9 +20,7 @@ const SectionTop = () => {
             toast.error(errorDisplay(error))
         }
     }
-    if (isFetching) {
-        return <Spin size='large' />
-    }
+
     return (
         <div id='hero' className='border p-4 rounded-lg'>
             <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
