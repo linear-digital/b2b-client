@@ -20,10 +20,12 @@ const page = () => {
                     Saved Items
                 </h2>
                 <div className="flex flex-col gap-y-4 mt-8">
+                    {/* <WishListCard image={WishImg} />
                     <WishListCard image={WishImg} />
                     <WishListCard image={WishImg} />
-                    <WishListCard image={WishImg} />
-                    <WishListCard image={WishImg} />
+                    <WishListCard image={WishImg} /> */}
+
+                    <h1 className='text-center mt-10 text-2xl font-elMessiri font-medium'>No Wishlist Found</h1>
                 </div>
             </Container>
             <Footer />
