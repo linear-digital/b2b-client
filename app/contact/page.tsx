@@ -1,17 +1,33 @@
-
+'use client'
 import Footer from '@/Components/Bars/Footer/Footer';
 import Navbar from '@/Components/Bars/Navbar';
 import PageTop from '@/Components/Pages/PageTop';
 import React from 'react';
 import Contact from './_UI/Contact';
+import { useQuery } from '@tanstack/react-query';
+import fetcher from '@/Components/util/axios';
 
-const page = () => {
+const Page = () => {
+
+    const { data } = useQuery({
+        queryKey: ['Contact'],
+        queryFn: () => {
+            const res: any = fetcher({
+                url: `/pages/search`,
+                method: 'POST',
+                body: {
+                    name: "Contact"
+                }
+            })
+            return res
+        }
+    })
     return (
         <div className='bg-[#F7F7F7]'>
             <Navbar />
             <PageTop
-                title='Get in touch with us'
-                description="We’re here to help! Whether you have a question, need assistance, or just want to provide feedback, feel free to reach out. Our team is dedicated to ensuring your experience on [Your Site Name] is seamless and satisfying."
+                title={data?.title}
+                description={data?.desc}
             />
             <Contact />
             <Footer />
@@ -19,4 +35,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

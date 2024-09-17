@@ -3,18 +3,33 @@ import { Card } from 'antd';
 import Image from 'next/image';
 import React from 'react';
 import ContactForm from './ContactForm';
+import { useQuery } from '@tanstack/react-query';
+import fetcher from '@/Components/util/axios';
 
 const Contact = () => {
+    const { data } = useQuery({
+        queryKey: ['Contact Details'],
+        queryFn: () => {
+            const res: any = fetcher({
+                url: `/pages/search`,
+                method: 'POST',
+                body: {
+                    name: "information"
+                }
+            })
+            return res
+        }
+    })
     return (
         <Container className='py-16 lg:px-0 px-4'>
             <div className="grid lg:grid-cols-2 gap-x-10">
                 {/* Information  */}
                 <div>
                     <h1 className='sec-title'>
-                        Contact Information
+                       {data?.title}
                     </h1>
                     <p className='max-w-[609px] text-[#898989] lg:text-[18px] text-sm  mt-3'>
-                        We’re here to assist you with any inquiries, support needs, or feedback. Reach out to us via email, phone, or the contact form below. Connect with us on social media to stay informed about the latest updates. Your satisfaction is our priority
+                        {data?.desc}
                     </p>
                     <div className="grid lg:grid-cols-2 gap-5 mt-10">
                         <Card className='border-0'>
@@ -29,7 +44,7 @@ const Contact = () => {
                                 Address
                             </h3>
                             <p className='text-[16px] mt-3 text-[#898989]'>
-                                123 Web Lane, Richmond, VA, 23220
+                               {data?.others?.address}
                             </p>
                         </Card>
                         <Card className='border-0'>
@@ -44,7 +59,7 @@ const Contact = () => {
                                 Email
                             </h3>
                             <p className='text-[16px] mt-3 text-[#898989]'>
-                                info@richmondwebdesigns.com
+                                {data?.others?.email}
                             </p>
                         </Card>
                         <Card className='border-0'>
@@ -59,7 +74,7 @@ const Contact = () => {
                                 Phone
                             </h3>
                             <p className='text-[16px] mt-3 text-[#898989]'>
-                                (123) 456-7890
+                                {data?.others?.phone}
                             </p>
                         </Card>
                     </div>

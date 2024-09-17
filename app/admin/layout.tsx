@@ -43,6 +43,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selected, setSelected] = useState(0)
 
     const navigateHandler = (e: any) => {
+        console.log(e);
         menuItems.forEach((item, index) => {
             if (item.key === e.key) {
                 setSelected(index)
@@ -72,7 +73,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             icon: <TeamOutlined />,
             label: 'All Users',
             path: '/admin',
-            key: '1',
+            key: '0',
         },
         {
             icon: <ShopOutlined />,
@@ -176,8 +177,13 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 {
                     label: 'Team',
                     path: '/admin/pages/team',
-                    key: '1323',
+                    key: '1325',
                 },
+                {
+                    label: 'Contact Us',
+                    path: '/admin/pages/contact',
+                    key: '1323',
+                }
             ]
         }
     ], []);
