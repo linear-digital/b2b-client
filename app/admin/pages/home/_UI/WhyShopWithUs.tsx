@@ -68,7 +68,7 @@ const WhyShopWithUs = () => {
             </Form>
             <section className='mt-10'>
                 <h1 className='text-2xl font-medium font-elMessiri'>{"Items"}</h1>
-                <div className="mt-10 grid grid-cols-2 gap-10">
+                <div className="mt-10 grid lg:grid-cols-2 gap-10">
                     {
                         data?.others?.options?.map((item: any, index: number) => <ItemCard
                             data={item}

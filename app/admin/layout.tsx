@@ -75,24 +75,24 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             path: '/admin',
             key: '0',
         },
-        {
-            icon: <ShopOutlined />,
-            label: 'Products',
-            path: '/admin/products',
-            key: '32',
-            children: [
-                {
-                    label: 'All Products',
-                    path: '/admin/products',
-                    key: '33',
-                },
-                {
-                    label: 'Add New Product',
-                    path: '/admin/products/add',
-                    key: '34',
-                },
-            ]
-        },
+        // {
+        //     icon: <ShopOutlined />,
+        //     label: 'Products',
+        //     path: '/admin/products',
+        //     key: '32',
+        //     children: [
+        //         {
+        //             label: 'All Products',
+        //             path: '/admin/products',
+        //             key: '33',
+        //         },
+        //         {
+        //             label: 'Add New Product',
+        //             path: '/admin/products/add',
+        //             key: '34',
+        //         },
+        //     ]
+        // },
         {
             icon: <DiscountIcon />,
             label: 'Vouchers',
@@ -182,6 +182,10 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 {
                     label: 'Contact Us',
                     path: '/admin/pages/contact',
+                    key: '1353',
+                }, {
+                    label: 'Wishlist',
+                    path: '/admin/pages/wishlist',
                     key: '1323',
                 }
             ]
@@ -212,9 +216,9 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
                 />
             </Sider>
-            <Layout style={{ marginInlineStart: 250 }}>
+            <Layout style={{ marginInlineStart: collapsed ? 60 : 250 }}>
                 <Header style={{ background: colorBgContainer }}
-                    className='flex justify-between items-center px-10'
+                    className='flex justify-between items-center lg:px-10'
                 >
                     <Logo path='/admin' />
                     <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}
@@ -226,13 +230,13 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             src={currentUser?.profile} />
                     </Popover>
                 </Header>
-                <Content style={{ margin: '24px 16px 0', overflow: 'initial', minHeight: '80vh' }}
-                    className='bg-white p-10 rounded-lg'
+                <Content style={{  overflow: 'initial', minHeight: '80vh' }}
+                    className='bg-white lg:p-10 py-5 pl-5 pr-3 my-4 lg:mx-10 rounded-lg mx-2'
                 >
                     {children}
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    B2B ©{new Date().getFullYear()}  All Rights Reserved
                 </Footer>
             </Layout>
         </Layout>

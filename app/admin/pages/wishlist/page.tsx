@@ -1,27 +1,34 @@
+
+'use client';
 import fetcher from '@/Components/util/axios';
 import { errorDisplay } from '@/Components/util/readError';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Form, Image, Input, Popover, Spin } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import UploadImage from './UploadImage';
-import UpdateImage from './UpdateImage';
 
-const FeaturedBrands = () => {
+const Wishlist = () => {
+
     const { data, isFetching, refetch } = useQuery({
-        queryKey: ['FeaturedBrands'],
+        queryKey: ['Wishlist-Section'],
         queryFn: () => {
             const res: any = fetcher({
                 url: `/pages/search`,
                 method: 'POST',
                 body: {
-                    name: "Featured Brands"
+                    name: "Wishlist-Section"
                 }
             })
             return res
         },
         refetchOnWindowFocus: false
     })
+    const [tags, setTags] = React.useState<string[]>([]);
+    useEffect(() => {
+        if (data?.others?.category) {
+            setTags(data?.others?.category)
+        }
+    }, [data])
     const onFinish = async (values: any) => {
         try {
             const res = await fetcher({
@@ -39,8 +46,8 @@ const FeaturedBrands = () => {
         return <Spin size='large' />
     }
     return (
-        <div id='Featured-Brands' className='border p-4 rounded-lg'>
-            <h1 className='text-3xl font-medium font-elMessiri'>{data?.section}</h1>
+        <div id='voucher-discount' className='border p-4 rounded-lg' >
+            <h1 className='text-3xl font-medium font-elMessiri'>{data?.title}</h1>
             <Form
                 layout='vertical'
                 initialValues={data}
@@ -57,7 +64,10 @@ const FeaturedBrands = () => {
                     label="Description"
                     name={"desc"}
                 >
-                    <Input.TextArea rows={4} size='large' />
+                    <Input.TextArea
+                        rows={3}
+                        size='large'
+                    />
                 </Form.Item>
                 <Form.Item>
                     <Button type='primary' htmlType='submit'>
@@ -65,30 +75,9 @@ const FeaturedBrands = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            <h1 className='text-2xl font-medium'>
-                Images
-            </h1>
-            {/* <UploadImage url={data?.images}/> */}
-            <div className="flex flex-wrap gap-4 mt-4">
-                {
-                    data?.images?.map((image: any, index: number) => (
-                        <div key={index} className='flex flex-col items-start gap-y-3 lg:w-auto w-[40%]'>
-                            <Image src={image} alt="login"  className={'h-full lg:w-[200px] w-full p-4'} />
-                            <Popover trigger={"click"} content={<UpdateImage
-                                data={data}
-                                url={image}
-                                refetch={refetch}
-                            />}>
-                                <Button type='primary'>
-                                    Update
-                                </Button>
-                            </Popover>
-                        </div>
-                    ))
-                }
-            </div>
+
         </div>
     );
 };
 
-export default FeaturedBrands;
+export default Wishlist;
