@@ -43,7 +43,9 @@ const Navbar = () => {
                 <SearchBox />
                 <div className='flex items-center gap-x-5 '>
                     <button>
-                        <SearchOutlined className='text-xl' />
+                        <SearchOutlined className='text-xl lg:hidden' 
+                        
+                        />
                     </button>
                     <Link href={"/wishlist"}>
                         <HeartOutlined className='text-xl' />

@@ -187,6 +187,10 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     label: 'Wishlist',
                     path: '/admin/pages/wishlist',
                     key: '1323',
+                }, {
+                    label: 'Reviews',
+                    path: '/admin/pages/review',
+                    key: '13253',
                 }
             ]
         }
@@ -230,7 +234,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             src={currentUser?.profile} />
                     </Popover>
                 </Header>
-                <Content style={{  overflow: 'initial', minHeight: '80vh' }}
+                <Content style={{ overflow: 'initial', minHeight: '80vh' }}
                     className='bg-white lg:p-10 py-5 pl-5 pr-3 my-4 lg:mx-10 rounded-lg mx-2'
                 >
                     {children}
