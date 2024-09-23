@@ -1,8 +1,10 @@
 import axios from 'axios';
 import Cookie from 'js-cookie'
 import { decrypt, encrypt } from './security';
+const server = 'https://server.shoppanorma.com/api'
+const local = 'http://localhost:4000/api'
 export const api = axios.create({
-    baseURL: 'http://localhost:4000/api',
+    baseURL: server,
     headers: {
         'Content-Type': 'application/json',
         "Authorization": Cookie.get("auth-token")
