@@ -24,10 +24,11 @@ const ProductComparison = ({ product }: { product: PType }) => {
                                 <th className="px-4 py-2 text-center">
                                     <div className='flex flex-col items-center gap-y-2'>
                                         <Image
-                                            src={product?.thumbnail}
+                                            src={product?.images[0]}
                                             width={151}
-                                            height={156}
-                                            alt="Product Image"
+                                            height={160}
+                                            alt="Product Image "
+                                            className='bg-white rounded-lg overflow-hidden p-2'
                                         />
                                         <h2 >
                                             {product?.title}
