@@ -9,7 +9,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Navbar from '@/Components/Bars/Navbar';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import ProductDetails from './_UI/ProductDetails';
 import ProductComparison from './_UI/ProductComparison';
 import CustomerReview from './_UI/CustomerReview';
@@ -39,7 +39,8 @@ const Page = ({ params }: { params: { id: string } }) => {
         return <Spin size='large' />
     }
     return (
-        <div className='bg-[#F7F7F7]'>
+        <Suspense fallback={<Spin size='large' />}>
+            <div className='bg-[#F7F7F7]'>
             <Navbar />
             <PageTop title='Products details' />
             <div className="container mx-auto mt-8 px-4 lg:p-0">
@@ -96,6 +97,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <FeaturedProduct data={product}/>
             <Footer />
         </div>
+        </Suspense>
     );
 };
 

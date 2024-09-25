@@ -7,7 +7,7 @@ import {
 import DiscountIcon from '@mui/icons-material/Discount';
 
 
-import React, { Children, useEffect, useMemo, useState } from 'react';
+import React, { Children, Suspense, useEffect, useMemo, useState } from 'react';
 import LayersIcon from '@mui/icons-material/Layers';
 import type { MenuProps } from 'antd';
 import { Avatar, Layout, Menu, Popover, theme } from 'antd';
@@ -205,45 +205,47 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }, [path, menuItems])
 
     return (
-        <Layout hasSider>
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}
-                width={250}
-            >
-                {/* <Logo path='/admin' color='white'/> */}
-                <Menu theme="dark"
-                    className='text-base h-full overflow-y-auto'
-                    selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
-                        ...item,
-                        key: String(index),
-                        onClick: navigateHandler
-                    }))}
+        <Suspense>
+            <Layout hasSider>
+                <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}
+                    width={250}
+                >
+                    {/* <Logo path='/admin' color='white'/> */}
+                    <Menu theme="dark"
+                        className='text-base h-full overflow-y-auto'
+                        selectedKeys={[`${selected}`]} mode="inline" items={menuItems.map((item, index) => ({
+                            ...item,
+                            key: String(index),
+                            onClick: navigateHandler
+                        }))}
 
-                />
-            </Sider>
-            <Layout style={{ marginInlineStart: collapsed ? 60 : 250 }}>
-                <Header style={{ background: colorBgContainer }}
-                    className='flex justify-between items-center lg:px-10'
-                >
-                    <Logo path='/admin' />
-                    <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}
-                        className='hidden lg:block'
+                    />
+                </Sider>
+                <Layout style={{ marginInlineStart: collapsed ? 60 : 250 }}>
+                    <Header style={{ background: colorBgContainer }}
+                        className='flex justify-between items-center lg:px-10'
                     >
-                        <Avatar
-                            size={40}
-                            className='border border-primary cursor-pointer'
-                            src={currentUser?.profile} />
-                    </Popover>
-                </Header>
-                <Content style={{ overflow: 'initial', minHeight: '80vh' }}
-                    className='bg-white lg:p-10 py-5 pl-5 pr-3 my-4 lg:mx-10 rounded-lg mx-2'
-                >
-                    {children}
-                </Content>
-                <Footer style={{ textAlign: 'center' }}>
-                    B2B ©{new Date().getFullYear()}  All Rights Reserved
-                </Footer>
+                        <Logo path='/admin' />
+                        <Popover title={"User Options"} trigger={"click"} content={<UserOptions />}
+                            className='hidden lg:block'
+                        >
+                            <Avatar
+                                size={40}
+                                className='border border-primary cursor-pointer'
+                                src={currentUser?.profile} />
+                        </Popover>
+                    </Header>
+                    <Content style={{ overflow: 'initial', minHeight: '80vh' }}
+                        className='bg-white lg:p-10 py-5 pl-5 pr-3 my-4 lg:mx-10 rounded-lg mx-2'
+                    >
+                        {children}
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }}>
+                        B2B ©{new Date().getFullYear()}  All Rights Reserved
+                    </Footer>
+                </Layout>
             </Layout>
-        </Layout>
+        </Suspense>
     );
 };
 
