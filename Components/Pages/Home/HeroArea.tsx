@@ -1,12 +1,12 @@
-
+'use server'
 import fetcher from '@/Components/util/axios';
-import { useQuery } from '@tanstack/react-query';
-import { Col, Row, Skeleton } from 'antd';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 const HeroArea = async () => {
+    
     const data = await fetcher({
         url: `/pages/search`,
         method: 'POST',
@@ -14,18 +14,6 @@ const HeroArea = async () => {
             name: "Hero Area"
         }
     })
-    // const { data, isLoading } = useQuery({
-    //     queryKey: ['hero'],
-    //     queryFn: () => {
-    //         return fetcher({
-    //             url: `/pages/search`,
-    //             method: 'POST',
-    //             body: {
-    //                 name: "Hero Area"
-    //             }
-    //         })
-    //     },
-    // })
     
     return (
         <div className='container mx-auto py-14 lg:px-0 px-4'>
