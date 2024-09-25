@@ -40,7 +40,7 @@ const Settings = () => {
         try {
             const formdata = new FormData();
             formdata.append('profile', image as any);
-            const resImage = await fetch('http://localhost:4000/upload', {
+            const resImage = await fetch('https://server.shoppanorma.com/upload', {
                 method: 'POST',
                 body: formdata
             })

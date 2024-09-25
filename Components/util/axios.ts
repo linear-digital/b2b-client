@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookie from 'js-cookie'
 import { decrypt, encrypt } from './security';
 const server = 'https://server.shoppanorma.com/api'
-const local = 'http://localhost:4000/api'
+const local = 'https://server.shoppanorma.com/api'
 
 export const api = axios.create({
     baseURL: server,

@@ -79,7 +79,7 @@ const AddTeamMember = ({ rootData, refetch }: { rootData: any, refetch: any }) =
                     name="profile"
                     listType="picture-card"
                     className="avatar-uploader"
-                    action="http://localhost:4000/upload"
+                    action="https://server.shoppanorma.com/upload"
                     accept="image/*"
                     maxCount={1}
                     onChange={handleChange}
