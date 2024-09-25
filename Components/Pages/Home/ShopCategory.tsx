@@ -1,3 +1,4 @@
+
 'use client'
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
@@ -99,9 +100,9 @@ const ShopCategory = () => {
                 modules={[Navigation, A11y]}
             >
                 {
-                    cateData?.map((item: PType, index: number) => (
+                    cateData?.map((item: any, index: number) => (
                         <SwiperSlide key={index} className='relative cursor-pointer'
-                        onClick={() => router.push(`/products?category=${item?.category}`)}
+                        // onClick={() => router.push(`/products?category=${item?.category}`)}
                         >
                             <Image src={item?.thumbnail} alt="login" width={300} height={300} className={'h-full w-full object-cover bg-white rounded-lg'} />
                             <h4 className='absolute top-4 left-4 capitalize text-white px-1 bg-primary'>

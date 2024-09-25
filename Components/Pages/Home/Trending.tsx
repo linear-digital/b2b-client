@@ -36,7 +36,7 @@ const Trending = () => {
     const { data: products, isLoading } = useQuery({
         queryKey: ['products-trending', ],
         queryFn: async () => {
-            const data = await axios.get(`https://dummyjson.com/products?limit=${20}&skip=${100}`)
+            const data = await axios.get(`https://brilliantsparklers.com/api/products.json?itemsPerPage=${20}&page=1`)
             return data.data
         }
     })
@@ -91,7 +91,7 @@ const Trending = () => {
                 onSwiper={(swiper) => setSwiper(swiper)}
             >
                 {
-                    products?.products?.map((product: any, index: number) => (
+                    products?.map((product: any, index: number) => (
                         <SwiperSlide key={index}>
                             <ProductCard data={product} />
                         </SwiperSlide>

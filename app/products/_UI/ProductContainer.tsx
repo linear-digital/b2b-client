@@ -1,7 +1,7 @@
 'use client'
 import { SearchOutlined } from '@ant-design/icons';
 import { Input, Popover, Spin } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -10,47 +10,24 @@ import { products } from '@/app/admin/products/data';
 import { useQuery } from '@tanstack/react-query';
 export interface PType {
     id: number;
-    title: string;
+    createdAt: string; // Use ISO 8601 format for consistency
+    updatedAt: string; // Use ISO 8601 format for consistency
+    identifiant: string;
+    brand: Brand; // Define a separate Brand interface for nested data
+    active: boolean;
+    name: string;
+    slug: string;
     description: string;
-    category: string;
-    price: number;
-    brand: string;
-    discountPercentage: number;
-    rating: number;
-    stock: number;
-    tags: string[];
-    sku: string;
-    weight: number;
-    dimensions: {
-      width: number;
-      height: number;
-      depth: number;
-    };
-    warrantyInformation: string;
-    shippingInformation: string;
-    availabilityStatus: string;
-    reviews: Review[];
-    returnPolicy: string;
-    minimumOrderQuantity: number;
-    meta: MetaData;
-    images: string[];
-    thumbnail: string;
-  }
-  
-  interface Review {
-    rating: number;
-    comment: string;
-    date: string;
-    reviewerName: string;
-    reviewerEmail: string;
-  }
-  
-  interface MetaData {
-    createdAt: string;
-    updatedAt: string;
-    barcode: string;
-    qrCode: string;
-  }
+    attributes: string[]; // Array of URLs
+    image: string;
+}
+
+interface Brand {
+    id: number;
+    identifiant: string;
+    name: string;
+    slug: string;
+}
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 const ProductContainer = () => {
@@ -59,11 +36,24 @@ const ProductContainer = () => {
     const [limit, setLimit] = React.useState(21);
     const cate = useSearchParams().get('category')
     const pagec = useSearchParams().get('page') as any || 1
-    console.log(cate, "cate");
-    const { data, isLoading } = useQuery({
-        queryKey: ['products', pagec, limit, cate],
+    const [total, setTotal] = React.useState(1);
+    // const { data, isLoading } = useQuery({
+    //     queryKey: ['products', pagec, limit, cate],
+    //     queryFn: async () => {
+    //         const data = await axios.get(`https://dummyjson.com/products${cate !== null ? `/category/${cate}` : ''}?limit=${limit}&skip=${limit * (pagec - 1)}`)
+    //         return data.data
+    //     }
+    // })
+    useEffect(() => {
+        axios.get('https://brilliantsparklers.com/api/products.jsonld?itemsPerPage=1&page=1')
+            .then(res => {
+                setTotal(res.data["hydra:totalItems"])
+            })
+    }, [])
+    const { data: prs, isLoading } = useQuery({
+        queryKey: ['products-545', page, limit],
         queryFn: async () => {
-            const data = await axios.get(`https://dummyjson.com/products${cate !== null ? `/category/${cate}` : ''}?limit=${limit}&skip=${limit * (pagec - 1)}`)
+            const data = await axios.get(`https://brilliantsparklers.com/api/products.json?itemsPerPage=${limit}&page=${page}`)
             return data.data
         }
     })
@@ -105,13 +95,14 @@ const ProductContainer = () => {
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-7 gap-5 mb-8 ">
                 {
-                    data?.products?.map((product: PType, index: number) => <ProductCard key={index} data={product} />)
+                    prs?.map((product: PType, index: number) => <ProductCard key={index} data={product} />)
                 }
 
             </div>
-            <Pagination pages={data?.total / 30} active={page} setActive={setPage} />
+            <Pagination pages={total / 21} active={page} setActive={setPage} />
         </section>
     );
 };
 
 export default ProductContainer;
+

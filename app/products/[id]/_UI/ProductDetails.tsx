@@ -3,19 +3,19 @@ import StarIcon from '@mui/icons-material/Star';
 import { colors } from '@/Components/Pages/Products/Filter';
 import { ProductType } from '@/app/admin/products/data';
 import { PType } from '../../_UI/ProductContainer';
-const ProductDetails = ({product}: {product: PType}) => {
+const ProductDetails = ({ product, price, details }: { product: PType, price: number,details : any }) => {
     return (
         <div>
             <h2 className='messiri lg:text-[36px] text-[25px]'>
-               {product?.title}
+                {product?.name}
             </h2>
             <h3 className='text-[28px] font-semibold mt-4'>
-                ${product?.price}
+                ${price}
             </h3>
             <div className="flex items-center gap-2 mt-2">
                 <StarIcon className='text-yellow-500' />
                 <h4 className='text-[14px] text-[#898989]'>
-                    ({product?.rating}/5 from {product?.reviews.length} reviews)
+                    ({5}/5 from {50} reviews)
                 </h4>
             </div>
             <h2 className='text-[18px] font-semibold mt-4'>
@@ -52,15 +52,17 @@ const ProductDetails = ({product}: {product: PType}) => {
                 Product details
             </h2>
             <p className='text-[14px] text-[#898989] mt-1'>
-               {product?.description}
+                {product?.description}
             </p>
             <div className="flex mt-6 gap-5">
                 <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>
                     Add to wishlist
                 </button>
-                <button className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm'>
-                    Buy now
-                </button>
+                <a href={details?.url} target="_blank">
+                    <button className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm'>
+                        Buy now
+                    </button>
+                </a>
             </div>
         </div>
     );

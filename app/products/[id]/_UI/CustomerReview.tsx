@@ -11,22 +11,22 @@ const CustomerReview = ({ data }: { data: PType }) => {
         start4: 0,
         start5: 0
     })
-    useEffect(() => {
-        if (data.reviews) {
-            const start1 = data.reviews.filter((review: any) => review.rating === 1).length
-            const start2 = data.reviews.filter((review: any) => review.rating === 2).length
-            const start3 = data.reviews.filter((review: any) => review.rating === 3).length
-            const start4 = data.reviews.filter((review: any) => review.rating === 4).length
-            const start5 = data.reviews.filter((review: any) => review.rating === 5).length
-            setRadingData({
-                start1,
-                start2,
-                start3,
-                start4,
-                start5
-            })
-        }
-    }, [data.reviews])
+    // useEffect(() => {
+    //     if (data.reviews) {
+    //         const start1 = data.reviews.filter((review: any) => review.rating === 1).length
+    //         const start2 = data.reviews.filter((review: any) => review.rating === 2).length
+    //         const start3 = data.reviews.filter((review: any) => review.rating === 3).length
+    //         const start4 = data.reviews.filter((review: any) => review.rating === 4).length
+    //         const start5 = data.reviews.filter((review: any) => review.rating === 5).length
+    //         setRadingData({
+    //             start1,
+    //             start2,
+    //             start3,
+    //             start4,
+    //             start5
+    //         })
+    //     }
+    // }, [data.reviews])
     return (
         <div className='container mx-auto py-16 px-4 lg:px-0'>
             <h2 className='sec-title'>
@@ -44,11 +44,11 @@ const CustomerReview = ({ data }: { data: PType }) => {
                     <div className="flex mt-3 items-center gap-3">
                         <Rate allowHalf defaultValue={4.9} />
                         <h2 className='text-[18px] font-semibold'>
-                            {data?.rating}/5
+                            {5}/5
                         </h2>
                     </div>
                     <h3 className='text-[16px] mt-5' >
-                        {data?.reviews.length} reviews
+                        {1} reviews
                     </h3>
                 </div>
                 <div className="lg:ml-20 mt-5 lg:mt-0">

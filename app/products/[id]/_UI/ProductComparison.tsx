@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { PType } from '../../_UI/ProductContainer';
 
-const ProductComparison = ({ product }: { product: PType }) => {
+const ProductComparison = ({ product, price }: { product: PType , price: number}) => {
     return (
         <div className='bg-black min-h-[400px] w-full mt-16 text-white py-10 lg:px-0 px-4' >
             <div className="container mx-auto">
@@ -24,14 +24,14 @@ const ProductComparison = ({ product }: { product: PType }) => {
                                 <th className="px-4 py-2 text-center">
                                     <div className='flex flex-col items-center gap-y-2'>
                                         <Image
-                                            src={product?.images[0]}
+                                            src={product?.image}
                                             width={151}
                                             height={160}
                                             alt="Product Image "
                                             className='bg-white rounded-lg overflow-hidden p-2'
                                         />
                                         <h2 >
-                                            {product?.title}
+                                            {product?.name}
                                         </h2>
                                     </div>
                                 </th>
@@ -53,40 +53,42 @@ const ProductComparison = ({ product }: { product: PType }) => {
                         <tbody>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Price</td>
-                                <td className="border px-4 py-2 text-center">${product?.price}</td>
+                                <td className="border px-4 py-2 text-center">${price}</td>
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Brand</td>
                                 <td className="border px-4 py-2 text-center">
-                                    {product?.brand}</td> 
+                                    {product?.brand?.name}</td> 
                                
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Ratings</td>
-                                <td className="border px-4 py-2 text-center">{product.rating}/5 From {product.reviews.length} reviews</td>
+                                <td className="border px-4 py-2 text-center">{4}/5 From {10} reviews</td>
                                
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Weight</td>
-                                <td className="border px-4 py-2 text-center">{product.weight}kg</td>
+                                <td className="border px-4 py-2 text-center">{0}kg</td>
                               
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Dimensions</td>
-                                <td className="border px-4 py-2 text-center">{product.dimensions.width}x{product.dimensions.height}x{product.dimensions.depth}</td>
+                                <td className="border px-4 py-2 text-center">{0}x{0}x{0}</td>
                                
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Availability</td>
-                                <td className="border px-4 py-2 text-center text-green-500">{product.availabilityStatus}</td>
+                                <td className="border px-4 py-2 text-center text-green-500">N/A</td>
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Warranty</td>
-                                <td className="border px-4 py-2 text-center text-green-500">{product.warrantyInformation}</td>
+                                <td className="border px-4 py-2 text-center text-green-500">
+                                    N/A
+                                </td>
                             </tr>
                             {/* <tr>
                                 <td></td>

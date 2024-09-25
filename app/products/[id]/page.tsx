@@ -31,72 +31,73 @@ const Page = ({ params }: { params: { id: string } }) => {
         setWidth(window.innerWidth);
     }, [])
     const { data, isLoading } = useQuery({
-        queryKey: ['reviews', params.id],
-        queryFn: async () => await axios.get(`https://dummyjson.com/products/${params.id}`)
+        queryKey: ['product-details', params.id],
+        queryFn: async () => await axios.get(`https://brilliantsparklers.com/api/products.json?slug=${params.id}`)
     })
-    const product: PType = data?.data as PType
+    const { data: details } = useQuery({
+        queryKey: ['details-545', params.id],
+        queryFn: async () => await axios.get(`https://brilliantsparklers.com/api/offers.json?slug=${params.id}`)
+    })
+    const product: PType = data?.data[0] as PType
     if (isLoading) {
         return <Spin size='large' />
     }
     return (
         <Suspense fallback={<Spin size='large' />}>
             <div className='bg-[#F7F7F7]'>
-            <Navbar />
-            <PageTop title='Products details' />
-            <div className="container mx-auto mt-8 px-4 lg:p-0">
-                <section className='flex gap-6 items-start'>
-                    <div className="flex lg:flex-row flex-col-reverse items-center gap-5">
-                        <div className="lg:w-[190px]"
-                            style={{
-                                maxWidth: width - 30
-                            }}
-                        >
-                            <Swiper
-                                onSwiper={(swiper) => setSwiper(swiper)}
-                                direction={width < 768 ? 'horizontal' : 'vertical'}
-                                slidesPerView={3}
-                                className='lg:min-h-[500px] max-h-[500px] w-full h-full'
-                                spaceBetween={20}
+                <Navbar />
+                <PageTop title='Products details' />
+                <div className="container mx-auto mt-8 px-4 lg:p-0">
+                    <section className='flex gap-6 items-start'>
+                        <div className="flex lg:flex-row flex-col-reverse items-center gap-5">
+                            <div className="lg:w-[190px]"
+                                style={{
+                                    maxWidth: width - 30
+                                }}
                             >
-                                {
-                                    product?.images?.map((image, index) => (
-                                        <SwiperSlide key={index} className='h-[160px]'>
-                                            <Image src={image} alt="login" width={148} height={161} className={"bg-[#E3E3E3] p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px]"} />
-                                        </SwiperSlide>
+                                <Swiper
+                                    onSwiper={(swiper) => setSwiper(swiper)}
+                                    direction={width < 768 ? 'horizontal' : 'vertical'}
+                                    slidesPerView={3}
+                                    className='lg:min-h-[500px] max-h-[500px] w-full h-full'
+                                    spaceBetween={20}
+                                >
+                                    <SwiperSlide className='h-[160px]'>
+                                        <Image src={product?.image} alt="login" width={148} height={161} className={"p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px]"} />
+                                    </SwiperSlide>
 
-                                    ))
-                                }
-
-                            </Swiper>
+                                </Swiper>
+                            </div>
+                            <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px]  flex items-center justify-center relative'>
+                                <Image src={product?.image} alt="login" width={422} height={400} className={" p-3 rounded-lg lg:w-[422px] h-full"} />
+                                <button
+                                    className='absolute top-1/2 left-3 -translate-y-1/2 '
+                                    onClick={() => swiper?.slidePrev()}>
+                                    <ArrowBackIosIcon />
+                                </button>
+                                <button
+                                    className='absolute top-1/2 right-3 -translate-y-1/2'
+                                    onClick={() => swiper?.slideNext()}>
+                                    <ArrowForwardIosIcon />
+                                </button>
+                            </div>
                         </div>
-                        <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px] bg-[#E3E3E3] flex items-center justify-center relative'>
-                            <Image src={product?.images[0]} alt="login" width={422} height={460} className={"bg-[#E3E3E3] p-3 rounded-lg lg:w-[422px] full"} />
-                            <button
-                                className='absolute top-1/2 left-3 -translate-y-1/2 '
-                                onClick={() => swiper?.slidePrev()}>
-                                <ArrowBackIosIcon />
-                            </button>
-                            <button
-                                className='absolute top-1/2 right-3 -translate-y-1/2'
-                                onClick={() => swiper?.slideNext()}>
-                                <ArrowForwardIosIcon />
-                            </button>
+                        <div className="hidden lg:block">
+                            <ProductDetails
+                                details={details?.data[0]}
+                                price={details?.data[0].price} product={product} />
                         </div>
+                    </section>
+                    <div className="lg:hidden mt-8">
+                        <ProductDetails price={details?.data[0].price} product={product} details={details?.data[0]} />
                     </div>
-                    <div className="hidden lg:block">
-                        <ProductDetails product={product} />
-                    </div>
-                </section>
-                <div className="lg:hidden mt-8">
-                    <ProductDetails product={product} />
                 </div>
+                <ProductComparison product={product} price={details?.data[0].price} />
+                <CustomerReview data={product} />
+                {/* <AllReviews data={product} /> */}
+                <FeaturedProduct data={product} />
+                <Footer />
             </div>
-            <ProductComparison product={product}/>
-            <CustomerReview data={product}/>
-            <AllReviews data={product}/>
-            <FeaturedProduct data={product}/>
-            <Footer />
-        </div>
         </Suspense>
     );
 };
