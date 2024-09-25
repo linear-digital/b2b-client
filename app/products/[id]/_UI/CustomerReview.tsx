@@ -10,7 +10,7 @@ const ratingsData = [
 ];
 const CustomerReview = () => {
     return (
-        <div className='container mx-auto py-16 px-4 lg:p-0'>
+        <div className='container mx-auto py-16 px-4 lg:px-0'>
             <h2 className='sec-title'>
                 Customer reviews & ratings
             </h2>

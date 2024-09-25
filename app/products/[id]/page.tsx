@@ -15,20 +15,35 @@ import ProductComparison from './_UI/ProductComparison';
 import CustomerReview from './_UI/CustomerReview';
 import AllReviews from './_UI/AllReviews';
 import FeaturedProduct from './_UI/FeaturedProduct';
+import { products, ProductType } from '@/app/admin/products/data';
+import { useQuery } from '@tanstack/react-query';
+import fetcher, { api } from '@/Components/util/axios';
+import axios from 'axios';
+import { Spin } from 'antd';
+import { PType } from '../_UI/ProductContainer';
 
 
-const Page = () => {
+const Page = ({ params }: { params: { id: string } }) => {
     const [swiper, setSwiper] = useState<any>(null);
     const [width, setWidth] = useState(0);
+    // const product: ProductType = products.find(product => product._id === params.id) as ProductType
     useEffect(() => {
         setWidth(window.innerWidth);
     }, [])
+    const { data, isLoading } = useQuery({
+        queryKey: ['reviews', params.id],
+        queryFn: async () => await axios.get(`https://dummyjson.com/products/${params.id}`)
+    })
+    const product: PType = data?.data as PType
+    if (isLoading) {
+        return <Spin size='large' />
+    }
     return (
         <div className='bg-[#F7F7F7]'>
             <Navbar />
             <PageTop title='Products details' />
             <div className="container mx-auto mt-8 px-4 lg:p-0">
-                <section className='flex gap-6 items-center'>
+                <section className='flex gap-6 items-start'>
                     <div className="flex lg:flex-row flex-col-reverse items-center gap-5">
                         <div className="lg:w-[190px]"
                             style={{
@@ -39,25 +54,22 @@ const Page = () => {
                                 onSwiper={(swiper) => setSwiper(swiper)}
                                 direction={width < 768 ? 'horizontal' : 'vertical'}
                                 slidesPerView={3}
-                                className='lg:max-h-[500px] w-full'
+                                className='lg:min-h-[500px] max-h-[500px] w-full h-full'
                                 spaceBetween={20}
                             >
-                                <SwiperSlide>
-                                    <Image src={'/products/watch.png'} alt="login" width={148} height={161} className={"bg-[#E3E3E3] p-3 rounded-lg lg:max-w-[148px] max-w-[100px]"} />
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <Image src={'/products/watch.png'} alt="login" width={148} height={161} className={"bg-[#E3E3E3] p-3 rounded-lg lg:max-w-[148px] max-w-[100px]"} />
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <Image src={'/products/watch.png'} alt="login" width={148} height={161} className={"bg-[#E3E3E3] p-3 rounded-lg lg:max-w-[148px] max-w-[100px]"} />
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <Image src={'/products/watch.png'} alt="login" width={148} height={161} className={"bg-[#E3E3E3] p-3 rounded-lg lg:max-w-[148px] max-w-[100px]"} />
-                                </SwiperSlide>
+                                {
+                                    product?.images?.map((image, index) => (
+                                        <SwiperSlide key={index} className='h-[160px]'>
+                                            <Image src={image} alt="login" width={148} height={161} className={"bg-[#E3E3E3] p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px]"} />
+                                        </SwiperSlide>
+
+                                    ))
+                                }
+
                             </Swiper>
                         </div>
                         <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px] bg-[#E3E3E3] flex items-center justify-center relative'>
-                            <Image src={'/products/watch.png'} alt="login" width={422} height={460} className={"bg-[#E3E3E3] p-3 rounded-lg lg:w-[422px] full"} />
+                            <Image src={product?.images[0]} alt="login" width={422} height={460} className={"bg-[#E3E3E3] p-3 rounded-lg lg:w-[422px] full"} />
                             <button
                                 className='absolute top-1/2 left-3 -translate-y-1/2 '
                                 onClick={() => swiper?.slidePrev()}>
@@ -71,17 +83,17 @@ const Page = () => {
                         </div>
                     </div>
                     <div className="hidden lg:block">
-                        <ProductDetails />
+                        <ProductDetails product={product} />
                     </div>
                 </section>
                 <div className="lg:hidden mt-8">
-                    <ProductDetails />
+                    <ProductDetails product={product} />
                 </div>
             </div>
             <ProductComparison />
             <CustomerReview />
             <AllReviews />
-              <FeaturedProduct />
+            <FeaturedProduct />
             <Footer />
         </div>
     );

@@ -3,25 +3,30 @@ import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Link from 'next/link';
-const ProductCard = () => {
+import { PType } from './ProductContainer';
+const ProductCard = ({ data }: { data: PType }) => {
     return (
         <div className='w-full relative'>
-            <Image src={'/products/apple.png'} alt="login" width={500} height={500} className={'object-cover  rounded-lg w-full lg:w-auto'} />
-            <Link href={'/products/485948'} className='mt-3 px-2'>
+            <div className='max-h-[400px] h-[400px] w-full bg-white flex justify-center items-center rounded-lg p-5'>
+                <Image src={data?.thumbnail} alt="login" width={300} height={300} className={' rounded-lg h-full object-contain'} />
+            </div>
+            <Link href={`/products/${data?.id}`} className='mt-3 px-2'>
                 <h3 className='text-[18px] font-semibold'>
-                    Apple iPhone 14 Pro
+                    {data?.title}
                 </h3>
                 <div className="flex mt-1 items-center gap-x-2">
                     <StarIcon className='text-[#FDCC0D]' />
                     <span className='text-[#898989]'>
-                        4.9
+                        {data?.rating}
                     </span>
                 </div>
                 <h3 className='text-[18px] font-semibold text-black'>
-                    $999.00
+                    ${data?.price}
                 </h3>
             </Link>
-            <div className="absolute top-4 left-4 bg-primary text-white rounded px-2 text-sm">70%</div>
+            <div className="absolute top-4 left-4 bg-primary text-white rounded px-2 text-sm">
+                {data?.discountPercentage}%
+            </div>
             <button className='absolute top-4 right-5 hover:text-red-500'>
                 <FavoriteBorderIcon />
             </button>

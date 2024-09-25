@@ -75,24 +75,24 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             path: '/admin',
             key: '0',
         },
-        // {
-        //     icon: <ShopOutlined />,
-        //     label: 'Products',
-        //     path: '/admin/products',
-        //     key: '32',
-        //     children: [
-        //         {
-        //             label: 'All Products',
-        //             path: '/admin/products',
-        //             key: '33',
-        //         },
-        //         {
-        //             label: 'Add New Product',
-        //             path: '/admin/products/add',
-        //             key: '34',
-        //         },
-        //     ]
-        // },
+        {
+            icon: <ShopOutlined />,
+            label: 'Products',
+            path: '/admin/products',
+            key: '32',
+            children: [
+                {
+                    label: 'All Products',
+                    path: '/admin/products',
+                    key: '33',
+                },
+                {
+                    label: 'Add New Product',
+                    path: '/admin/products/add',
+                    key: '34',
+                },
+            ]
+        },
         {
             icon: <DiscountIcon />,
             label: 'Vouchers',

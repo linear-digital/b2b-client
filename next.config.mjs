@@ -6,6 +6,18 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'server.shoppanorma.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'r.kelkoo.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fakestoreapi.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dummyjson.com',
+      }
     ],
   },
   typescript: {

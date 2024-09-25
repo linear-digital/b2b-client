@@ -1,19 +1,21 @@
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import { colors } from '@/Components/Pages/Products/Filter';
-const ProductDetails = () => {
+import { ProductType } from '@/app/admin/products/data';
+import { PType } from '../../_UI/ProductContainer';
+const ProductDetails = ({product}: {product: PType}) => {
     return (
         <div>
             <h2 className='messiri lg:text-[36px] text-[25px]'>
-                Apple MacBook Pro 16-inch
+               {product?.title}
             </h2>
             <h3 className='text-[28px] font-semibold mt-4'>
-                $2,499.00
+                ${product?.price}
             </h3>
             <div className="flex items-center gap-2 mt-2">
                 <StarIcon className='text-yellow-500' />
                 <h4 className='text-[14px] text-[#898989]'>
-                    (4.5/5 from 1,200 reviews)
+                    ({product?.rating}/5 from {product?.reviews.length} reviews)
                 </h4>
             </div>
             <h2 className='text-[18px] font-semibold mt-4'>
@@ -23,7 +25,7 @@ const ProductDetails = () => {
             >
                 {
                     colors.map((color, index) => {
-                        return <div key={index} className={`p-[3px] border-2 w-[27px] h-[27px] rounded-full ${"black" === color ? 'border-gray-300' : 'border-transparent'}`}>
+                        return <div key={index} className={`p-[3px] border-2 w-[27px] h-[27px] rounded-full ${color === "black" ? 'border-gray-300' : 'border-transparent'}`}>
                             <div
                                 className={`text-2xl rounded-full cursor-pointer`}
                                 style={{
@@ -50,7 +52,7 @@ const ProductDetails = () => {
                 Product details
             </h2>
             <p className='text-[14px] text-[#898989] mt-1'>
-                Experience top-tier performance with the Apple MacBook Pro 16-inch, featuring a stunning Retina display, powerful Intel Core i9 processor, and advanced graphics—perfect for professionals seeking speed and reliability.
+               {product?.description}
             </p>
             <div className="flex mt-6 gap-5">
                 <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>

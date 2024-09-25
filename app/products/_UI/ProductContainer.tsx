@@ -6,9 +6,62 @@ import ProductCard from './ProductCard';
 import Pagination from './Pagination';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Filter from '@/Components/Pages/Products/Filter';
+import { products } from '@/app/admin/products/data';
+import { useQuery } from '@tanstack/react-query';
+export interface PType {
+    id: number;
+    title: string;
+    description: string;
+    category: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    tags: string[];
+    sku: string;
+    weight: number;
+    dimensions: {
+      width: number;
+      height: number;
+      depth: number;
+    };
+    warrantyInformation: string;
+    shippingInformation: string;
+    availabilityStatus: string;
+    reviews: Review[];
+    returnPolicy: string;
+    minimumOrderQuantity: number;
+    meta: MetaData;
+    images: string[];
+    thumbnail: string;
+  }
+  
+  interface Review {
+    rating: number;
+    comment: string;
+    date: string;
+    reviewerName: string;
+    reviewerEmail: string;
+  }
+  
+  interface MetaData {
+    createdAt: string;
+    updatedAt: string;
+    barcode: string;
+    qrCode: string;
+  }
+import axios from 'axios';
 const ProductContainer = () => {
     const [visible, setVisible] = React.useState(false);
     const [page, setPage] = React.useState(1);
+    const [limit, setLimit] = React.useState(20);
+    const { data } = useQuery({
+        queryKey: ['products', page, limit],
+        queryFn: async () => {
+            const data = await axios.get(`https://dummyjson.com/products/category/mens-shirts?limit=${limit}&skip=${limit * (page - 1)}`)
+            return data.data
+        }
+    })
     return (
         <section className='w-full lg:pb-20 pb-10'>
             {
@@ -43,17 +96,12 @@ const ProductContainer = () => {
                 </div>
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-7 gap-5 mb-8 ">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                {
+                    data?.products?.map((product: PType, index: number) => <ProductCard key={index} data={product} />)
+                }
+
             </div>
-            <Pagination pages={3} active={page} setActive={setPage}/>
+            <Pagination pages={data?.total / 30} active={page} setActive={setPage} />
         </section>
     );
 };
