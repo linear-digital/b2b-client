@@ -1,3 +1,4 @@
+'use client'
 import fetcher from '@/Components/util/axios';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';

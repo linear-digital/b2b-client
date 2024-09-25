@@ -6,50 +6,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const HeroArea = () => {
-    const { data, isLoading } = useQuery({
-        queryKey: ['hero'],
-        queryFn: () => {
-            return fetcher({
-                url: `/pages/search`,
-                method: 'POST',
-                body: {
-                    name: "Hero Area"
-                }
-            })
-        },
+const HeroArea = async () => {
+    const data = await fetcher({
+        url: `/pages/search`,
+        method: 'POST',
+        body: {
+            name: "Hero Area"
+        }
     })
-    if (isLoading) {
-        return <div className="container mx-auto py-14 lg:px-0 px-4">
-            <Skeleton title />
-            <Skeleton paragraph />
-            <Row gutter={[16, 16]}>
-                <Col span={6}>
-                    <Skeleton active />
-                </Col>
-                <Col span={6}>
-                    <Skeleton active />
-                </Col>
-                <Col span={6}>
-                    <Skeleton active />
-                </Col>
-                <Col span={6}>
-                    <Skeleton active />
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col span={8}>
-                    <Skeleton active />
-                </Col>
-                <Col span={8}>
-                    <Skeleton active />
-                </Col>
-                <Col span={8}>
-                    <Skeleton active />
-                </Col>
-            </Row>
-        </div>
-    }
+    // const { data, isLoading } = useQuery({
+    //     queryKey: ['hero'],
+    //     queryFn: () => {
+    //         return fetcher({
+    //             url: `/pages/search`,
+    //             method: 'POST',
+    //             body: {
+    //                 name: "Hero Area"
+    //             }
+    //         })
+    //     },
+    // })
+    
     return (
         <div className='container mx-auto py-14 lg:px-0 px-4'>
             <h1 className='text-center messiri lg:text-[48px] text-[32px] text-black font-semibold max-w-[725px] mx-auto'>
