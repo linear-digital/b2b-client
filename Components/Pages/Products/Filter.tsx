@@ -2,7 +2,10 @@
 import { HR } from '@/Components/Shared/Global';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { Close } from '@mui/icons-material';
+import { useQuery } from '@tanstack/react-query';
 import { Checkbox, Radio, Rate, Switch } from 'antd';
+import axios from 'axios';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 export const colors = ["black", "red", "blue", "green", "yellow", "orange"];
 const Filter = ({ setVisible }: { setVisible?: any }) => {
@@ -15,6 +18,16 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
         color: "",
         rate: 0
     })
+
+    const cate = useSearchParams().get('category')
+    const { data: categories } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const res = await axios.get('https://dummyjson.com/products/categories')
+            return res.data
+        },
+    })
+    const router = useRouter()
     return (
         <div className='min-w-[295px] lg:max-w-[300px] w-full  bg-white rounded-lg p-5'>
             <div className="flex justify-between items-center">
@@ -28,15 +41,25 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
                 </button>
             </div>
             <select
+                defaultValue={cate ? cate : ''}
                 className='w-full mt-8 outline-none border-none bg-transparent font-semibold text-[16px] text-black'
+                onChange={(e: any) => {
+                    if (e.target.value) {
+                        router.push(`/products?category=${e.target.value}`)
+                    }
+                    else {
+                        router.push('/products')
+                    }
+                }}
             >
                 <option value="">Category</option>
-                <option value="all">All Products</option>
-                <option value="electronics">Electronics</option>
-                <option value="fashion">Fashion</option>
-                <option value="home">Home</option>
-                <option value="sports">Sports</option>
-                <option value="beauty">Beauty</option>
+                {
+                    categories?.map((item: any, index: number) => (
+                        <option key={index} value={item?.slug}>
+                            {item?.name}
+                        </option>
+                    ))
+                }
             </select>
             <HR className='my-3' />
             <div className=''>

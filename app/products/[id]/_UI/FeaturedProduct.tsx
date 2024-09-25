@@ -11,12 +11,27 @@ import 'swiper/css/pagination';
 import { A11y, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import ProductCard from '../../_UI/ProductCard';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { Spin } from 'antd';
+import { PType } from '../../_UI/ProductContainer';
 
 
 
-const FeaturedProduct = () => {
+const FeaturedProduct = ({data: pr}: {data: PType}) => {
     const swiperRef: any = useRef(null);
     const [swiper, setSwiper] = React.useState<any>(null);
+    const { data: products, isLoading } = useQuery({
+        queryKey: ['products-featured', ],
+        queryFn: async () => {
+            const data = await axios.get(`https://dummyjson.com/products/category/${pr.category}`)
+            return data.data
+        }
+    })
+
+    if (isLoading) {
+        return <Spin size='large' />
+    }
     return (
         <div className='container mx-auto px-4 lg:px-0'>
             <div className="flex items-end justify-between">
@@ -51,30 +66,16 @@ const FeaturedProduct = () => {
                 onSwiper={(swiper) => setSwiper(swiper)}
                 modules={[Navigation, A11y]}
             >
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
+                {
+                    products?.products?.map((product: any) => (
+                        <SwiperSlide key={product.id} className='relative'>
+                            <ProductCard data={product} />
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
             <div className="flex justify-center mt-10">
-                <Link href={'/shop'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
+                <Link href={'/products'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
                     View All
                 </Link>
             </div>

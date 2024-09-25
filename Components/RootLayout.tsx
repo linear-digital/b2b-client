@@ -18,9 +18,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         }, 1000);
     }, []);
 
-    if (isLoading) {
-        return <Spin size='large'  fullscreen={true} />;
-    }
     return (
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>

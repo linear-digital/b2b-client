@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,6 +12,9 @@ import { A11y, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import fetcher from '@/Components/util/axios';
+import axios from 'axios';
+import { PType } from '@/app/products/_UI/ProductContainer';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -31,6 +34,32 @@ const ShopCategory = () => {
             return res
         },
     })
+    const [cateData, setCateData] = React.useState<any>([])
+
+    const { data: categories , isLoading} = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const res = await axios.get('https://dummyjson.com/products/categories')
+            return res.data
+        },
+    })
+
+    useEffect(() => {
+        if(!isLoading){
+           (
+            async () => {
+                categories?.map((item: any, index: number) => {
+                    const d = axios.get(`https://dummyjson.com/products/category/${item?.slug}?limit=1`)
+                    d.then((res: any) => {
+                        setCateData((prev: any) => [...prev, res.data?.products[0]])
+                    })
+                })
+
+            }
+           )()
+        }
+    },[categories, isLoading])
+    const router = useRouter()
     return (
         <div className='container mx-auto px-4 lg:px-0'>
             <h2 className='sec-title  mt-4'>
@@ -54,7 +83,7 @@ const ShopCategory = () => {
                 ref={swiperRef}
                 // slidesPerView={4}
                 breakpoints={{
-                   700: {
+                    700: {
                         slidesPerView: 1,
                     },
                     1024: {
@@ -69,70 +98,18 @@ const ShopCategory = () => {
                 onSwiper={(swiper) => setSwiper(swiper)}
                 modules={[Navigation, A11y]}
             >
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-
-                    </h4>
-
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/products/product-1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image3.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image4.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image5.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-
-                    </h4>
-
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/products/product-1.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image3.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image4.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <Image src={'/photos/image5.png'} alt="login" width={300} height={300} className={'h-full w-full object-cover'} />
-                    <h4 className='absolute top-4 left-4 text-white px-1 bg-primary'>
-                        Product Category
-                    </h4>
-                </SwiperSlide>
+                {
+                    cateData?.map((item: PType, index: number) => (
+                        <SwiperSlide key={index} className='relative cursor-pointer'
+                        onClick={() => router.push(`/products?category=${item?.category}`)}
+                        >
+                            <Image src={item?.thumbnail} alt="login" width={300} height={300} className={'h-full w-full object-cover bg-white rounded-lg'} />
+                            <h4 className='absolute top-4 left-4 capitalize text-white px-1 bg-primary'>
+                                {item?.category}
+                            </h4>
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
             <div className="flex justify-center lg:mt-10 mt-7">
                 <Link href={'/products'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>

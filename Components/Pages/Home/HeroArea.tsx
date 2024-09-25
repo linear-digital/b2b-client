@@ -1,12 +1,13 @@
 
 import fetcher from '@/Components/util/axios';
 import { useQuery } from '@tanstack/react-query';
+import { Col, Row, Skeleton } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 const HeroArea = () => {
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['hero'],
         queryFn: () => {
             return fetcher({
@@ -18,6 +19,37 @@ const HeroArea = () => {
             })
         },
     })
+    if (isLoading) {
+        return <div className="container mx-auto py-14 lg:px-0 px-4">
+            <Skeleton title />
+            <Skeleton paragraph />
+            <Row gutter={[16, 16]}>
+                <Col span={6}>
+                    <Skeleton active />
+                </Col>
+                <Col span={6}>
+                    <Skeleton active />
+                </Col>
+                <Col span={6}>
+                    <Skeleton active />
+                </Col>
+                <Col span={6}>
+                    <Skeleton active />
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
+                <Col span={8}>
+                    <Skeleton active />
+                </Col>
+                <Col span={8}>
+                    <Skeleton active />
+                </Col>
+                <Col span={8}>
+                    <Skeleton active />
+                </Col>
+            </Row>
+        </div>
+    }
     return (
         <div className='container mx-auto py-14 lg:px-0 px-4'>
             <h1 className='text-center messiri lg:text-[48px] text-[32px] text-black font-semibold max-w-[725px] mx-auto'>
@@ -35,7 +67,7 @@ const HeroArea = () => {
             </div>
             <div className="grid grid-cols-12 max-h-[480px] grid-rows-2 gap-5 mt-10">
                 <div className="col-span-4 row-span-2">
-                    <Image src={data?.images[0]} alt="login" width={700} height={1000} className={'h-full w-full'} />
+                    <Image src={data?.images[0]} alt="login" width={700} height={1000} className={'h-full w-full '} loading="eager" />
                 </div>
                 <div className="col-span-4 row-span-1">
                     <Image src={data?.images[1]} alt="login" width={1000} height={1000} className={'h-full w-full'} />

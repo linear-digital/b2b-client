@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
+import { PType } from '../../_UI/ProductContainer';
 
-const ProductComparison = () => {
+const ProductComparison = ({ product }: { product: PType }) => {
     return (
         <div className='bg-black min-h-[400px] w-full mt-16 text-white py-10 lg:px-0 px-4' >
             <div className="container mx-auto">
@@ -23,17 +24,17 @@ const ProductComparison = () => {
                                 <th className="px-4 py-2 text-center">
                                     <div className='flex flex-col items-center gap-y-2'>
                                         <Image
-                                            src={'/products/watch-1.png'}
-                                            width={121}
-                                            height={146}
-                                            alt="login"
+                                            src={product?.thumbnail}
+                                            width={151}
+                                            height={156}
+                                            alt="Product Image"
                                         />
                                         <h2 >
-                                            Product A
+                                            {product?.title}
                                         </h2>
                                     </div>
                                 </th>
-                                <th className="px-4 py-2 text-center">
+                                {/* <th className="px-4 py-2 text-center">
                                     <div className='flex flex-col items-center gap-y-2'>
                                         <Image
                                             src={'/products/text-2.png'}
@@ -45,46 +46,48 @@ const ProductComparison = () => {
                                             Product B
                                         </h2>
                                     </div>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Price</td>
-                                <td className="border px-4 py-2 text-center">$2,499.00</td>
-                                <td className="border px-4 py-2 text-center">$2,499.00</td>
-
+                                <td className="border px-4 py-2 text-center">${product?.price}</td>
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Brand</td>
-                                <td className="border px-4 py-2 text-center">Brand A</td>
-                                <td className="border px-4 py-2 text-center">Brand A</td>
+                                <td className="border px-4 py-2 text-center">
+                                    {product?.brand}</td> 
+                               
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Ratings</td>
-                                <td className="border px-4 py-2 text-center">4.5/5 From 1,200 reviews</td>
-                                <td className="border px-4 py-2 text-center">4.5/5 From 1,200 reviews</td>
-
-                            </tr>
-                            <tr>
-                                <td className="border px-4 py-2 font-bold">Battery Life</td>
-                                <td className="border px-4 py-2 text-center">10 hours</td>
-                                <td className="border px-4 py-2 text-center">10 hours</td>
+                                <td className="border px-4 py-2 text-center">{product.rating}/5 From {product.reviews.length} reviews</td>
+                               
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Weight</td>
-                                <td className="border px-4 py-2 text-center">1.2 kg</td>
-                                <td className="border px-4 py-2 text-center">1.2 kg</td>
+                                <td className="border px-4 py-2 text-center">{product.weight}kg</td>
+                              
+
+                            </tr>
+                            <tr>
+                                <td className="border px-4 py-2 font-bold">Dimensions</td>
+                                <td className="border px-4 py-2 text-center">{product.dimensions.width}x{product.dimensions.height}x{product.dimensions.depth}</td>
+                               
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Availability</td>
-                                <td className="border px-4 py-2 text-center text-green-500">In Stock</td>
-                                <td className="border px-4 py-2 text-center text-green-500">In Stock</td>
+                                <td className="border px-4 py-2 text-center text-green-500">{product.availabilityStatus}</td>
                             </tr>
                             <tr>
+                                <td className="border px-4 py-2 font-bold">Warranty</td>
+                                <td className="border px-4 py-2 text-center text-green-500">{product.warrantyInformation}</td>
+                            </tr>
+                            {/* <tr>
                                 <td></td>
                                 <td></td>
                                 <td>
@@ -92,7 +95,7 @@ const ProductComparison = () => {
                                         <button className='border text-white px-4 py-2 rounded-lg lg:text-base text-sm '>Add to wishlist</button>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>

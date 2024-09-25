@@ -90,10 +90,10 @@ const Page = ({ params }: { params: { id: string } }) => {
                     <ProductDetails product={product} />
                 </div>
             </div>
-            <ProductComparison />
-            <CustomerReview />
-            <AllReviews />
-            <FeaturedProduct />
+            <ProductComparison product={product}/>
+            <CustomerReview data={product}/>
+            <AllReviews data={product}/>
+            <FeaturedProduct data={product}/>
             <Footer />
         </div>
     );

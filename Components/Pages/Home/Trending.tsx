@@ -13,6 +13,8 @@ import Image from 'next/image';
 import ProductCard from '@/app/products/_UI/ProductCard';
 import { useQuery } from '@tanstack/react-query';
 import fetcher from '@/Components/util/axios';
+import axios from 'axios';
+import { Spin } from 'antd';
 // import ProductCard from './ProductCard';
 
 
@@ -31,6 +33,17 @@ const Trending = () => {
             return res
         },
     })
+    const { data: products, isLoading } = useQuery({
+        queryKey: ['products-trending', ],
+        queryFn: async () => {
+            const data = await axios.get(`https://dummyjson.com/products?limit=${20}&skip=${100}`)
+            return data.data
+        }
+    })
+
+    if (isLoading) {
+        return <Spin size='large' />
+    }
     return (
         <div className='container mx-auto px-4 lg:px-0'>
             <h2 className='sec-title mt-10'>
@@ -77,25 +90,13 @@ const Trending = () => {
                 className="mt-10 h-auto w-full"
                 onSwiper={(swiper) => setSwiper(swiper)}
             >
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-                <SwiperSlide className='relative'>
-                    <ProductCard />
-                </SwiperSlide>
-
+                {
+                    products?.products?.map((product: any, index: number) => (
+                        <SwiperSlide key={index}>
+                            <ProductCard data={product} />
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
             <div className="flex justify-center mt-10">
                 <Link href={'/shop'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>

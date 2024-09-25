@@ -1,6 +1,6 @@
 'use client'
 import { SearchOutlined } from '@ant-design/icons';
-import { Input, Popover } from 'antd';
+import { Input, Popover, Spin } from 'antd';
 import React from 'react';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
@@ -14,6 +14,7 @@ export interface PType {
     description: string;
     category: string;
     price: number;
+    brand: string;
     discountPercentage: number;
     rating: number;
     stock: number;
@@ -51,17 +52,24 @@ export interface PType {
     qrCode: string;
   }
 import axios from 'axios';
+import { useSearchParams } from 'next/navigation';
 const ProductContainer = () => {
     const [visible, setVisible] = React.useState(false);
     const [page, setPage] = React.useState(1);
-    const [limit, setLimit] = React.useState(20);
-    const { data } = useQuery({
-        queryKey: ['products', page, limit],
+    const [limit, setLimit] = React.useState(21);
+    const cate = useSearchParams().get('category')
+    const pagec = useSearchParams().get('page') as any || 1
+    console.log(cate, "cate");
+    const { data, isLoading } = useQuery({
+        queryKey: ['products', pagec, limit, cate],
         queryFn: async () => {
-            const data = await axios.get(`https://dummyjson.com/products/category/mens-shirts?limit=${limit}&skip=${limit * (page - 1)}`)
+            const data = await axios.get(`https://dummyjson.com/products${cate !== null ? `/category/${cate}` : ''}?limit=${limit}&skip=${limit * (pagec - 1)}`)
             return data.data
         }
     })
+    if (isLoading) {
+        return <Spin size='large' />
+    }
     return (
         <section className='w-full lg:pb-20 pb-10'>
             {
