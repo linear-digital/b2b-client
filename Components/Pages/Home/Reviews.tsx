@@ -13,7 +13,58 @@ import Image from 'next/image';
 import { Avatar } from 'antd';
 
 // Import required modules
-
+const reviews = [
+    {
+        name: "Alice Johnson",
+        text: "I love the ease of use of this platform. It's very user-friendly and efficient. The shipping options are great. We always receive our orders on time. The pricing is very competitive. We've saved a lot of money by using this platform.",
+        image: "/man/1.png"
+    },
+    {
+        name: "Bob Smith",
+        text: "The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently. The product quality is excellent. We've never had any issues with our orders. The website is easy to navigate. We can find what we need quickly and easily.",
+        image: "/man/2.png"
+    },
+    {
+        name: "Charlie Brown",
+        text: "The platform is very reliable. We've never had any technical issues. The integration with our existing systems was seamless. It was a breeze to set up. We've been using this platform for years and we've always been satisfied with the service.",
+        image: "/man/3.png"
+    },
+    {
+        name: "David Jones",
+        text: "Excellent platform for our business needs. The user interface is intuitive and the product catalog is comprehensive. The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently.",
+        image: "/man/4.jpeg"
+    },
+    {
+        name: "Emily Williams",
+        text: "The platform is very reliable. We've never had any technical issues. The integration with our existing systems was seamless. It was a breeze to set up. We've been using this platform for years and we've always been satisfied with the service.",
+        image: "/man/5.webp"
+    },
+    {
+        name: "Frank Thomas",
+        text: "The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently. The product quality is excellent. We've never had any issues with our orders. The website is easy to navigate. We can find what we need quickly and easily.",
+        image: "/man/6.jpeg"
+    },
+    {
+        name: "Grace Miller",
+        text: "Excellent platform for our business needs. The user interface is intuitive and the product catalog is comprehensive. The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently.",
+        image: "/man/7.png"
+    },
+    {
+        name: "Henry Baker",
+        text: "The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently. The product quality is excellent. We've never had any issues with our orders. The website is easy to navigate. We can find what we need quickly and easily.",
+        image: "/man/8.png"
+    },
+    {
+        name: "Isabella Carter",
+        text: "Excellent platform for our business needs. The user interface is intuitive and the product catalog is comprehensive. The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently.",
+        image: "/man/9.png"
+    },
+    {
+        name: "Jack Davis",
+        text: "The customer support team is incredibly helpful. They always respond promptly to our inquiries and resolve our issues efficiently. The product quality is excellent. We've never had any issues with our orders. The website is easy to navigate. We can find what we need quickly and easily.",
+        image: "/man/10.jpeg"
+    }
+];
 
 const ReviewSlider = () => {
 
@@ -30,16 +81,13 @@ const ReviewSlider = () => {
                 modules={[Navigation, A11y]}
                 className='w-full lg:mt-10 '
             >
-                <SwiperSlide className='w-[1000px]'>
-                    <ReviewCard />
-                </SwiperSlide>
-                <SwiperSlide className='w-[1000px]'>
-                    <ReviewCard />
-                </SwiperSlide>
-                <SwiperSlide className='w-[1000px]'>
-                    <ReviewCard />
-                </SwiperSlide>
-                {/* Add more slides as needed */}
+                {
+                    reviews.map((review, index) => (
+                        <SwiperSlide className='w-[1000px]' key={index}>
+                            <ReviewCard data={review} />
+                        </SwiperSlide>
+                    ))
+                }
 
             </Swiper>
 
@@ -50,7 +98,7 @@ const ReviewSlider = () => {
 export default ReviewSlider;
 
 
-const ReviewCard = () => {
+const ReviewCard = ({ data }: { data: any }) => {
     return <div className='relative max-w-[1000px] h-[400px] flex items-center'>
         <div className="p-8 w-[720px]  bg-white rounded-lg shadow-lg z-10 ">
             <div className="">
@@ -58,8 +106,7 @@ const ReviewCard = () => {
                     <Image src={'/icons/Quote.png'} alt="quote" width={90} height={90} />
                 </div>
                 <p className="text-gray-500 lg:text-[18px] text-[14px] mt-4">
-                    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
-                    or randomised words which don't look even slightly believable."
+                    "{data?.text}"
                 </p>
             </div>
             <div className="flex items-center justify-between">
@@ -73,8 +120,8 @@ const ReviewCard = () => {
                 <SwiperNavButtons />
             </div>
         </div>
-        <Image src={'/images/Avatar/avater.png'} alt="avater" width={400} height={400}
-            className='absolute bottom-0 right-0 z-[-1] lg:block hidden'
+        <Image src={data?.image} alt="avater" width={400} height={400}
+            className='absolute bottom-0 right-0 z-[-1] lg:block hidden object-cover h-[400px] w-[400px] rounded-lg bg-white'
         />
     </div>
 }

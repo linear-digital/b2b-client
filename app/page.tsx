@@ -23,7 +23,7 @@ export default function Home() {
       <Why />
       <Newsletter />
       <FeaturedBrands />
-      <FAQ />
+      {/* <FAQ /> */}
       <ReviewSlider />
       <Footer />
     </main>

@@ -33,7 +33,7 @@ const Category = () => {
                         <div className={`w-full flex items-center justify-between ${selected === index ? 'text-black' : 'text-[#898989]'} cursor-pointer`} key={index}
                             onClick={() => setSelected(index)}
                         >
-                            <h5>{category._id}</h5>
+                            <h5 className='capitalize'>{category._id}</h5>
                             <h5>{category.count}</h5>
                         </div>
                     ))

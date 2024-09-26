@@ -20,7 +20,7 @@ const page = () => {
                 <select name="" id="" className='w-full py-2 mb-4 rounded-lg text-sm outline-none px-2 lg:hidden'>
                     <option value="">Select Caegory</option>
                     {
-                        categories.map((category, index) => <option key={index} value={category.value}>{category.name}</option>)
+                        categories.map((category, index) => <option key={index} value={category.value} className='capitalize'>{category.name}</option>)
                     }
                 </select>
                 <Category />

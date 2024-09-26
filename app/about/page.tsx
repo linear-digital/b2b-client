@@ -49,7 +49,7 @@ const Page = () => {
             <WhyChooseUs />
             <Partnerships />
             <Affiliate />
-            <OurTeam />
+            {/* <OurTeam /> */}
             <Footer />
         </div>
     );
