@@ -113,7 +113,7 @@ const ReviewCard = ({ data }: { data: any }) => {
                 <div className="flex items-center mt-4 gap-x-3">
                     <Avatar size={45} />
                     <div className="lg:mt-4">
-                        <h3 className="lg:text-lg text-[16px] font-bold">Joe Weeks</h3>
+                        <h3 className="lg:text-lg text-[16px] font-bold">{data?.name}</h3>
                         <p className="text-sm text-gray-400">Customer</p>
                     </div>
                 </div>
