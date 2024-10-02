@@ -3,11 +3,11 @@ import StarIcon from '@mui/icons-material/Star';
 import { colors } from '@/Components/Pages/Products/Filter';
 import { ProductType } from '@/app/admin/products/data';
 import { PType } from '../../_UI/ProductContainer';
-const ProductDetails = ({ product, price, details }: { product: PType, price: number,details : any }) => {
+const ProductDetails = ({ product, price, details }: { product: PType, price: number, details: any }) => {
     return (
         <div>
             <h2 className='messiri lg:text-[36px] text-[25px]'>
-                {product?.name}
+                {product?.title}
             </h2>
             <h3 className='text-[28px] font-semibold mt-4'>
                 ${price}
@@ -58,11 +58,9 @@ const ProductDetails = ({ product, price, details }: { product: PType, price: nu
                 <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>
                     Add to wishlist
                 </button>
-                <a href={details?.url} target="_blank">
-                    <button className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm'>
-                        Buy now
-                    </button>
-                </a>
+                <button className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm'>
+                    Buy now
+                </button>
             </div>
         </div>
     );

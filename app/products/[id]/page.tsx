@@ -32,13 +32,10 @@ const Page = ({ params }: { params: { id: string } }) => {
     }, [])
     const { data, isLoading } = useQuery({
         queryKey: ['product-details', params.id],
-        queryFn: async () => await axios.get(`https://brilliantsparklers.com/api/products.json?slug=${params.id}`)
+        queryFn: async () => await axios.get(`https://dummyjson.com/products/${params.id}`)
     })
-    const { data: details } = useQuery({
-        queryKey: ['details-545', params.id],
-        queryFn: async () => await axios.get(`https://brilliantsparklers.com/api/offers.json?slug=${params.id}`)
-    })
-    const product: PType = data?.data[0] as PType
+    const [selected, setSelected] = useState("");
+    const product: PType = data?.data as any
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -62,14 +59,20 @@ const Page = ({ params }: { params: { id: string } }) => {
                                     className='lg:min-h-[500px] max-h-[500px] w-full h-full'
                                     spaceBetween={20}
                                 >
-                                    <SwiperSlide className='h-[160px]'>
-                                        <Image src={product?.image} alt="login" width={148} height={161} className={"p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px]"} />
-                                    </SwiperSlide>
-
+                                    {
+                                        product?.images?.map((image, index) => (
+                                            <SwiperSlide key={index} className='h-[160px]'
+                                            >
+                                                <Image src={image} alt="login" width={148} height={161} className={"p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px]"}
+                                                    onClick={() => setSelected(image)}
+                                                />
+                                            </SwiperSlide>
+                                        ))
+                                    }
                                 </Swiper>
                             </div>
                             <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px]  flex items-center justify-center relative'>
-                                <Image src={product?.image} alt="login" width={422} height={400} className={" p-3 rounded-lg lg:w-[422px] h-full"} />
+                                <Image src={selected || product?.thumbnail} alt="login" width={422} height={400} className={" p-3 rounded-lg lg:w-[422px] h-full"} />
                                 <button
                                     className='absolute top-1/2 left-3 -translate-y-1/2 '
                                     onClick={() => swiper?.slidePrev()}>
@@ -84,17 +87,17 @@ const Page = ({ params }: { params: { id: string } }) => {
                         </div>
                         <div className="hidden lg:block">
                             <ProductDetails
-                                details={details?.data[0]}
-                                price={details?.data[0].price} product={product} />
+                                details={product}
+                                price={product?.price} product={product} />
                         </div>
                     </section>
                     <div className="lg:hidden mt-8">
-                        <ProductDetails price={details?.data[0].price} product={product} details={details?.data[0]} />
+                        <ProductDetails price={product?.price} product={product} details={product} />
                     </div>
                 </div>
-                <ProductComparison product={product} price={details?.data[0].price} />
+                <ProductComparison product={product} price={product?.price} />
                 <CustomerReview data={product} />
-                {/* <AllReviews data={product} /> */}
+                <AllReviews data={product} />
                 <FeaturedProduct data={product} />
                 <Footer />
             </div>

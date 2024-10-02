@@ -24,7 +24,7 @@ const FeaturedProduct = ({data: pr}: {data: PType}) => {
     const { data: products, isLoading } = useQuery({
         queryKey: ['products-featured', ],
         queryFn: async () => {
-            const data = await axios.get(`https://brilliantsparklers.com/api/products.json?itemsPerPage=${20}&page=1`)
+            const data = await axios.get(`https://dummyjson.com/products/category/${pr.category}`)
             return data.data
         }
     })
@@ -67,7 +67,7 @@ const FeaturedProduct = ({data: pr}: {data: PType}) => {
                 modules={[Navigation, A11y]}
             >
                 {
-                    products?.map((product: any) => (
+                    products?.products?.map((product: any) => (
                         <SwiperSlide key={product.id} className='relative'>
                             <ProductCard data={product} />
                         </SwiperSlide>

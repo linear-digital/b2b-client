@@ -24,14 +24,14 @@ const ProductComparison = ({ product, price }: { product: PType , price: number}
                                 <th className="px-4 py-2 text-center">
                                     <div className='flex flex-col items-center gap-y-2'>
                                         <Image
-                                            src={product?.image}
+                                            src={product?.thumbnail}
                                             width={151}
                                             height={160}
                                             alt="Product Image "
                                             className='bg-white rounded-lg overflow-hidden p-2'
                                         />
                                         <h2 >
-                                            {product?.name}
+                                            {product?.title}
                                         </h2>
                                     </div>
                                 </th>
@@ -58,7 +58,7 @@ const ProductComparison = ({ product, price }: { product: PType , price: number}
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Brand</td>
                                 <td className="border px-4 py-2 text-center">
-                                    {product?.brand?.name}</td> 
+                                    {product?.brand}</td> 
                                
 
                             </tr>

@@ -10,13 +10,13 @@ const ProductCard = ({ data }: { data: PType }) => {
     return (
         <div className='w-full relative'>
             <div className='max-h-[400px] h-[400px] w-full bg-white flex justify-center items-center rounded-lg p-5'>
-                <Image src={data?.image} alt="Product" width={300} height={300} className={' rounded-lg h-full object-contain cursor-pointer'} 
-                onClick={() => router.push(`/products/${data?.slug}`)}
+                <Image src={data?.thumbnail} alt="Product" width={300} height={300} className={' rounded-lg h-full object-contain cursor-pointer'} 
+                onClick={() => router.push(`/products/${data?.id}`)}
                 />
             </div>
-            <Link href={`/products/${data?.slug}`} className='mt-3 px-2'>
+            <Link href={`/products/${data?.id}`} className='mt-3 px-2'>
                 <h3 className='text-[18px] font-semibold'>
-                    {data?.name}
+                    {data?.title}
                 </h3>
                 <div className="flex mt-1 items-center gap-x-2">
                     <StarIcon className='text-[#FDCC0D]' />

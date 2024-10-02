@@ -10,23 +10,44 @@ import { products } from '@/app/admin/products/data';
 import { useQuery } from '@tanstack/react-query';
 export interface PType {
     id: number;
-    createdAt: string; // Use ISO 8601 format for consistency
-    updatedAt: string; // Use ISO 8601 format for consistency
-    identifiant: string;
-    brand: Brand; // Define a separate Brand interface for nested data
-    active: boolean;
-    name: string;
-    slug: string;
+    title: string;
     description: string;
-    attributes: string[]; // Array of URLs
-    image: string;
+    category: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    tags: string[];
+    brand: string;
+    sku: string;
+    weight: number;
+    dimensions: {
+        width: number;
+        height: number;
+        depth: number;
+    };
+    warrantyInformation: string;
+    shippingInformation: string;
+    availabilityStatus: string;
+    reviews: Review[];
+    returnPolicy: string;
+    minimumOrderQuantity: number;
+    meta: {
+        createdAt: string;
+        updatedAt: string;
+        barcode: string;
+        qrCode: string;
+    };
+    images: string[];
+    thumbnail: string;
 }
 
-interface Brand {
-    id: number;
-    identifiant: string;
-    name: string;
-    slug: string;
+interface Review {
+    rating: number;
+    comment: string;
+    date: string;
+    reviewerName: string;
+    reviewerEmail: string;
 }
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
@@ -37,26 +58,21 @@ const ProductContainer = () => {
     const cate = useSearchParams().get('category')
     const pagec = useSearchParams().get('page') as any || 1
     const [total, setTotal] = React.useState(1);
-    // const { data, isLoading } = useQuery({
-    //     queryKey: ['products', pagec, limit, cate],
-    //     queryFn: async () => {
-    //         const data = await axios.get(`https://dummyjson.com/products${cate !== null ? `/category/${cate}` : ''}?limit=${limit}&skip=${limit * (pagec - 1)}`)
-    //         return data.data
-    //     }
-    // })
-    useEffect(() => {
-        axios.get('https://brilliantsparklers.com/api/products.jsonld?itemsPerPage=1&page=1')
-            .then(res => {
-                setTotal(res.data["hydra:totalItems"])
-            })
-    }, [])
     const { data: prs, isLoading } = useQuery({
-        queryKey: ['products-545', page, limit],
+        queryKey: ['products', pagec, limit, cate],
         queryFn: async () => {
-            const data = await axios.get(`https://brilliantsparklers.com/api/products.json?itemsPerPage=${limit}&page=${page}`)
+            const data = await axios.get(`https://dummyjson.com/products${cate !== null ? `/category/${cate}` : ''}?limit=${limit}&skip=${limit * (pagec - 1)}`)
             return data.data
         }
     })
+  
+    // const { data: prs, isLoading } = useQuery({
+    //     queryKey: ['products-545', page, limit],
+    //     queryFn: async () => {
+    //         const data = await axios.get(`https://dummyjson.com/products?limit=${limit}&skip=${limit * (pagec - 1)}`)
+    //         return data.data
+    //     }
+    // })
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -95,11 +111,11 @@ const ProductContainer = () => {
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-7 gap-5 mb-8 ">
                 {
-                    prs?.map((product: PType, index: number) => <ProductCard key={index} data={product} />)
+                    prs?.products?.map((product: PType, index: number) => <ProductCard key={index} data={product} />)
                 }
 
             </div>
-            <Pagination pages={total / 21} active={page} setActive={setPage} />
+            <Pagination pages={prs?.total / 21 > 7 ? 7 : prs?.total / 21} active={pagec} setActive={setPage} />
         </section>
     );
 };

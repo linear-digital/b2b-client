@@ -50,7 +50,7 @@ const ShopCategory = () => {
            (
             async () => {
                 categories?.map((item: any, index: number) => {
-                    const d = axios.get(`https://dummyjson.com/products/category/${item?.slug}?limit=1`)
+                    const d = axios.get(`https://dummyjson.com/products/category/${item?.slug}?limit=1&skip=1`)
                     d.then((res: any) => {
                         setCateData((prev: any) => [...prev, res.data?.products[0]])
                     })
@@ -102,7 +102,7 @@ const ShopCategory = () => {
                 {
                     cateData?.map((item: any, index: number) => (
                         <SwiperSlide key={index} className='relative cursor-pointer'
-                        // onClick={() => router.push(`/products?category=${item?.category}`)}
+                        onClick={() => router.push(`/products?category=${item?.category}`)}
                         >
                             <Image src={item?.thumbnail} alt="login" width={300} height={300} className={'h-full w-full object-cover bg-white rounded-lg'} />
                             <h4 className='absolute top-4 left-4 capitalize text-white px-1 bg-primary'>
