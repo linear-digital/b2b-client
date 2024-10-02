@@ -11,22 +11,22 @@ const CustomerReview = ({ data }: { data: PType }) => {
         start4: 0,
         start5: 0
     })
-    // useEffect(() => {
-    //     if (data.reviews) {
-    //         const start1 = data.reviews.filter((review: any) => review.rating === 1).length
-    //         const start2 = data.reviews.filter((review: any) => review.rating === 2).length
-    //         const start3 = data.reviews.filter((review: any) => review.rating === 3).length
-    //         const start4 = data.reviews.filter((review: any) => review.rating === 4).length
-    //         const start5 = data.reviews.filter((review: any) => review.rating === 5).length
-    //         setRadingData({
-    //             start1,
-    //             start2,
-    //             start3,
-    //             start4,
-    //             start5
-    //         })
-    //     }
-    // }, [data.reviews])
+    useEffect(() => {
+        if (data.reviews) {
+            const start1 = data.reviews.filter((review: any) => review.rating === 1).length
+            const start2 = data.reviews.filter((review: any) => review.rating === 2).length
+            const start3 = data.reviews.filter((review: any) => review.rating === 3).length
+            const start4 = data.reviews.filter((review: any) => review.rating === 4).length
+            const start5 = data.reviews.filter((review: any) => review.rating === 5).length
+            setRadingData({
+                start1,
+                start2,
+                start3,
+                start4,
+                start5
+            })
+        }
+    }, [data.reviews])
     return (
         <div className='container mx-auto py-16 px-4 lg:px-0'>
             <h2 className='sec-title'>
