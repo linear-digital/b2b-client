@@ -111,7 +111,7 @@ const Vouchers = () => {
                 }
             </Swiper>
             <div className="flex justify-center mt-5 lg:mt-10">
-                <Link href={'/shop'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
+                <Link href={'/voucher'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
                     View All
                 </Link>
             </div>
