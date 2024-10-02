@@ -28,7 +28,9 @@ const Footer = () => {
         <footer className='bg-black w-full  lg:mt-16 mt-10'>
             <div className="container mx-auto grid lg:grid-cols-12 py-10 gap-x-10 grid-cols-1 p-4 gap-y-6">
                 <div className='col-span-3'>
-                    <Logo color='white' />
+                    <div className="bg-white max-w-[200px] flex justify-center py-2">
+                        <Logo color='white' />
+                    </div>
                     <p className='text-sm leading-normal text-white mt-2'>
                         Efforlessly manage and organize chats,
                         tasks, and files in one centeral location
