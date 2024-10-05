@@ -10,7 +10,7 @@ import MainLayout from "@/Components/RootLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "B2B E-commerce Platform",
+  title: "Shoppanorma E-commerce Platform",
   description: "Find the Best Deals on the Latest Tech, Fashion, and More!",
 };
 
