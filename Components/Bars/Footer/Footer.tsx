@@ -31,11 +31,6 @@ const Footer = () => {
                     <div className="bg-white max-w-[200px] flex justify-center py-2">
                         <Logo color='white' />
                     </div>
-                    <p className='text-sm leading-normal text-white mt-2'>
-                        Efforlessly manage and organize chats,
-                        tasks, and files in one centeral location
-                        with Qoterra chat management solutions
-                    </p>
                     <div className="icons text-white text-2xl gap-x-3 flex items-center mt-5">
                         <a href="#" className='flex items-center'>
                             <TwitterOutlined color='white' />

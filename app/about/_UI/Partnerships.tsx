@@ -34,7 +34,7 @@ const Partnerships = () => {
                     alt="mission"
                     width={610}
                     height={525}
-                    className='mt-4 lg:mt-0'
+                    className='mt-4 lg:mt-0 rounded-lg'
                 />
             </div>
         </Container>

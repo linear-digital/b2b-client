@@ -36,7 +36,7 @@ const Page = () => {
                 description={data?.desc}
             />
             <OurMission />
-            <Container>
+            {/* <Container>
                 <Image
                     src="/images/about/about.png"
                     alt="about"
@@ -44,7 +44,7 @@ const Page = () => {
                     height={500}
                     className='w-full'
                 />
-            </Container>
+            </Container> */}
             <WhatWeDo />
             <WhyChooseUs />
             <Partnerships />
