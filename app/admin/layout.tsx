@@ -10,7 +10,7 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import React, { Children, Suspense, useEffect, useMemo, useState } from 'react';
 import LayersIcon from '@mui/icons-material/Layers';
 import type { MenuProps } from 'antd';
-import { Avatar, Layout, Menu, Popover, theme } from 'antd';
+import { Avatar, Layout, Menu, Popover, Spin, theme } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/Redux/store';
 import Logo from '@/Components/Shared/Logo';
@@ -212,6 +212,9 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         })
     }, [path, menuItems])
 
+    if (currentUser?.role !== "admin") {
+        return <Spin size='large' fullscreen/>
+    }
     return (
         <Suspense>
             <Layout hasSider>
