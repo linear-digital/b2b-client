@@ -191,6 +191,14 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     label: 'Reviews',
                     path: '/admin/pages/review',
                     key: '13253',
+                }, {
+                    label: 'Terms & Conditions',
+                    path: '/admin/pages/terms',
+                    key: 'terms',
+                }, {
+                    label: 'Privacy Policy',
+                    path: '/admin/pages/privacy',
+                    key: 'privacy',
                 }
             ]
         }

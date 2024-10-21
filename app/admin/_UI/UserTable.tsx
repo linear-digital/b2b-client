@@ -31,6 +31,12 @@ const columns: TableProps<UserType>['columns'] = [
         key: 'phone',
     },
     {
+        title: 'Role',
+        dataIndex: 'role',
+        key: 'role',
+    },
+    
+    {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',

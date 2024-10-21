@@ -109,7 +109,7 @@ const Footer = () => {
             <div className='py-5 text-white container mx-auto flex justify-between lg:flex-row flex-col-reverse items-center gap-y-2 text-sm'>
                 <p className='text-sm'>©2024 Your Company</p>
                 <div className='flex gap-x-3'>
-                    <Link href={'#'}>
+                    <Link href={'/privacy-policy'}>
                         Privacy Policy
                     </Link>
                     /
@@ -156,7 +156,7 @@ const resources = [
         path: "/",
     },
     {
-        name: "terms and conditions",
-        path: "/",
+        name: "Terms and conditions",
+        path: "/terms-condition",
     }
 ]
