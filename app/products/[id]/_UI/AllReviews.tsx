@@ -2,8 +2,9 @@ import { Avatar, Card, Image, Rate } from 'antd';
 import React from 'react';
 import { PType } from '../../_UI/ProductContainer';
 import moment from 'moment';
+import { ProductType } from '@/Components/util/type';
 
-const AllReviews = ({ data }: { data: PType }) => {
+const AllReviews = ({ data }: { data: ProductType }) => {
     return (
         <section className='mt-10 container mx-auto lg:p-0 p-4'>
             <div className="flex items-center justify-between">
@@ -16,11 +17,11 @@ const AllReviews = ({ data }: { data: PType }) => {
 
             </div>
             <div className="mt-10 flex flex-col gap-y-4">
-                {
+                {/* {
                     data.reviews.map((review: any, index: number) => {
                         return <ReviewCard key={index} data={review} />
                     })
-                }
+                } */}
             </div>
             <div className="flex mt-10 justify-center">
                 <button className='border border-black text-black px-8 py-3 text-sm rounded-xl font-medium'>

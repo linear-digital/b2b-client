@@ -15,27 +15,33 @@ import ProductComparison from './_UI/ProductComparison';
 import CustomerReview from './_UI/CustomerReview';
 import AllReviews from './_UI/AllReviews';
 import FeaturedProduct from './_UI/FeaturedProduct';
-import { products, ProductType } from '@/app/admin/products/data';
+import { products} from '@/app/admin/products/data';
 import { useQuery } from '@tanstack/react-query';
-import fetcher, { api } from '@/Components/util/axios';
+import fetcher, { api, fetcherSS } from '@/Components/util/axios';
 import axios from 'axios';
 import { Spin } from 'antd';
 import { PType } from '../_UI/ProductContainer';
+import { ProductType } from '@/Components/util/type';
 
 
 const Page = ({ params }: { params: { id: string } }) => {
     const [swiper, setSwiper] = useState<any>(null);
     const [width, setWidth] = useState(0);
-    // const product: ProductType = products.find(product => product._id === params.id) as ProductType
     useEffect(() => {
         setWidth(window.innerWidth);
     }, [])
     const { data, isLoading } = useQuery({
         queryKey: ['product-details', params.id],
-        queryFn: async () => await axios.get(`https://dummyjson.com/products/${params.id}`)
+        queryFn: async () => {
+            const data = await fetcherSS({
+                url: `/product/single/${params.id}`,
+                method: 'GET',
+            })
+            return data
+        }
     })
     const [selected, setSelected] = useState("");
-    const product: PType = data?.data as any
+    const product: ProductType = data 
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -61,18 +67,18 @@ const Page = ({ params }: { params: { id: string } }) => {
                                 >
                                     {
                                         product?.images?.map((image, index) => (
-                                            <SwiperSlide key={index} className='h-[160px]'
+                                            <SwiperSlide key={index} className='h-[160px] min-w-[100px]'
                                             >
-                                                <Image src={image} alt="login" width={148} height={161} className={"p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px]"}
-                                                    onClick={() => setSelected(image)}
+                                                <Image src={image.url} alt="Product Image" width={148} height={161} className={"p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px] w-full bg-white object-contain"}
+                                                    onClick={() => setSelected(image.url)}
                                                 />
                                             </SwiperSlide>
                                         ))
                                     }
                                 </Swiper>
                             </div>
-                            <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px]  flex items-center justify-center relative'>
-                                <Image src={selected || product?.thumbnail} alt="login" width={422} height={400} className={" p-3 rounded-lg lg:w-[422px] h-full"} />
+                            <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px]  flex items-center justify-center relative bg-white'>
+                                <Image src={selected || product?.images[0].zoomUrl} alt="Product Image" width={1080} height={1080} className={" p-3 rounded-lg lg:w-[422px] h-[422px] object-contain"} />
                                 <button
                                     className='absolute top-1/2 left-3 -translate-y-1/2 '
                                     onClick={() => swiper?.slidePrev()}>
@@ -97,7 +103,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 </div>
                 <ProductComparison product={product} price={product?.price} />
                 <CustomerReview data={product} />
-                <AllReviews data={product} />
+                {/* <AllReviews data={product} /> */}
                 <FeaturedProduct data={product} />
                 <Footer />
             </div>

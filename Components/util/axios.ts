@@ -2,10 +2,10 @@ import axios from 'axios';
 import Cookie from 'js-cookie'
 import { decrypt, encrypt } from './security';
 const server = 'https://server.shoppanorma.com/api'
-const local = 'https://server.shoppanorma.com/api'
+const local = 'http://localhost:4000/api'
 
 export const api = axios.create({
-    baseURL: server,
+    baseURL: local,
     headers: {
         'Content-Type': 'application/json',
         "Authorization": Cookie.get("auth-token")
@@ -49,7 +49,7 @@ export const fetcherSS = async (
 ) => {
 
     try {
-        const res = await fetch(server + url, {
+        const res = await fetch(local + url, {
             method,
             body: body ? JSON.stringify(encrypt(body)) : undefined, // Only include body for non-GET requests
             headers: {

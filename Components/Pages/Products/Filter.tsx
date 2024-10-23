@@ -1,5 +1,6 @@
 'use client'
 import { HR } from '@/Components/Shared/Global';
+import { fetcherSS } from '@/Components/util/axios';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { Close } from '@mui/icons-material';
 import { useQuery } from '@tanstack/react-query';
@@ -18,13 +19,16 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
         color: "",
         rate: 0
     })
-
     const cate = useSearchParams().get('category')
+    const [selected, setSelected] = React.useState(cate ? cate : '');
+   
     const { data: categories } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await axios.get('https://dummyjson.com/products/categories')
-            return res.data
+            const res = await fetcherSS({
+                url: '/product/category'
+            })
+            return res
         },
     })
     const router = useRouter()
@@ -41,13 +45,15 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
                 </button>
             </div>
             <select
-                defaultValue={cate ? cate : ''}
+                value={selected}
                 className='w-full mt-8 outline-none border-none bg-transparent font-semibold text-[16px] text-black'
                 onChange={(e: any) => {
                     if (e.target.value) {
+                        setSelected(e.target.value)
                         router.push(`/products?category=${e.target.value}`)
                     }
                     else {
+                        setSelected('')
                         router.push('/products')
                     }
                 }}
@@ -55,7 +61,7 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
                 <option value="">Category</option>
                 {
                     categories?.map((item: any, index: number) => (
-                        <option key={index} value={item?.slug}>
+                        <option key={index} value={item?.id}>
                             {item?.name}
                         </option>
                     ))

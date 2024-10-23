@@ -51,6 +51,8 @@ interface Review {
 }
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
+import { api, fetcherSS } from '@/Components/util/axios';
+import { ProductMeta, ProductType } from '@/Components/util/type';
 const ProductContainer = () => {
     const [visible, setVisible] = React.useState(false);
     const [page, setPage] = React.useState(1);
@@ -58,21 +60,23 @@ const ProductContainer = () => {
     const cate = useSearchParams().get('category')
     const pagec = useSearchParams().get('page') as any || 1
     const [total, setTotal] = React.useState(1);
-    const { data: prs, isLoading } = useQuery({
+    const { data: response, isLoading, error } = useQuery({
         queryKey: ['products', pagec, limit, cate],
         queryFn: async () => {
-            const data = await axios.get(`https://dummyjson.com/products${cate !== null ? `/category/${cate}` : ''}?limit=${limit}&skip=${limit * (pagec - 1)}`)
-            return data.data
+            const data = await fetcherSS({
+                url: `/product?${cate ? `filterBy=categoryId:${cate}` : ''}&page=${page}&limit=${limit}`,
+                method: 'GET',
+            })
+            return data
         }
     })
-  
-    // const { data: prs, isLoading } = useQuery({
-    //     queryKey: ['products-545', page, limit],
-    //     queryFn: async () => {
-    //         const data = await axios.get(`https://dummyjson.com/products?limit=${limit}&skip=${limit * (pagec - 1)}`)
-    //         return data.data
-    //     }
-    // })
+    const data = {
+        offers: response?.offers as ProductType[],
+        meta: response?.meta as ProductMeta
+    }
+    const products = data?.offers
+    const meta = data?.meta
+
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -111,11 +115,11 @@ const ProductContainer = () => {
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-7 gap-5 mb-8 ">
                 {
-                    prs?.products?.map((product: PType, index: number) => <ProductCard key={index} data={product} />)
+                    products?.map((product: ProductType, index: number) => <ProductCard key={index} data={product} />)
                 }
 
             </div>
-            <Pagination pages={prs?.total / 21 > 7 ? 7 : prs?.total / 21} active={pagec} setActive={setPage} />
+            {/* <Pagination pages={meta.offers.totalPages} active={pagec} setActive={setPage} /> */}
         </section>
     );
 };

@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import { PType } from '../../_UI/ProductContainer';
+import { ProductType } from '@/Components/util/type';
 
-const ProductComparison = ({ product, price }: { product: PType , price: number}) => {
+const ProductComparison = ({ product, price }: { product: ProductType, price: number }) => {
     return (
         <div className='bg-black min-h-[400px] w-full mt-16 text-white py-10 lg:px-0 px-4' >
             <div className="container mx-auto">
@@ -24,7 +25,7 @@ const ProductComparison = ({ product, price }: { product: PType , price: number}
                                 <th className="px-4 py-2 text-center">
                                     <div className='flex flex-col items-center gap-y-2'>
                                         <Image
-                                            src={product?.thumbnail}
+                                            src={product?.images[0]?.url}
                                             width={151}
                                             height={160}
                                             alt="Product Image "
@@ -58,47 +59,49 @@ const ProductComparison = ({ product, price }: { product: PType , price: number}
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Brand</td>
                                 <td className="border px-4 py-2 text-center">
-                                    {product?.brand}</td> 
-                               
-
+                                    {product?.brand.name}</td>
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Ratings</td>
-                                <td className="border px-4 py-2 text-center">{4}/5 From {10} reviews</td>
-                               
+                                <td className="border px-4 py-2 text-center">
+                                    {/* {4}/5 From {10} reviews */}
+                                    N/A
+                                </td>
+
 
                             </tr>
                             <tr>
-                                <td className="border px-4 py-2 font-bold">Weight</td>
-                                <td className="border px-4 py-2 text-center">{0}kg</td>
-                              
+                                <td className="border px-4 py-2 font-bold">Condition</td>
+                                <td className="border px-4 capitalize py-2 text-center">{product?.condition}</td>
+
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Dimensions</td>
                                 <td className="border px-4 py-2 text-center">{0}x{0}x{0}</td>
-                               
+
 
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Availability</td>
-                                <td className="border px-4 py-2 text-center text-green-500">N/A</td>
+                                <td className="border px-4 py-2 text-center text-green-500">
+                                    {product?.availabilityStatus}
+                                </td>
                             </tr>
                             <tr>
                                 <td className="border px-4 py-2 font-bold">Warranty</td>
                                 <td className="border px-4 py-2 text-center text-green-500">
-                                    N/A
+                                    {product?.warranty || "N/A"}
                                 </td>
                             </tr>
-                            {/* <tr>
-                                <td></td>
+                            <tr>
                                 <td></td>
                                 <td>
                                     <div className="flex justify-center mt-2">
                                         <button className='border text-white px-4 py-2 rounded-lg lg:text-base text-sm '>Add to wishlist</button>
                                     </div>
                                 </td>
-                            </tr> */}
+                            </tr>
                         </tbody>
                     </table>
                 </div>

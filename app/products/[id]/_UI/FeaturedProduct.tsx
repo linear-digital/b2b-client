@@ -15,20 +15,25 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
 import { PType } from '../../_UI/ProductContainer';
+import { ProductType } from '@/Components/util/type';
+import fetcher, { fetcherSS } from '@/Components/util/axios';
 
 
 
-const FeaturedProduct = ({data: pr}: {data: PType}) => {
+const FeaturedProduct = ({data: pr}: {data: ProductType}) => {
     const swiperRef: any = useRef(null);
     const [swiper, setSwiper] = React.useState<any>(null);
-    const { data: products, isLoading } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['products-featured', ],
         queryFn: async () => {
-            const data = await axios.get(`https://dummyjson.com/products/category/${pr.category}`)
-            return data.data
+            const data = await fetcherSS({
+                url: `/product/category/${pr.category.id}`,
+                method: 'GET',
+            })
+            return data
         }
     })
-
+    const products = data?.offers as ProductType[]
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -67,8 +72,8 @@ const FeaturedProduct = ({data: pr}: {data: PType}) => {
                 modules={[Navigation, A11y]}
             >
                 {
-                    products?.products?.map((product: any) => (
-                        <SwiperSlide key={product.id} className='relative'>
+                    products?.map((product: ProductType) => (
+                        <SwiperSlide key={product.offerId} className='relative'>
                             <ProductCard data={product} />
                         </SwiperSlide>
                     ))
