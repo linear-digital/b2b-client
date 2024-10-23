@@ -64,7 +64,7 @@ const ProductContainer = () => {
         queryKey: ['products', pagec, limit, cate],
         queryFn: async () => {
             const data = await fetcherSS({
-                url: `/product?${cate ? `filterBy=categoryId:${cate}` : ''}&page=${page}&limit=${limit}`,
+                url: `/product?${cate ? `filterBy=categoryId:${cate}` : ''}&page=${page}&pageSize=${limit}`,
                 method: 'GET',
             })
             return data
@@ -76,7 +76,7 @@ const ProductContainer = () => {
     }
     const products = data?.offers
     const meta = data?.meta
-
+    console.log(meta?.offers);
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -119,7 +119,7 @@ const ProductContainer = () => {
                 }
 
             </div>
-            {/* <Pagination pages={meta.offers.totalPages} active={pagec} setActive={setPage} /> */}
+            <Pagination pages={meta.offers.remaining} active={pagec} setActive={setPage} />
         </section>
     );
 };
