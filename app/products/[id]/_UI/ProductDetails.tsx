@@ -59,9 +59,9 @@ const ProductDetails = ({ product, price, details }: { product: ProductType, pri
                 <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>
                     Add to wishlist
                 </button>
-                <button className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm'>
+                <a href={product?.goUrl} className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm hover:text-white'>
                     Buy now
-                </button>
+                </a>
             </div>
         </div>
     );

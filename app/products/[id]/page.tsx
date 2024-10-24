@@ -13,14 +13,13 @@ import { Suspense, useEffect, useState } from 'react';
 import ProductDetails from './_UI/ProductDetails';
 import ProductComparison from './_UI/ProductComparison';
 import CustomerReview from './_UI/CustomerReview';
-import AllReviews from './_UI/AllReviews';
+
 import FeaturedProduct from './_UI/FeaturedProduct';
-import { products} from '@/app/admin/products/data';
 import { useQuery } from '@tanstack/react-query';
-import fetcher, { api, fetcherSS } from '@/Components/util/axios';
-import axios from 'axios';
+import { fetcherSS } from '@/Components/util/axios';
+
 import { Spin } from 'antd';
-import { PType } from '../_UI/ProductContainer';
+
 import { ProductType } from '@/Components/util/type';
 
 
@@ -41,9 +40,10 @@ const Page = ({ params }: { params: { id: string } }) => {
         }
     })
     const [selected, setSelected] = useState("");
-    const product: ProductType = data 
+    const product: ProductType = data
+
     if (isLoading) {
-        return <Spin size='large' />
+        return <Spin size='large' fullscreen />
     }
     return (
         <Suspense fallback={<Spin size='large' />}>

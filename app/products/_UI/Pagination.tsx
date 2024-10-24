@@ -3,10 +3,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { Pagination as AntPagination } from 'antd';
-const Pagination = ({ className, pages, active, setActive }: { className?: string, pages: number, active: number, setActive: any }) => {
-   
+const Pagination = ({ pages, active }: { className?: string, pages: number, active: number, }) => {
+
     const router = useRouter()
-    console.log(pages);
     const updatepages = (value: number) => {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set('page', `${value}`)
@@ -15,13 +14,12 @@ const Pagination = ({ className, pages, active, setActive }: { className?: strin
     return (
         <div >
             <AntPagination
-            showSizeChanger
-            onChange={(e) => updatepages(e)}
-            onShowSizeChange={(e) => { console.log(e); }}
-            defaultCurrent={active}
-            defaultPageSize={21}
-            total={pages}
-        />
+                showSizeChanger={false}
+                onChange={(e) => updatepages(e)}
+                defaultCurrent={active}
+                total={pages}
+                pageSize={21}
+            />
         </div>
     );
 };

@@ -80,7 +80,7 @@ const FeaturedProduct = ({data: pr}: {data: ProductType}) => {
                 }
             </Swiper>
             <div className="flex justify-center mt-10">
-                <Link href={'/products'} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
+                <Link href={`/products?category=${pr.category.id}`} className='text-white bg-primary px-7 py-3 rounded-lg hover:text-white bg-primary/90'>
                     View All
                 </Link>
             </div>

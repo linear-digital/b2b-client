@@ -9,19 +9,22 @@ import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 export const colors = ["black", "red", "blue", "green", "yellow", "orange"];
-const Filter = ({ setVisible }: { setVisible?: any }) => {
+const Filter = (
+    { setVisible, setRange, range, stockAvailable, setStockAvailable }:
+        { setVisible?: any, setRange: any, range: { min: number, max: number }, stockAvailable: string, setStockAvailable: any }
+) => {
     const [showrange, setShowrange] = React.useState(true);
     const [showBrands, setShowBrands] = React.useState(false);
-    const [showColor, setShowColor] = React.useState(false);
+    // const [showColor, setShowColor] = React.useState(false);
     const [showAvailable, setShowAvailable] = React.useState(true);
-
-    const [filter, setFilter] = React.useState({
-        color: "",
-        rate: 0
-    })
+    const [showDiscount, setShowDiscount] = React.useState(false);
+    // const [filter, setFilter] = React.useState({
+    //     color: "",
+    //     rate: 0
+    // })
     const cate = useSearchParams().get('category')
     const [selected, setSelected] = React.useState(cate ? cate : '');
-   
+
     const { data: categories } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -31,7 +34,18 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
             return res
         },
     })
+    const discount = useSearchParams().get('discount')
     const router = useRouter()
+    const updateQuery = (key: string, value: any) => {
+        const searchParams = new URLSearchParams(window.location.search);
+        if (value === 'false') {
+            searchParams.delete(key)
+        }
+        else {
+            searchParams.set(key, value)
+        }
+        router.push(`?${searchParams}`)
+    }
     return (
         <div className='min-w-[295px] lg:max-w-[300px] w-full  bg-white rounded-lg p-5'>
             <div className="flex justify-between items-center">
@@ -84,16 +98,28 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
                         display: showrange ? 'flex' : 'none'
                     }}
                 >
-                    <Checkbox className='w-full flex items-center text-[16px] text-[#898989]'>
+                    <Checkbox
+                        onClick={() => setRange({ min: 0, max: 99 })}
+                        checked={range?.min === 0 && range?.max === 99}
+                        className='w-full flex items-center text-[16px] text-[#898989]'>
                         $0.00 - $99
                     </Checkbox>
-                    <Checkbox className='w-full flex items-center text-[16px] text-[#898989]'>
+                    <Checkbox
+                        onClick={() => setRange({ min: 100, max: 199 })}
+                        checked={range?.min === 100 && range?.max === 199}
+                        className='w-full flex items-center text-[16px] text-[#898989]'>
                         $100 - $199
                     </Checkbox>
-                    <Checkbox className='w-full flex items-center text-[16px] text-[#898989]'>
+                    <Checkbox
+                        onClick={() => setRange({ min: 200, max: 299 })}
+                        checked={range?.min === 200 && range?.max === 299}
+                        className='w-full flex items-center text-[16px] text-[#898989]'>
                         $200 - $299
                     </Checkbox>
-                    <Checkbox className='w-full flex items-center text-[16px] text-[#898989]'>
+                    <Checkbox
+                        onClick={() => setRange({ min: 300, max: 0 })}
+                        checked={range?.min === 300 && range?.max === 0}
+                        className='w-full flex items-center text-[16px] text-[#898989]'>
                         $300 - and above
                     </Checkbox>
                 </div>
@@ -130,7 +156,7 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
                 </div>
             </div>
             <HR className='my-3' />
-            <div className=''>
+            {/* <div className=''>
                 <button className='flex justify-between items-center w-full'
                     onClick={() => setShowColor(!showColor)}
                 >
@@ -168,12 +194,12 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
 
                 </div>
             </div>
-            <HR className='my-3' />
+            <HR className='my-3' /> */}
             <div className="flex justify-between items-center">
                 <h2 className='font-semibold text-[18px]'>
                     Discount & Deals
                 </h2>
-                <Switch size="small" defaultChecked />
+                <Switch size="small" onChange={() => updateQuery('discount', discount ? 'false' : 'true')} checked={!!discount} />
             </div>
             <HR className='my-3' />
             <div className="">
@@ -187,28 +213,34 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
             <HR className='my-3' />
             <div className="">
                 <button className='flex justify-between items-center w-full'
-                    onClick={() => setShowrange(!showrange)}
+                    onClick={() => setShowAvailable(!showAvailable)}
                 >
                     <h2 className='font-semibold text-[18px]'>
                         Availability
                     </h2>
                     {
-                        showrange ? <CaretUpOutlined /> : <CaretDownOutlined />
+                        showAvailable ? <CaretUpOutlined /> : <CaretDownOutlined />
                     }
                 </button>
                 {
                     showAvailable && <div className="mt-4">
-                        <Checkbox className='w-full flex items-center text-[16px] text-[#898989]'>
+                        <Checkbox
+                            checked={stockAvailable === 'in_stock'}
+                            onClick={() => setStockAvailable('in_stock')}
+                            className='w-full flex items-center text-[16px] text-[#898989]'>
                             In Stock
                         </Checkbox>
-                        <Checkbox className='w-full flex items-center text-[16px] text-[#898989]'>
+                        <Checkbox
+                            checked={stockAvailable === 'out_of_stock'}
+                            onClick={() => setStockAvailable('out_of_stock')}
+                            className='w-full flex items-center text-[16px] text-[#898989]'>
                             Out of Stock
                         </Checkbox>
                     </div>
                 }
             </div>
-            <HR className='my-3' />
-            <div className="">
+            {/* <HR className='my-3' /> */}
+            {/* <div className="">
                 <button className='flex justify-between items-center w-full'
                     onClick={() => setShowrange(!showrange)}
                 >
@@ -237,8 +269,12 @@ const Filter = ({ setVisible }: { setVisible?: any }) => {
                         </Checkbox>
                     </div>
                 }
-            </div>
-            <button className='w-full mt-5 bg-primary py-3 rounded-xl text-white'>
+            </div> */}
+            <button className='w-full mt-5 bg-primary py-3 rounded-xl text-white'
+                onClick={() => {
+                    setRange({ min: 0, max: 0 })
+                }}
+            >
                 Reset
             </button>
         </div>
