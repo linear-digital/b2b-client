@@ -11,7 +11,8 @@ const ProductCard = ({ data }: { data: ProductType }) => {
     return (
         <div className='w-full relative'>
             <div className='max-h-[400px] h-[400px] w-full bg-white flex justify-center items-center rounded-lg p-5'>
-                <Image src={data?.images[0]?.url} alt="Product Image" width={1000} height={1000}
+                <Image
+                    src={data?.images[0]?.url || '/placeholder.png'} alt="Product Image" width={1000} height={1000}
                     quality={100}
                     loading='lazy'
                     className={' rounded-lg h-[300px] w-[300px] object-contain cursor-pointer '}

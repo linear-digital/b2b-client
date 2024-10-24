@@ -21,7 +21,7 @@ import { fetcherSS } from '@/Components/util/axios';
 import { Spin } from 'antd';
 
 import { ProductType } from '@/Components/util/type';
-
+import { Image as AntdImage } from 'antd'
 
 const Page = ({ params }: { params: { id: string } }) => {
     const [swiper, setSwiper] = useState<any>(null);
@@ -70,7 +70,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                                             <SwiperSlide key={index} className='h-[160px] min-w-[100px]'
                                             >
                                                 <Image src={image.url} alt="Product Image" width={148} height={161} className={"p-3 rounded-lg h-[161px] lg:max-w-[148px] max-w-[100px] w-full bg-white object-contain"}
-                                                    onClick={() => setSelected(image.url)}
+                                                    onClick={() => setSelected(image.zoomUrl)}
                                                 />
                                             </SwiperSlide>
                                         ))
@@ -78,7 +78,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                                 </Swiper>
                             </div>
                             <div className='lg:min-w-[505px] w-full lg:w-[505px] lg:h-[550px] rounded-[10px]  flex items-center justify-center relative bg-white'>
-                                <Image src={selected || product?.images[0].zoomUrl} alt="Product Image" width={1080} height={1080} className={" p-3 rounded-lg lg:w-[422px] h-[422px] object-contain"} />
+                                <AntdImage src={selected || product?.images[0].zoomUrl} alt="Product Image"  className={" p-3 rounded-lg lg:w-[422px] max-h-[422px] object-contain"} />
                                 <button
                                     className='absolute top-1/2 left-3 -translate-y-1/2 '
                                     onClick={() => swiper?.slidePrev()}>

@@ -12,9 +12,10 @@ import { Pagination } from 'swiper/modules';
 import Image from 'next/image';
 import ProductCard from '@/app/products/_UI/ProductCard';
 import { useQuery } from '@tanstack/react-query';
-import fetcher from '@/Components/util/axios';
+import fetcher, { fetcherSS } from '@/Components/util/axios';
 import axios from 'axios';
-import { Spin } from 'antd';
+import { Select, Spin } from 'antd';
+import { ProductType } from '@/Components/util/type';
 // import ProductCard from './ProductCard';
 
 
@@ -33,14 +34,29 @@ const Trending = () => {
             return res
         },
     })
-    const { data: products, isLoading } = useQuery({
-        queryKey: ['products-trending', ],
+
+
+    const { data: categories } = useQuery({
+        queryKey: ['categories'],
         queryFn: async () => {
-            const data = await axios.get(`https://dummyjson.com/products?limit=20`)
-            return data.data
+            const res = await fetcherSS({
+                url: '/product/category'
+            })
+            return res
+        },
+    })
+    const [selectedCategory, setSelectedCategory] = React.useState<string>('')
+    const { data: response, isLoading } = useQuery({
+        queryKey: ['products-tranding', selectedCategory],
+        queryFn: async () => {
+            const data = await fetcherSS({
+                url: `/product?pageSize=50&sortBy=performanceScore&sortDirection=asc${selectedCategory ? `&filterBy=categoryId:${selectedCategory}` : ''}`,
+                method: 'GET',
+            })
+            return data
         }
     })
-
+    const products = response?.offers as ProductType[]
     if (isLoading) {
         return <Spin size='large' />
     }
@@ -50,7 +66,7 @@ const Trending = () => {
                 {data?.title}
             </h2>
             <div className="flex items-center justify-between mt-8">
-                <ul className='flex items-center gap-x-4 text-[#898989] lg:text-base text-sm'>
+                {/* <ul className='flex items-center gap-x-4 text-[#898989] lg:text-base text-sm'>
                     {
                         data?.others?.category?.map((item: any, index: number) => (
                             <li key={index}>
@@ -60,7 +76,25 @@ const Trending = () => {
                             </li>
                         ))
                     }
-                </ul>
+                </ul> */}
+                 <Select
+                        showSearch
+                        size='large'
+                        value={selectedCategory}
+                        onChange={(value) => setSelectedCategory(value)}
+                        defaultValue={categories?.[0]?.id}
+                        placeholder="Select Category"
+                        filterOption={(input, option) =>
+                            String(option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                        }
+                        options={
+                            categories?.map((item: any) => ({
+                                value: item?.id,
+                                label: item?.name
+                            }))
+                        }
+                        className='min-w-[200px]'
+                    />
                 <div className='flex items-center gap-4'>
                     <button onClick={() => swiper?.slidePrev()}>
                         <ArrowBackIosIcon />
@@ -91,7 +125,7 @@ const Trending = () => {
                 onSwiper={(swiper) => setSwiper(swiper)}
             >
                 {
-                    products?.products?.map((product: any, index: number) => (
+                    products?.map((product: any, index: number) => (
                         <SwiperSlide key={index}>
                             <ProductCard data={product} />
                         </SwiperSlide>

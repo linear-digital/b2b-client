@@ -75,7 +75,7 @@ const ProductContainer = (
     ]
 
 
-    const url = `/product?${cate ? `filterBy=categoryId:${cate}` : ''}${cate ? `&page=${pagec}` : `page=${pagec}`}&pageSize=${limit}${search ? `&query=${search}` : ''}${shortBy ? `&sortBy=${shortBy}` : ''}${sortOrder ? `&sortDirection=${sortOrder}` : ''}${range.min ? `&filterGreaterThanEqual=price:${range.min}` : ''}${range.max ? `&filterLowerThanEqual=price:${range.max}` : ''}${stockAvailable ? `&facetValuesOn=availabilityStatus:${stockAvailable}` : ''}${!!discount ? `&filterGreaterThan=rebatePercentage:1` : ''}`
+    const url = `/product?${cate ? `filterBy=categoryId:${cate}` : ''}${cate ? `&page=${pagec}` : `page=${pagec}`}&pageSize=${limit}${search ? `&query=${search}` : ''}${shortBy ? `&sortBy=${shortBy}&sortDirection=asc` : ''}${sortOrder ? `&sortDirection=${sortOrder}` : ''}${range.min ? `&filterGreaterThanEqual=price:${range.min}` : ''}${range.max ? `&filterLowerThanEqual=price:${range.max}` : ''}${stockAvailable ? `&facetValuesOn=availabilityStatus:${stockAvailable}` : ''}${!!discount ? `&filterGreaterThan=rebatePercentage:1` : ''}`
 
 
 
