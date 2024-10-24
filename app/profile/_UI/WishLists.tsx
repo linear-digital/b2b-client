@@ -9,10 +9,10 @@ const WishLists = () => {
                 WishLists
             </h3>
             <div className='flex flex-col gap-4 mt-5'>
-                {/* <WishListCard />
                 <WishListCard />
                 <WishListCard />
-                <WishListCard /> */}
+                <WishListCard />
+                <WishListCard />
                  <h1 className='text-center mt-10 text-xl font-medium'>No Wishlists Found</h1>
             </div>
         </Card>

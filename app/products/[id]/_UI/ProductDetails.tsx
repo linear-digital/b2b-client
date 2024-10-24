@@ -4,7 +4,31 @@ import { colors } from '@/Components/Pages/Products/Filter';
 
 import { PType } from '../../_UI/ProductContainer';
 import { ProductType } from '@/Components/util/type';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/Redux/store';
+import toast from 'react-hot-toast';
+import fetcher from '@/Components/util/axios';
+import { errorDisplay } from '@/Components/util/readError';
 const ProductDetails = ({ product, price, details }: { product: ProductType, price: number, details: any }) => {
+    const { currentUser } = useSelector((state: RootState) => state.user)
+    const addWIshList = async () => {
+        if (!currentUser) {
+            toast.error('Please login first')
+        }
+        try {
+            const res = await fetcher({
+                url: `/wishlist`,
+                method: 'POST',
+                body: {
+                    ...product,
+                    user: currentUser?._id
+                }
+            })
+            toast.success('Product added to wishlist')
+        } catch (error: any) {
+            toast.error(errorDisplay(error))
+        }
+    }
     return (
         <div>
             <h2 className='messiri lg:text-[36px] text-[25px]'>
@@ -56,7 +80,9 @@ const ProductDetails = ({ product, price, details }: { product: ProductType, pri
                 {product?.description}
             </p>
             <div className="flex mt-6 gap-5">
-                <button className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>
+                <button
+                    onClick={addWIshList}
+                    className='border border-primary rounded-lg px-4 py-[14px] hover:bg-primary text-primary hover:text-white text-sm'>
                     Add to wishlist
                 </button>
                 <a href={product?.goUrl} className='border border-primary rounded-lg px-5 py-[14px] bg-primary text-white text-sm hover:text-white'>

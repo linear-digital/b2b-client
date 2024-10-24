@@ -6,8 +6,33 @@ import Link from 'next/link';
 import { PType } from './ProductContainer';
 import { useRouter } from 'next/navigation';
 import { ProductType } from '@/Components/util/type';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/Redux/store';
+import toast from 'react-hot-toast';
+import { errorDisplay } from '@/Components/util/readError';
+import fetcher from '@/Components/util/axios';
 const ProductCard = ({ data }: { data: ProductType }) => {
     const router = useRouter();
+    const { currentUser } = useSelector((state: RootState) => state.user)
+
+    const addWIshList = async () => {
+        if (!currentUser) {
+            toast.error('Please login first')
+        }
+        try {
+            const res = await fetcher({
+                url: `/wishlist`,
+                method: 'POST',
+                body: {
+                    ...data,
+                    user: currentUser?._id
+                }
+            })
+            toast.success('Product added to wishlist')
+        } catch (error: any) {
+            toast.error(errorDisplay(error))
+        }
+    }
     return (
         <div className='w-full relative'>
             <div className='max-h-[400px] h-[400px] w-full bg-white flex justify-center items-center rounded-lg p-5'>
@@ -40,7 +65,9 @@ const ProductCard = ({ data }: { data: ProductType }) => {
                 </div>
             }
 
-            <button className='absolute top-4 right-5 hover:text-red-500'>
+            <button 
+            onClick={addWIshList}
+            className='absolute top-4 right-5 hover:text-red-500'>
                 <FavoriteBorderIcon />
             </button>
         </div>
