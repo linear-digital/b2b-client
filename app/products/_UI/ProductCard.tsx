@@ -17,7 +17,7 @@ const ProductCard = ({ data }: { data: ProductType }) => {
 
     const addWIshList = async () => {
         if (!currentUser) {
-            toast.error('Please login first')
+            return toast.error('Please login first')
         }
         try {
             const res = await fetcher({
@@ -65,9 +65,9 @@ const ProductCard = ({ data }: { data: ProductType }) => {
                 </div>
             }
 
-            <button 
-            onClick={addWIshList}
-            className='absolute top-4 right-5 hover:text-red-500'>
+            <button
+                onClick={addWIshList}
+                className='absolute top-4 right-5 hover:text-red-500'>
                 <FavoriteBorderIcon />
             </button>
         </div>

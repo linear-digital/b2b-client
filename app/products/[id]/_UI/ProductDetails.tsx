@@ -13,7 +13,7 @@ const ProductDetails = ({ product, price, details }: { product: ProductType, pri
     const { currentUser } = useSelector((state: RootState) => state.user)
     const addWIshList = async () => {
         if (!currentUser) {
-            toast.error('Please login first')
+            return   toast.error('Please login first')
         }
         try {
             const res = await fetcher({
