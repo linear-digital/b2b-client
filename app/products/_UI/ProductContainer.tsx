@@ -64,6 +64,7 @@ const ProductContainer = (
     const shortBy = allParams.get('sortBy') || "performanceScore"
     const pagec = allParams.get('page') as any || 1
     const discount = allParams.get('discount')
+    const merchantId = allParams.get('merchantId')
 
     const sortOrder = allParams.get('sortDirection')
     const [search, setSearch] = React.useState('');
@@ -71,11 +72,12 @@ const ProductContainer = (
     const dependency = [pagec, limit, cate, search, shortBy, sortOrder,
         range,
         stockAvailable,
-        discount
+        discount,
+        merchantId
     ]
 
 
-    const url = `/product?${cate ? `filterBy=categoryId:${cate}` : ''}${cate ? `&page=${pagec}` : `page=${pagec}`}&pageSize=${limit}${search ? `&query=${search}` : ''}${shortBy ? `&sortBy=${shortBy}&sortDirection=asc` : ''}${sortOrder ? `&sortDirection=${sortOrder}` : ''}${range.min ? `&filterGreaterThanEqual=price:${range.min}` : ''}${range.max ? `&filterLowerThanEqual=price:${range.max}` : ''}${stockAvailable ? `&facetValuesOn=availabilityStatus:${stockAvailable}` : ''}${!!discount ? `&filterGreaterThan=rebatePercentage:1` : ''}`
+    const url = `/product?${cate ? `filterBy=categoryId:${cate}` : ''}${cate ? `&page=${pagec}` : `page=${pagec}`}&pageSize=${limit}${search ? `&query=${search}` : ''}${shortBy ? `&sortBy=${shortBy}&sortDirection=asc` : ''}${sortOrder ? `&sortDirection=${sortOrder}` : ''}${range.min ? `&filterGreaterThanEqual=price:${range.min}` : ''}${range.max ? `&filterLowerThanEqual=price:${range.max}` : ''}${stockAvailable ? `&facetValuesOn=availabilityStatus:${stockAvailable}` : ''}${!!discount ? `&filterGreaterThan=rebatePercentage:1` : ''}${merchantId ? `&filterBy=merchantId:${merchantId}` : ''}`
 
 
 

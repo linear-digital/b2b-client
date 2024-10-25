@@ -15,8 +15,8 @@ const nextConfig = {
         hostname: 'fakestoreapi.com',
       },
       {
-        protocol: 'https',
-        hostname: 'cdn.dummyjson.com',
+        protocol: 'http',
+        hostname: 'r6.kelkoo.com',
       }
     ],
   },
