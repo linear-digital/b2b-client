@@ -11,12 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         {
             url: 'https://www.shoppanorma.com/products',
             lastModified: new Date(),
-            changeFrequency: 'monthly',
+            changeFrequency: 'weekly',
             priority: 0.8,
         }, {
             url: 'https://www.shoppanorma.com/voucher',
             lastModified: new Date(),
-            changeFrequency: 'monthly',
+            changeFrequency: 'weekly',
             priority: 0.8,
         }, {
             url: 'https://www.shoppanorma.com/about',
