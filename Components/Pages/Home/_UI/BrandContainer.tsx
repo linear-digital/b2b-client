@@ -81,13 +81,13 @@ export default function BrandContainer({ data }: { data: any }) {
                 {
                     data?.slice(data?.length / 2).map((brand: any, index: number) => (
                         <SwiperSlide key={index}>
-                            <a target='_blank' href={brand?.url} className={`p-5 bg-white flex h-[100px] justify-center items-start w-full`}>
+                            <Link  href={`/products?merchantId=${brand?.id}`} className={`p-5 bg-white flex h-[100px] justify-center items-start w-full`}>
                                 <Image
                                     src={brand?.logo}
                                     alt={brand?.name} width={240} height={240}
                                     className={'object-contain w-auto min-w-[100px] max-h-[80px] '}
                                 />
-                            </a>
+                            </Link>
 
                         </SwiperSlide>
                     ))
