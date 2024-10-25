@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import { colors } from '@/Components/Pages/Products/Filter';

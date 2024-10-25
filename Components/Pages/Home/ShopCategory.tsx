@@ -43,7 +43,7 @@ const ShopCategory = () => {
         queryKey: ['products', selectedCategory],
         queryFn: async () => {
             const data = await fetcherSS({
-                url: `/product/category/${selectedCategory}?pageSize=50&sortBy=performanceScore&fieldsAlias=all`,
+                url: `/product/category/${selectedCategory}?pageSize=20&sortBy=performanceScore&fieldsAlias=all`,
                 method: 'GET',
             })
             return data

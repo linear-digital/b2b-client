@@ -1,22 +1,15 @@
-'use client'
-import fetcher from '@/Components/util/axios';
-import { useQuery } from '@tanstack/react-query';
+
+import fetcher, { fetcherSS } from '@/Components/util/axios';
 import Image from 'next/image';
 import React from 'react';
 
-const Newsletter = () => {
-    const { data } = useQuery({
-        queryKey: ['newsletter'],
-        queryFn: () => {
-            const res: any = fetcher({
-                url: `/pages/search`,
-                method: 'POST',
-                body: {
-                    name: "newsletter"
-                }
-            })
-            return res
-        },
+const Newsletter = async () => {
+    const data: any = await fetcherSS({
+        url: `/pages/search`,
+        method: 'POST',
+        body: {
+            name: "newsletter"
+        }
     })
     return (
         <div className='container lg:h-[399px]  lg:bg-[#E3E3E6] mx-auto mt-[150px] relative flex flex-col justify-center rounded-lg'>

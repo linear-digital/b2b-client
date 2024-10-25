@@ -1,5 +1,5 @@
-'use server'
-import fetcher from '@/Components/util/axios';
+
+import  { fetcherSS } from '@/Components/util/axios';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ import React from 'react';
 
 const HeroArea = async () => {
     
-    const data = await fetcher({
+    const data = await fetcherSS({
         url: `/pages/search`,
         method: 'POST',
         body: {

@@ -1,23 +1,17 @@
-'use client'
-import fetcher from '@/Components/util/axios';
+
+import fetcher, { fetcherSS } from '@/Components/util/axios';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
 import React from 'react';
 
-const Why = () => {
-    const { data } = useQuery({
-        queryKey: ['Why Shop With Us'],
-        queryFn: () => {
-            const res: any = fetcher({
-                url: `/pages/search`,
-                method: 'POST',
-                body: {
-                    name: "Why Shop With Us"
-                }
-            })
-            return res
-        },
+const Why = async () => {
+    const data = await fetcherSS({
+        url: `/pages/search`,
+        method: 'POST',
+        body: {
+            name: "Why Shop With Us"
+        }
     })
     return (
         <div className='min-h-[450px] bg-[#8E9E84] mt-20 py-10 flex flex-col justify-center px-4 lg:px-0'>
