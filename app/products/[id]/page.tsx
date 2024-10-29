@@ -63,13 +63,19 @@ export async function generateMetadata(
         title: product.title,
         description: product.description,
         openGraph: {
+            title: "Shoppanorma - Your Go-To B2B E-commerce Platform",
+            description: "Discover and compare products from diverse merchants on Shoppanorma's comprehensive B2B platform. Real-time data ensures accuracy in price, features, and reviews.",
+            url: "https://www.shoppanorma.com",
+            type: "website",
             images: product.images.map((image) => {
                 return {
                     url: image.url,
                     alt: product.title,
+                    width: 1200,
+                    height: 630,
                 }
             }),
-        },
+          },
     }
 }
 
