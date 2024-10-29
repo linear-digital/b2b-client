@@ -42,42 +42,21 @@ export async function generateMetadata(
     const id = (await params).id
 
     // fetch data
-    let product: ProductType | null = null;
-    try {
-        product = await getProduct(id);
-    } catch (error) {
-        console.error("Error fetching product:", error);
-    }
-
-    // Return default metadata if product data is unavailable
-    if (!product) {
-        return {
-            title: "Product Not Found",
-            description: "The requested product could not be found.",
-        };
-    }
-
-    // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || []
+    let product: ProductType  = await getProduct(id)
+    
     return {
         title: product.title,
         description: product.description,
         openGraph: {
-            title: "Shoppanorma - Your Go-To B2B E-commerce Platform",
-            description: "Discover and compare products from diverse merchants on Shoppanorma's comprehensive B2B platform. Real-time data ensures accuracy in price, features, and reviews.",
-            url: "https://www.shoppanorma.com",
-            type: "website",
-            images: [
-                ...product.images.map((image) => {
-                    return {
-                        url: image.url,
-                        alt: product.title,
-                        width: 1200,
-                        height: 630,
-                    }
-                }),
-                ...previousImages
-            ],
+            title: product.title,
+            description: product.description,
+            url: `https://www.shoppanorma.com/products/${id}`, // Set specific URL for the product
+            images: product.images.map((image) => ({
+                url: image.url,
+                alt: product.title,
+                width: 1200,
+                height: 630,
+            })),
         },
         twitter: {
             card: "summary_large_image",
