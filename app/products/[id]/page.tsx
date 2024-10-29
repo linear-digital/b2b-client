@@ -19,6 +19,13 @@ import { Spin } from 'antd';
 
 import { ProductType } from '@/Components/util/type';
 import ProductImage from './_UI/ProductImage';
+import type { Metadata, ResolvingMetadata } from 'next'
+
+type Props = {
+    params: Promise<{ id: string }>
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
 const getProduct = async (id: string) => {
     const data = await fetcherSS({
         url: `/product/single/${id}`,
@@ -26,6 +33,49 @@ const getProduct = async (id: string) => {
     })
     return data
 }
+
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    // read route params
+    const id = (await params).id
+
+    // fetch data
+    let product: ProductType | null = null;
+    try {
+        product = await getProduct(id);
+    } catch (error) {
+        console.error("Error fetching product:", error);
+    }
+
+    // Return default metadata if product data is unavailable
+    if (!product) {
+        return {
+            title: "Product Not Found",
+            description: "The requested product could not be found.",
+        };
+    }
+
+    // optionally access and extend (rather than replace) parent metadata
+ 
+    return {
+        title: product.title,
+        description: product.description,
+        openGraph: {
+            images: product.images.map((image) => {
+                return {
+                    url: image.url,
+                    alt: product.title,
+                }
+            }),
+        },
+    }
+}
+
+
+
+
 const Page = async ({ params }: { params: { id: string } }) => {
 
     const product: ProductType = await getProduct(params.id)
