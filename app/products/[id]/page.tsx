@@ -68,7 +68,7 @@ export async function generateMetadata(
             url: "https://www.shoppanorma.com",
             type: "website",
             images: [
-                ... product.images.map((image) => {
+                ...product.images.map((image) => {
                     return {
                         url: image.url,
                         alt: product.title,
@@ -78,7 +78,13 @@ export async function generateMetadata(
                 }),
                 ...previousImages
             ],
-          },
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: product.title,
+            description: product.description,
+            images: [product.images[0].url],
+        }
     }
 }
 
