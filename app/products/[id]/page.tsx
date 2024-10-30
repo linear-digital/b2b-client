@@ -69,11 +69,9 @@ export async function generateMetadata(
 
 
 
-
 const Page = async ({ params }: { params: { id: string } }) => {
 
     const product: ProductType = await getProduct(params.id)
-
     return (
         <Suspense fallback={<Spin size='large' />}>
             <div className='bg-[#F7F7F7]'>
