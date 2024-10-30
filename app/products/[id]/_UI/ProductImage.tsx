@@ -24,7 +24,7 @@ const ProductImage = ({ product }: { product: ProductType }) => {
     const copyToClipboard = () => {
         const url = `${window.location.origin}/redirect?pid=${product.offerId}`
         navigator.clipboard.writeText(url);
-        toast.success('Link copied to clipboard')
+        toast.success('Product redirect link copied to clipboard')
     }
 
     const [selected, setSelected] = useState("");
