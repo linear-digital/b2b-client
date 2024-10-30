@@ -4,26 +4,29 @@ import React, { useEffect } from 'react';
 import ErrorPage from './ErrorPage';
 import Details from './Details';
 import { ProductType } from '@/Components/util/type';
+import { useSearchParams } from 'next/navigation';
 
 const Page = () => {
-    const params = new URLSearchParams(window.location.search);
-    const pid = params.get('pid') as string;
+    const allParams = useSearchParams()
+    const pid = allParams.get('pid') as string;
     const [product, setProduct] = React.useState<ProductType | null>(null)
     const [isError, setIsError] = React.useState(false)
     useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const data: ProductType = await fetcher({
-                    url: `/product/single/${pid}`,
-                    method: 'GET',
-                })
-                setProduct(data)
-                window.location.href = data.goUrl
-            } catch (error) {
-                setIsError(true)
+        if (typeof window !== 'undefined') {
+            const fetchProduct = async () => {
+                try {
+                    const data: ProductType = await fetcher({
+                        url: `/product/single/${pid}`,
+                        method: 'GET',
+                    })
+                    setProduct(data)
+                    window.location.href = data.goUrl
+                } catch (error) {
+                    setIsError(true)
+                }
             }
+            fetchProduct()
         }
-        fetchProduct()
     }, [pid])
 
 
@@ -32,7 +35,7 @@ const Page = () => {
     }
     if (!product) {
         return (
-            <Details  />
+            <Details />
         )
     }
 
