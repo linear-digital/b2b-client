@@ -1,16 +1,17 @@
 'use client'
 import fetcher from '@/Components/util/axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import ErrorPage from './ErrorPage';
 import Details from './Details';
 import { ProductType } from '@/Components/util/type';
 import { useSearchParams } from 'next/navigation';
 
-const Page = () => {
-    const allParams = useSearchParams()
+const ProductPageContent = () => {
+    const allParams = useSearchParams();
     const pid = allParams.get('pid') as string;
-    const [product, setProduct] = React.useState<ProductType | null>(null)
-    const [isError, setIsError] = React.useState(false)
+    const [product, setProduct] = React.useState<ProductType | null>(null);
+    const [isError, setIsError] = React.useState(false);
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const fetchProduct = async () => {
@@ -18,27 +19,32 @@ const Page = () => {
                     const data: ProductType = await fetcher({
                         url: `/product/single/${pid}`,
                         method: 'GET',
-                    })
-                    setProduct(data)
-                    window.location.href = data.goUrl
+                    });
+                    setProduct(data);
+                    window.location.href = data.goUrl;
                 } catch (error) {
-                    setIsError(true)
+                    setIsError(true);
                 }
-            }
-            fetchProduct()
+            };
+            fetchProduct();
         }
-    }, [pid])
-
+    }, [pid]);
 
     if (isError) {
-        return <ErrorPage />
-    }
-    if (!product) {
-        return (
-            <Details />
-        )
+        return <ErrorPage />;
     }
 
+    if (!product) {
+        return <Details />;
+    }
+
+    return null; // No content here since we redirect
 };
+
+const Page = () => (
+    <Suspense fallback={<p>Loading...</p>}>
+        <ProductPageContent />
+    </Suspense>
+);
 
 export default Page;
