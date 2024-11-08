@@ -22,11 +22,10 @@ const ProductImage = ({ product }: { product: ProductType }) => {
         setWidth(window.innerWidth);
     }, [])
     const copyToClipboard = () => {
-        const url = `${window.location.origin}/redirect?pid=${product.offerId}`
+        const url = `${window.location.origin}/redirect?pid=${product.offerId}&marchantId=${product.merchant.id}`
         navigator.clipboard.writeText(url);
         toast.success('Product redirect link copied to clipboard')
     }
-
     const [selected, setSelected] = useState("");
     return (
         <div className="flex lg:flex-row flex-col-reverse items-center gap-5">
