@@ -26,6 +26,7 @@ const ProductImage = ({ product }: { product: ProductType }) => {
         navigator.clipboard.writeText(url);
         toast.success('Product redirect link copied to clipboard')
     }
+    console.log(product);
     const [selected, setSelected] = useState("");
     return (
         <div className="flex lg:flex-row flex-col-reverse items-center gap-5">
