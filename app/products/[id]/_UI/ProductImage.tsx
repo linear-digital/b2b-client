@@ -56,11 +56,11 @@ const ProductImage = ({ product }: { product: ProductType }) => {
                 </Swiper>
             </div>
             <div className='lg:min-w-[505px] p-5 w-full lg:w-[505px] lg:h-[550px] rounded-[10px]  flex items-center justify-center relative bg-white '>
-            <button className='absolute top-4 right-4 '
-                        onClick={copyToClipboard}
-                    >
-                        <ShareAltOutlined className='text-2xl hover:text-primary' />
-                    </button>
+                <button className='absolute top-4 right-4 '
+                    onClick={copyToClipboard}
+                >
+                    <ShareAltOutlined className='text-2xl hover:text-primary' />
+                </button>
                 <AntdImage src={selected || product?.images[0].zoomUrl} alt="Product Image" className={" p-3 rounded-lg lg:w-[422px] max-h-[422px] object-contain"} />
                 <button
                     className='absolute top-1/2 left-3 -translate-y-1/2 '
