@@ -43,7 +43,6 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selected, setSelected] = useState(0)
 
     const navigateHandler = (e: any) => {
-        console.log(e);
         menuItems.forEach((item, index) => {
             if (item.key === e.key) {
                 setSelected(index)
@@ -87,8 +86,8 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     key: '33',
                 },
                 {
-                    label: 'Add New Product',
-                    path: '/admin/products/add',
+                    label: 'Marchents',
+                    path: '/admin/products/marchents',
                     key: '34',
                 },
             ]

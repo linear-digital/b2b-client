@@ -62,7 +62,6 @@ export const fetcherSS = async (
         });
 
         if (!res.ok) {
-            console.log(res);
             // Optional: Handle different status codes
             throw new Error(`HTTP error! status: ${res.status}`);
         }
