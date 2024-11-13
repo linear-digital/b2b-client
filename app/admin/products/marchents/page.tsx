@@ -3,6 +3,7 @@ import fetcher, { api, fetcherSS } from '@/Components/util/axios';
 import { useQuery } from '@tanstack/react-query';
 import { Avatar, Image, Spin, Table } from 'antd';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const Marchents = () => {
     const { data, isLoading, isError } = useQuery({
@@ -54,6 +55,17 @@ const Marchents = () => {
                         title: 'Marchant ID',
                         dataIndex: 'id',
                         key: 'id',
+                        render: (_, record: any) => (
+                            <div>
+                                <p className='font-semibold cursor-pointer'
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(record.id)
+                                        toast.success('Copied to clipboard')
+                                    }
+                                    }
+                                >{record.id}</p>
+                            </div>
+                        )
                     }
                 ]}
             />
