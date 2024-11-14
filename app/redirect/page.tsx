@@ -6,6 +6,14 @@ export const generateMetadata = () => {
     return {
         title: "Redirecting...",
         description: "Redirect page",
+        openGraph: {
+            title: "Redirecting...",
+            url: `https://www.shoppanorma.com/redirect`, // Set specific URL for the product
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: "Redirect page",
+        }
     };
 }
 
