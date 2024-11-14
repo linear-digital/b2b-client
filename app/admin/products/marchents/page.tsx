@@ -1,7 +1,7 @@
 'use client'
 import fetcher, { api, fetcherSS } from '@/Components/util/axios';
 import { useQuery } from '@tanstack/react-query';
-import { Avatar, Image, Spin, Table } from 'antd';
+import { Avatar, Button, Image, Spin, Table } from 'antd';
 import React from 'react';
 import toast from 'react-hot-toast';
 
@@ -64,6 +64,24 @@ const Marchents = () => {
                                     }
                                     }
                                 >{record.id}</p>
+                            </div>
+                        )
+                    },
+                    {
+                        title: 'Action',
+                        dataIndex: 'action',
+                        key: 'action',
+                        render: (_, record: any) => (
+                            <div>
+                                <Button type='primary'
+                                onClick={() => {
+                                    const url = `${window.location.origin}/redirect?url=${record.url}&marchantId=${record.id}`
+                                    navigator.clipboard.writeText(url);
+                                    toast.success('Marchant redirect link copied to clipboard')
+                                }}
+                                >
+                                    Copy Redirect URL
+                                </Button>
                             </div>
                         )
                     }
