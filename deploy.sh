@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script: deploy.sh
-# Description: Pull latest changes, build the project, and restart PM2 process.
+# Description: Pull latest changes, clean old build files, build the project, and restart PM2 process.
 
 # Set script to exit on any error
 set -e
@@ -11,6 +11,10 @@ echo "Starting deployment..."
 # Pull latest changes from Git
 echo "Pulling latest changes from Git..."
 git pull
+
+# Remove old build files
+echo "Removing old build files..."
+rm -rf .next
 
 # Build the project
 echo "Building the project..."
