@@ -1,48 +1,16 @@
-'use client'
-import fetcher from '@/Components/util/axios';
-import React, { useEffect, Suspense } from 'react';
-import ErrorPage from './ErrorPage';
-import Details from './Details';
-import { ProductType } from '@/Components/util/type';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from "react";
+import ProductPageContent from "./Content";
+import { Spin } from "antd";
 
-const ProductPageContent = () => {
-    const allParams = useSearchParams();
-    const pid = allParams.get('pid') as string;
-    const [product, setProduct] = React.useState<ProductType | null>(null);
-    const [isError, setIsError] = React.useState(false);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const fetchProduct = async () => {
-                try {
-                    const data: ProductType = await fetcher({
-                        url: `/product/single/${pid}`,
-                        method: 'GET',
-                    });
-                    setProduct(data);
-                    window.location.href = data.goUrl;
-                } catch (error) {
-                    setIsError(true);
-                }
-            };
-            fetchProduct();
-        }
-    }, [pid]);
-
-    if (isError) {
-        return <ErrorPage />;
-    }
-
-    if (!product) {
-        return <Details />;
-    }
-
-    return null; // No content here since we redirect
-};
+export const generateMetadata = () => {
+    return {
+        title: "Redirecting...",
+        description: "Redirect page",
+    };
+}
 
 const Page = () => (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Spin size="large" fullscreen/>}>
         <ProductPageContent />
     </Suspense>
 );
