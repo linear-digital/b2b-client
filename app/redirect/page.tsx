@@ -4,15 +4,15 @@ import { Spin } from "antd";
 
 export const generateMetadata = () => {
     return {
-        title: "Shoppanorma - Redirecting...",
+        title: "Shoppanorma - Redirecting page...",
         description: "Shoppanorma - Redirect page",
         openGraph: {
-            title: "Redirecting...",
+            title: "Redirecting page...",
             url: `https://www.shoppanorma.com/redirect`, // Set specific URL for the product
         },
         twitter: {
             card: "summary_large_image",
-            title: "Redirect page",
+            title: "Shoppanorma - Redirecting page...",
         }
     };
 }
