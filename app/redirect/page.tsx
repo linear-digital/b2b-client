@@ -4,8 +4,8 @@ import { Spin } from "antd";
 
 export const generateMetadata = () => {
     return {
-        title: "Redirecting...",
-        description: "Redirect page",
+        title: "Shoppanorma - Redirecting...",
+        description: "Shoppanorma - Redirect page",
         openGraph: {
             title: "Redirecting...",
             url: `https://www.shoppanorma.com/redirect`, // Set specific URL for the product
