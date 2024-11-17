@@ -1,5 +1,5 @@
 'use client'
-import fetcher from '@/Components/util/axios';
+import fetcher, { api } from '@/Components/util/axios';
 import React, { useEffect, Suspense } from 'react';
 import ErrorPage from './ErrorPage';
 import Details from './Details';
@@ -16,7 +16,15 @@ const ProductPageContent = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (url) {
-                window.location.href = url;
+                const fetchMarchent = async () => {
+                    try {
+                        const data = await api.get(`/product/custom/search/link?country=us&merchantUrl=${url}`);
+                        window.location.href = data.data?.result?.directory.goUrl;
+                    } catch (error) {
+                        setIsError(true);
+                    }
+                };
+                fetchMarchent();
             }
             else {
                 const fetchProduct = async () => {
@@ -40,7 +48,7 @@ const ProductPageContent = () => {
         return <ErrorPage />;
     }
 
-    if (!product && !url) {
+    if (!product) {
         return <Details />;
     }
 
