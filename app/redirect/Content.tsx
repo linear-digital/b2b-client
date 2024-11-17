@@ -10,6 +10,7 @@ const ProductPageContent = () => {
     const allParams = useSearchParams();
     const pid = allParams.get('pid') as string;
     const url = allParams.get('url') as string;
+    const merchantId = allParams.get('marchantId') as string;
     const [product, setProduct] = React.useState<ProductType | null>(null);
     const [isError, setIsError] = React.useState(false);
 
@@ -18,7 +19,7 @@ const ProductPageContent = () => {
             if (url) {
                 const fetchMarchent = async () => {
                     try {
-                        const data = await api.get(`/product/custom/search/link?country=us&merchantUrl=${url}`);
+                        const data = await api.get(`/product/custom/search/link?country=us&merchantUrl=${url}&merchantId=${merchantId}`);
                         window.location.href = data.data?.result?.directory.goUrl;
                     } catch (error) {
                         setIsError(true);
